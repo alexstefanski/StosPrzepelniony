@@ -1,16 +1,18 @@
 var Sequelize = require('sequelize')
-var sequelize = require('./../configs/sequelize.js')
+var sequelize = require('./../config/sequelize.js')
+
+var UserToken = require('./UserToken')
 
 var User = sequelize.define('user', {
   email: {
       type: Sequelize.STRING,
-      unique: { msg: "Ten adres e-mail jest już w użyciu"},
+      unique: { msg: 'Ten adres e-mail jest już w użyciu'},
       allowNull: false,
 
       validate: {
-        isEmail: { msg: 'To nie jest prawidłowy adres e-mail' },
-        len: { args: [4, 255], msg: 'Adres e-mail może zawierać od 4 do 255 znaków.'},
-      }
+          isEmail: { msg: 'To nie jest prawidłowy adres e-mail' },
+          len: { args: [4, 255], msg: 'Adres e-mail może zawierać od 4 do 255 znaków.'},
+        }
   },
 
   firstName: {
@@ -43,14 +45,16 @@ var User = sequelize.define('user', {
   status: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    defaultValue: 2,
+    defaultValue: 0,
 
     validate: {
       isInt: true,
-      isIn: [[1, 2]],
+      isIn: [[0, 1, 2]],
     }
   }
 });
+
+User.hasMany(UserToken, { foreignKey: 'userId', sourceKey: 'id' })
 
 User.sync({ force: true }).then(function() {
 
