@@ -1,7 +1,8 @@
 {
-  "repository":{
-    "type":"git",
-    "url":"git://github.com/alexstefanski/StosPrzepelniony"},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alexstefanski/StosPrzepelniony"
+  },
   "name": "sp_server",
   "version": "1.0.0",
   "description": "REST server for Stos Przepełniony application.",
@@ -14,6 +15,7 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "moment": "^2.18.1",
     "sequelize": "^3.30.4",
     "sqlite3": "^3.1.8",
     "validate": "^3.0.1",
