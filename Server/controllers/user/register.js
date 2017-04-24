@@ -1,5 +1,5 @@
-var User = require('./../../models/User.js')
-var UserToken = require('./../../models/UserToken.js')
+var User = require('./../../models/User.js');
+var UserToken = require('./../../models/UserToken.js');
 
 module.exports.main = function(request, response) {
 
@@ -12,8 +12,8 @@ module.exports.main = function(request, response) {
   .then(function(user) {
 
     // Generating random token
-    var token = ""
-    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    var token = "";
+    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     for( var i = 0; i < 16; i++ ) {
       token += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -37,13 +37,13 @@ module.exports.main = function(request, response) {
 
   }, function(errors) {
 
-    var emailExists = false
+    var emailExists = false;
 
     errors.errors.forEach(function (error) {
       if(error.type == "unique violation") {
         emailExists = true
       }
-    })
+    });
 
     if(emailExists) {
       response.status(409).json()
