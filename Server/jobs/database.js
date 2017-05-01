@@ -1,0 +1,13 @@
+var User = require('./../models/user.js')
+var UserToken = require('./../models/userToken.js')
+var Admin = require('./../models/admin.js')
+var Action = require('./../models/action.js')
+var Permission = require('./../models/permission.js')
+var PermissionAction = require('./../models/permissionAction.js')
+
+User.sync({ force: true })
+UserToken.sync({ force: true })
+Admin.sync({ force: true })
+PermissionAction.sync({ force: true })
+Action.sync({ force: true })
+Permission.sync({ force: true })
