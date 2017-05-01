@@ -22,7 +22,9 @@ var UserToken = sequelize.define('user_token', {
 
     validate: {
       isInt: true,
-      isIn: [[0, 1, 10, 20, 21]]
+      isIn: [
+        [0, 1, 10, 20, 21]
+      ]
     }
   },
 
@@ -30,10 +32,6 @@ var UserToken = sequelize.define('user_token', {
     type: Sequelize.INTEGER,
     allowNull: false,
   }
-})
-
-UserToken.sync({ force: true}).then(function() {
-  console.log('User token table created!')
 })
 
 module.exports = UserToken
