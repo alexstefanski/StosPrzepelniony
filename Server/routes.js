@@ -2,7 +2,6 @@ var register = require('./controllers/user/register.js')
 var confirmRegistration = require('./controllers/user/confirmRegistration.js')
 var checkEmail = require('./controllers/user/checkEmail.js')
 
-
 module.exports = function(app) {
 
   app.get('/', function(request, response) {
