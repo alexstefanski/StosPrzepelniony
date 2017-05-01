@@ -1,5 +1,5 @@
-var User = require('./../../models/User.js');
-var UserToken = require('./../../models/UserToken.js');
+var User = require('./../../models/index.js').User
+var UserToken = require('./../../models/index.js').UserToken
 
 module.exports.main = function(request, response) {
 

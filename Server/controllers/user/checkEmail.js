@@ -1,23 +1,23 @@
-var User = require('./../../models/User.js')
-var UserToken = require('./../../models/UserToken.js')
+var User = require('./../../models/index.js').User
+var UserToken = require('./../../models/index.js').UserToken
 
-var validate = require("validate.js");
+var validate = require('validate.js')
 
-module.exports.validEmail = function(request, response, next) {
-  validate.async(request.body, { email: { email: true, }})
-    .then(function(success) {
+module.exports.validEmail = function (request, response, next) {
+  validate.async(request.body, {email: {email: true}})
+    .then(function (success) {
       next()
     },
-    function(error) {
+    function (error) {
       response.status(403).json()
     })
 }
 
-module.exports.main = function(request, response) {
+module.exports.main = function (request, response) {
   User.findOne({
     where: { email: request.body.email }
   })
-    .then(function(user) {
+    .then(function (user) {
 
       if(user != null ) {
         response.status(403).json()

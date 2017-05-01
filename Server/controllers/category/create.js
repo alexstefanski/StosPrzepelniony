@@ -9,6 +9,6 @@ module.exports.main = function (request, response) {
             name: request.body.name,
             description: request.body.description
         }).then(function (category) {
-        
+
     })
 }
