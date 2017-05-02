@@ -27,6 +27,10 @@ module.exports.main = function(request, response) {
     .then(function(userToken) {
 
       var confirmEmailLink = "/users/" + userToken.userId + "/register/confirm/" + userToken.id + "/" + userToken.token
+
+      // TODO: Sending email with confirm link.
+      console.log('Confirm link for user ' + user.email + ': ', confirmEmailLink)
+
       response.status(201).json(confirmEmailLink)
 
     }, function(errors) {

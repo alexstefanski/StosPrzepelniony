@@ -8,7 +8,6 @@ module.exports.validUserMiddleware = function(request, response, next) {
 
   User.findById(request.params.userId)
     .then(function(user) {
-
       if(user == null) {
         response.status(404).json()
       } else if ( user.status == 1 ) {
@@ -16,9 +15,7 @@ module.exports.validUserMiddleware = function(request, response, next) {
       } else {
         next()
       }
-
     })
-
 }
 
 module.exports.validTokenMiddleware = function(request, response, next) {
@@ -52,24 +49,15 @@ module.exports.main = function(request, response) {
 
   User.findById(request.params.userId)
     .then(function(user) {
-
         user.update({ status: 1 })
           .then(function(user) {
-
             UserToken.findById(request.params.tokenId)
               .then(function(userToken) {
-
                 userToken.update({ status: 1 })
                   .then(function(userToken) {
-
                     response.status(204).json()
-
                   })
-
               })
-
           })
-
     })
-
 }
