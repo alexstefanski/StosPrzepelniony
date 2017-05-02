@@ -1,24 +1,21 @@
-var databaseName = '12280081_sptmp';//'database'
+var databaseName = 'database';
 
-var databaseUser = '12280081_sptmp';//'root'
+var databaseUser = 'root';
 
-var databasePassword = 'Stos2017$';//''
+var databasePassword = '';
 
-var databaseHost = 'serwer1384076.home.pl';//'localhost'
+var databaseHost = 'localhost';
 
-var databaseDialect = 'mysql';//'sqlite'
+var databaseDialect = 'sqlite';
 
-//var databaseStorage = 'database.sqlite'
+var databaseStorage = 'database.sqlite'
 
 var Sequelize = require('sequelize');
 
 var databaseObject = new Sequelize(databaseName, databaseUser, databasePassword, {
   host: databaseHost,
   dialect: databaseDialect,
-  define:{
-    timestamps: false
-  }
-  //storage: databaseStorage
+  storage: databaseStorage
 });
 
 module.exports = databaseObject;
