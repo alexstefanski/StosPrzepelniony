@@ -58,4 +58,8 @@ module.exports = function(app) {
   app.use('/api/v1/admins/list', authenticatedUser.main)
   app.use('/api/v1/admins/list', isAdministrator.main)
   app.get('/api/v1/admins/list', admins.list.main)
+
+  app.use('/api/v1/admins/:adminId/info', authenticatedUser.main)
+  app.use('/api/v1/admins/:adminId/info', isAdministrator.main)
+  app.get('/api/v1/admins/:adminId/info', admins.info.main)
 };
