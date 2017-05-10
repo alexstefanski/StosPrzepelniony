@@ -7,10 +7,14 @@ var login = require('./controllers/user/login.js')
 var isLoggedIn = require('./controllers/user/isLoggedIn.js')
 var logout = require('./controllers/user/logout.js')
 
+// API for admin/admins
+var admins = require('./controllers/admin/admins/index.js')
+
 var categoryRead = require('./controllers/category/read.js');
 
 // Common middlewares
 var authenticatedUser = require('./middlewares/authenticatedUser.js')
+var isAdministrator = require('./middlewares/isAdministrator.js')
 
 module.exports = function(app) {
 
@@ -41,4 +45,9 @@ module.exports = function(app) {
   app.post('/api/v1/users/logout', logout.main)
 
   app.get('/categories/list', categoryRead.main);
+
+  // Routes for admin/admins
+  app.use('/api/v1/admins/add', authenticatedUser.main)
+  app.use('/api/v1/admins/add', isAdministrator.main)
+  app.post('/api/v1/admins/add', admins.create.main)
 };
