@@ -62,4 +62,8 @@ module.exports = function(app) {
   app.use('/api/v1/admins/:adminId/info', authenticatedUser.main)
   app.use('/api/v1/admins/:adminId/info', isAdministrator.main)
   app.get('/api/v1/admins/:adminId/info', admins.info.main)
+
+  app.use('/api/v1/admins/:adminId/edit', authenticatedUser.main)
+  app.use('/api/v1/admins/:adminId/edit', isAdministrator.main)
+  app.post('/api/v1/admins/:adminId/edit', admins.edit.main)
 };
