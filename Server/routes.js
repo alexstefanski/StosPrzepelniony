@@ -9,6 +9,8 @@ var logout = require('./controllers/user/logout.js')
 
 // API for admin/admins
 var admins = require('./controllers/admin/admins/index.js')
+// API for admin/users
+var users = require('./controllers/admin/users/index.js')
 
 var categoryRead = require('./controllers/category/read.js');
 
@@ -70,4 +72,8 @@ module.exports = function(app) {
   app.use('/api/v1/admins/:adminId/delete', authenticatedUser.main)
   app.use('/api/v1/admins/:adminId/delete', isAdministrator.main)
   app.delete('/api/v1/admins/:adminId/delete', admins.delete.main)
+
+  app.use('/api/v1/users/list', authenticatedUser.main)
+  app.use('/api/v1/users/list', isAdministrator.main)
+  app.get('/api/v1/users/list', users.list.main)
 };
