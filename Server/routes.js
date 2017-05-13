@@ -73,7 +73,12 @@ module.exports = function(app) {
   app.use('/api/v1/admins/:adminId/delete', isAdministrator.main)
   app.delete('/api/v1/admins/:adminId/delete', admins.delete.main)
 
+  // Routes for admin/users
   app.use('/api/v1/users/list', authenticatedUser.main)
   app.use('/api/v1/users/list', isAdministrator.main)
   app.get('/api/v1/users/list', users.list.main)
+
+  app.use('/api/v1/users/list', authenticatedUser.main)
+  app.use('/api/v1/users/list', isAdministrator.main)
+  app.post('/api/v1/users/:userId/status', users.editStatus.main)
 };
