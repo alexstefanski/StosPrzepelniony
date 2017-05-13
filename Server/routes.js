@@ -78,7 +78,11 @@ module.exports = function(app) {
   app.use('/api/v1/users/list', isAdministrator.main)
   app.get('/api/v1/users/list', users.list.main)
 
-  app.use('/api/v1/users/list', authenticatedUser.main)
-  app.use('/api/v1/users/list', isAdministrator.main)
+  app.use('/api/v1/users/:userId/status', authenticatedUser.main)
+  app.use('/api/v1/users/:userId/status', isAdministrator.main)
   app.post('/api/v1/users/:userId/status', users.editStatus.main)
+
+  app.use('/api/v1/users/:userId/delete', authenticatedUser.main)
+  app.use('/api/v1/users/:userId/delete', isAdministrator.main)
+  app.delete('/api/v1/users/:userId/delete', users.delete.main)
 };
