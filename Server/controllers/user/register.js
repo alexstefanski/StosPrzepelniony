@@ -1,6 +1,59 @@
 var User = require('./../../models/index.js').User
 var UserToken = require('./../../models/index.js').UserToken
 
+var validate = require('validate.js')
+
+// Własny walidator sprawdzający czy adres e-mail jest unikalny.
+validate.validators.uniqueEmail = function(value) {
+  return new validate.Promise(function(resolve, reject) {
+    User.findOne({
+      where: {email: value},
+      attributes: ['id']
+    })
+    .then(result => {
+      if(result == null) {
+        resolve()
+      } else {
+        resolve('already in use.')
+      }
+    })
+  })
+}
+
+// Walidacja przychodzących danych.
+module.exports.validate = function(request, response, next) {
+  var constraints = {
+    email: {
+      presence: true,
+      email: true,
+      uniqueEmail: true
+    },
+
+    firstName: {
+      presence: true,
+      length: {minimum: 4, maximum: 255},
+    },
+
+    lastName: {
+      presence: true,
+      length: {minimum: 4, maximum: 255},
+    },
+
+    password: {
+      presence: true,
+      length: {minimum: 6, maximum: 255},
+    }
+  }
+
+  validate.async(request.body, constraints)
+    .then(result => {
+      next()
+    })
+    .catch(result => {
+      response.status(422).json(result)
+    })
+}
+
 module.exports.main = function(request, response) {
 
   User.create({

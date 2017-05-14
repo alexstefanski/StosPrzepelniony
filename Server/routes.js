@@ -25,6 +25,7 @@ module.exports = function(app) {
     response.send('Hello world from server!')
   })
 
+  app.use('/api/v1/users/register', register.validate)
   app.post('/api/v1/users/register', register.main);
 
   app.use('/api/v1/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.validUserMiddleware);
