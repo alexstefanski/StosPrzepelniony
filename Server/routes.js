@@ -6,6 +6,7 @@ var resendConfirmRegistrationEmail = require('./controllers/user/resendConfirmRe
 var login = require('./controllers/user/login.js')
 var isLoggedIn = require('./controllers/user/isLoggedIn.js')
 var logout = require('./controllers/user/logout.js')
+var info = require('./controllers/user/info.js')
 
 // API for admin/admins
 var admins = require('./controllers/admin/admins/index.js')
@@ -45,6 +46,9 @@ module.exports = function(app) {
 
   app.use('/api/v1/users/logout', authenticatedUser.main)
   app.post('/api/v1/users/logout', logout.main)
+
+  app.use('/api/v1/users/:userId/info', authenticatedUser.main)
+  app.get('/api/v1/users/:userId/info', info.main)
 
   app.get('/categories/list', categoryRead.main);
 
