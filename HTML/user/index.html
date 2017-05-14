@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Stos Przepełniony</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="jquery-1.12.3.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+		<link rel="stylesheet" type="text/css" href="mainpage.css">
+        <script src="main.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="nav">
+				<div class="logo">
+					<img src="logo.png" class="logo-img" alt="img1">
+				</div>
+				<div class="nav_btns">
+					<ul>
+                        
+						<li class="dropdown">
+							<a href="#" class="dropbtn"><i class="fa fa-user-o" aria-hidden="true"></i>moje konto</a>
+                            <div class="dropdown-content">
+                                <a href="#"><i class="fa fa-cog" aria-hidden="true"></i>moje dane</a>
+                                <a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i>moje ogłoszenia</a>
+                                <a href="#"><i class="fa fa-commenting-o" aria-hidden="true"></i>wiadomości</a>
+                                <a href="#"><i class="fa fa-power-off" aria-hidden="true"></i>wyloguj się</a>
+                            </div>
+                        </li>
+                        <li class="">
+							<a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i>dodaj ogłoszenie </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <div class="content">
+                  <div class="search-main">
+				<div class="wrapper">
+					<div class="search-input">
+						<input type="text" name="phrase" id="search-phrase" placeholder="Czego szukasz?">
+					</div>
+					<div class="search-btn">
+						<button class="btn"><i class="fa fa-search" aria-hidden="true"></i>Szukaj</button>
+					</div>
+				</div>
+				<div class="search-filtres">
+					<ul>
+						<li>	
+							<a href="#" id="nav_category" class="bold" onclick="showCategoryView()">
+								Kategoria
+								<hr id="line1" style="border: 1px solid #cccccc">
+							</a>
+						</li>
+						<li>
+							<a href="#" id="nav_salary" onclick="showSalaryView()">
+								Wynagrodzenie
+								<hr id="line2" style="border: 1px solid #cccccc">
+							</a>
+						</li>
+					</ul>
+					
+					<div class="category">
+						<label class="control control--checkbox checkbox-container">
+							Android
+							<input type="checkbox"/>
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							Assembler
+							<input type="checkbox"/>
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							C
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							C#
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							C++
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							Delphi/Object Pascal
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							GO
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							HTML/CSS
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							IOS
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							Java
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							Javascript
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							Matlab
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							Objective-C
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							PHP
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+						<label class="control control--checkbox checkbox-container">
+							PL/SQL
+							<input type="checkbox" />
+							<div class="control__indicator"></div>
+						</label>
+					</div>
+					<div class="salary">
+						<div class="checkbox-salary">
+							<label class="control control--checkbox checkbox-container">
+								Za godzinę
+								<input type="checkbox"/>
+								<div class="control__indicator"></div>
+							</label>
+							<label class="control control--checkbox checkbox-container">
+								Za projekt
+								<input type="checkbox"/>
+								<div class="control__indicator"></div>
+							</label>
+						</div>
+						<div class="salary_range">
+							<div>
+								Minimalne
+							</div>
+							<input type="range" name="range-min" min="0" max="100000" onchange="showMin(this.value)"  />
+							<span id="range-min"></span>
+						</div>
+						<div class="salary_range">
+							<div>
+								Maksymalne
+							</div>
+							<input type="range" name="range-max" min="0" max="100000" onchange="showMax(this.value)"  />
+							<span id="range-max"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="list-wrapper">
+				<div class="title">
+					Ogłoszenia
+				</div>
+				<div class="list_container">
+					<div class="list-short">
+						<div class="header">
+							<a href="#">
+								Stworzenie sklepu internetowego dla młodej polskiej firmy odzieżowej
+							</a>
+						</div>
+						<div class="info">
+							<div class="author-name">
+								Młoda polska firma odzieżowa
+							</div>
+							<div class="date">
+								Dodane
+								<span class="add-date">
+									20-04-2017
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="list-short">
+						<div class="header">
+							<a href="#">
+								Senior Django Developer
+							</a>
+						</div>
+						<div class="info">
+							<div class="author-name">
+								Samsung Electronics Polska Sp.z.o.o
+							</div>
+							<div class="date">
+								Dodane
+								<span class="add-date">
+									17-04-2017
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="list-short">
+						<div class="header">
+							<a href="#">
+								Aplikacja na androida do zarządzania firmą
+							</a>
+						</div>
+						<div class="info">
+							<div class="author-name">
+								Sklep spożywczy Radek
+							</div>
+							<div class="date">
+								Dodane
+								<span class="add-date">
+									16-04-2017
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="list-short">
+						<div class="header">
+							<a href="#">
+								Junior Frontend developer
+							</a>
+						</div>
+						<div class="info">
+							<div class="author-name">
+								Microsoft Polska
+							</div>
+							<div class="date">
+								Dodane
+								<span class="add-date">
+									20-04-2017
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="list-short">
+						<div class="header">
+							<a href="#">
+								Zlecę zrobienie portfolio
+							</a>
+						</div>
+						<div class="info">
+							<div class="author-name">
+								Jan Kowalski
+							</div>
+							<div class="date">
+								Dodane
+								<span class="add-date">
+									15-04-2017
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            </div>
+            <div class="footer">
+               <div class="footer_nav">
+					<ul>
+						<li class="">
+							<a href="#">
+								Regulamin
+							</a>
+						</li>
+						<li class="">
+							<a href="#">
+								FAQ
+							</a>
+						</li>
+                        <li class="">
+							<a href="#">
+								Polityka prywatności
+							</a>
+						</li>
+                        <li class="">
+							<a href="#">
+								O nas
+							</a>
+						</li>
+					</ul>
+				</div>
+            </div>
+		</div>
+	</body>
+</html>
