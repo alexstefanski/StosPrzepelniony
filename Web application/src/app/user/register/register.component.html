@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong>Rejestracja</strong>
+      </div>
+
+      <div class="panel-body">
+        <div class="alert alert-danger" *ngIf="error.messages">
+          {{ error.messages.join(' ') }}
+        </div>
+
+        <form (submit)="handleRegister()">
+          <div class="form-group">
+            <label for="email">Adres e-mail</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="email">
+            <div class="text-danger" *ngIf="error.email">
+              {{ error.email.join(' ') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Imię</label>
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="firstName">
+            <div class="text-danger" *ngIf="error.email">
+              {{ error.firstName.join(' ') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Nazwisko</label>
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="lastName">
+            <div class="text-danger" *ngIf="error.email">
+              {{ error.lastName.join(' ') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Hasło</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="password">
+            <div class="text-danger" *ngIf="error.email">
+              {{ error.password.join(' ') }}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary">Rejestracja</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
