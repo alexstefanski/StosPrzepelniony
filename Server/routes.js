@@ -13,7 +13,9 @@ var admins = require('./controllers/admin/admins/index.js')
 // API for admin/users
 var users = require('./controllers/admin/users/index.js')
 
-var categoryRead = require('./controllers/category/read.js');
+var categoryCreate  = require('./controllers/category/create')
+var categoryRead = require('./controllers/category/read.js')
+var categoryUpdate  = require('./controllers/category/update')
 
 // Common middlewares
 var authenticatedUser = require('./middlewares/authenticatedUser.js')
@@ -51,7 +53,18 @@ module.exports = function(app) {
   app.use('/api/v1/users/:userId/info', authenticatedUser.main)
   app.get('/api/v1/users/:userId/info', info.main)
 
-  app.get('/categories/list', categoryRead.main);
+  app.use('/categories/list', authenticatedUser.main)
+  app.use('/categories/list', isAdministrator.main)
+  app.get('/categories/list', categoryRead.main)
+
+
+    app.use('/categories/create', authenticatedUser.main)
+    app.use('/categories/create', isAdministrator.main)
+    app.post('/categories/create',categoryCreate.main)
+
+    app.use('/categories/:categoryId/edit', authenticatedUser.main)
+    app.use('/categories/:categoryId/edit', isAdministrator.main)
+    app.post('/categories/:categoryId/edit', categoryUpdate.main)
 
   // Routes for admin/admins
   app.use('/api/v1/admins/add', authenticatedUser.main)

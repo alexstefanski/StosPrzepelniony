@@ -29,7 +29,7 @@ module.exports.main = function(request, response) {
         return k;
     }
     Category.findAll({
-        attributes: {exclude: ['id','createdAt'], include:['categoryId']},
+        attributes: {exclude: ['id','createdAt','updatedAt'], include:['categoryId']},
     })
         .then(function(categories) {
             var categoryTree = new Array();
