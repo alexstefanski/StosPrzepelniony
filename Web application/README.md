@@ -1,4 +1,4 @@
-# Aplikacja webowa stos przepełniony
+# Aplikacja webowa Stos przepełniony
 
 __Wymagania:__
 + Node.js
@@ -15,3 +15,4 @@ __Uruchomienie:__
     ```
 
 Aplikacja staruje na porcie 4200 - http://localhost:4200.
+Aplikacja komunikuje się z naszym serwerem Node.js więc jego uruchomienie jest również wymagane.
