@@ -1,9 +1,11 @@
 var express = require('express')
+var cors = require('cors')
 var Sequelize = require('sequelize')
 var bodyParser = require('body-parser')
 var routes = require('./routes.js')
 
 var app = express()
+app.use(cors())
 app.use(bodyParser.json())
 routes(app)
 
