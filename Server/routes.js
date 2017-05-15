@@ -30,9 +30,9 @@ module.exports = function(app) {
   app.use('/api/v1/users/register', register.validate)
   app.post('/api/v1/users/register', register.main);
 
-  app.use('/api/v1/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.validUserMiddleware);
-  app.use('/api/v1/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.validTokenMiddleware);
-  app.get('/api/v1/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.main);
+  app.use('/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.validUserMiddleware);
+  app.use('/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.validTokenMiddleware);
+  app.get('/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.main);
 
   app.use('/api/v1/users/checkemail', checkEmail.validEmail);
   app.post('/api/v1/users/checkemail', checkEmail.main);
