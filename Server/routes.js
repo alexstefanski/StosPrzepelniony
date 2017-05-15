@@ -12,6 +12,8 @@ var info = require('./controllers/user/info.js')
 var admins = require('./controllers/admin/admins/index.js')
 // API for admin/users
 var users = require('./controllers/admin/users/index.js')
+// API for admin/permissions
+var permissions = require('./controllers/admin/permissions/index.js')
 
 var categoryCreate  = require('./controllers/category/create')
 var categoryRead = require('./controllers/category/read.js')
@@ -103,4 +105,9 @@ module.exports = function(app) {
   app.use('/api/v1/users/:userId/delete', authenticatedUser.main)
   app.use('/api/v1/users/:userId/delete', isAdministrator.main)
   app.delete('/api/v1/users/:userId/delete', users.delete.main)
+
+  // Routes for admin/permissions
+  app.use('/api/v1/permissions/list', authenticatedUser.main)
+  app.use('/api/v1/permissions/list', isAdministrator.main)
+  app.get('/api/v1/permissions/list', permissions.list.main)
 };
