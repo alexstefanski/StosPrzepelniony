@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   password: string;
 
   handlingLogin: Boolean = false;
-  error: Object;
+  error: { messages: Array<string>} = { messages: null };
 
   constructor(private http: Http, private router: Router) { }
 
@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
   handleLogin() {
     this.handlingLogin = true;
 
+    this.error = { messages: null };
+
     let payload = {
       email: this.email,
       password: this.password
@@ -35,29 +37,42 @@ export class LoginComponent implements OnInit {
     this.http.post(loginUser, payload)
       .toPromise()
       .then(response => {
+        // Otrzymaliśmy od serwera nasze userID oraz wygenerowany sessionToken.
+
+        // Zapisujemy lokalnie userID - te dane możemy podejrzeć w narzędziach developerskich przeglądarki. Zakładka DANE
         window.localStorage.setItem('userId', response.json().userId)
+
+        // Zapisujemy lokalnie sessionToken - te dane możemy podejrzeć w narzędziach developerskich przeglądarki. Zakładka DANE
         window.localStorage.setItem('sessionToken', response.json().sessionToken)
 
         let userInfoURL = userInfo(response.json().userId)
 
+        // Przygotowujemy nagłówek do autoryzacji.
+        // Kożystamy z Basic Auth: dane w formacie userId:sessionToken np. 1:nzyRYJbR8yOJdhaC7xnW3BatRRyQAbxs, są skracane base64 - to ta funkcja btoa.
+        // Dodajemy z przodu słowa Basic. W rezultacie otrzymujemy treść nagłwka 'Basic MTpuenlSWUpiUjh5T0pkaGFDN3huVzNCYXRSUnlRQWJ4cw=='
+        // Pole nagłówka to Authorization, te wszytskie dane możemy podejrzeć w narzędziach developerskich przeglądarki. Zakładka sieci i nagłówki żądania.
         let headers = new Headers()
         headers.append('Content-Type', 'application/json')
         headers.append('Authorization', 'Basic ' + btoa(response.json().userId + ':' + response.json().sessionToken))
+        console.log(btoa(response.json().userId + ':' + response.json().sessionToken))
 
+        // Tworzyliśmy nagłówek autoryzacji ponieważ akórat te API wymaga autoryzacji użytkownika.
         this.http.get(userInfoURL, { headers: headers})
           .toPromise()
           .then(response => {
+
+            // Zapisujemy lokalnie userName - te dane możemy podejrzeć w narzędziach developerskich przeglądarki. Zakładka DANE
             window.localStorage.setItem('userName', response.json().firstName)
             this.router.navigate([''])
           })
           .catch(response => {
-            console.log(response)
             this.handlingLogin = false;
           })
 
       })
       .catch(response => {
-        console.log(response)
+        this.error.messages = response.json().messages
+
         this.handlingLogin = false;
       })
   }

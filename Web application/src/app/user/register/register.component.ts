@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   password: string;
 
   handlingRegister: Boolean = false;
-  success: { messages: Array<String> };
+  success: { messages: Array<String> } = { messages: null };
   error: { email: string, firstName: string, lastName: string, password: string, messages: Array<String> } = { email: null, firstName: null, lastName: null, password: null, messages: null };
 
   constructor(private http: Http) { }
@@ -27,6 +27,9 @@ export class RegisterComponent implements OnInit {
 
   handleRegister() {
     this.handlingRegister = true
+
+    this.success = { messages: null };
+    this.error = { email: null, firstName: null, lastName: null, password: null, messages: null };
 
     let payload = {
       email: this.email,
@@ -38,7 +41,13 @@ export class RegisterComponent implements OnInit {
     this.http.post(registerUser, payload)
       .toPromise()
       .then(response => {
-        console.log(response)
+        this.success.messages = response.json().messages;
+
+        this.email = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.password = null;
+
       })
       .catch(response => {
         this.error.email = response.json().email;
@@ -47,7 +56,6 @@ export class RegisterComponent implements OnInit {
         this.error.password = response.json().password;
         this.error.messages = response.json().messages;
       })
-
   }
 
 }
