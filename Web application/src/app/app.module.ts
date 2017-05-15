@@ -10,6 +10,13 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { LogoutComponent } from './user/logout/logout.component';
 import { InfoComponent } from './user/info/info.component';
+import { AdminComponent } from './admin/admin.component';
+import { CategoryComponent } from './admin/category/category.component';
+import { UserComponent } from './admin/user/user.component';
+import { IndexComponent } from './admin/category/index/index.component';
+import { AddComponent } from './admin/category/add/add.component';
+import { EditComponent } from './admin/category/edit/edit.component';
+import { DeleteComponent } from './admin/category/delete/delete.component';
 
 const routes = [
   {path: '', component: HomeComponent},
@@ -28,6 +35,13 @@ const routes = [
     RegisterComponent,
     LogoutComponent,
     InfoComponent,
+    AdminComponent,
+    CategoryComponent,
+    UserComponent,
+    IndexComponent,
+    AddComponent,
+    EditComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,
