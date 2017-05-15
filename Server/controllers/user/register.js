@@ -50,7 +50,8 @@ module.exports.validate = function(request, response, next) {
       next()
     })
     .catch(result => {
-      response.status(422).json(result)
+      result['messages'] = ['Coś poszło nie tak.']
+      response.status(406).json(result)
     })
 }
 
@@ -82,9 +83,9 @@ module.exports.main = function(request, response) {
       var confirmEmailLink = "/users/" + userToken.userId + "/register/confirm/" + userToken.id + "/" + userToken.token
 
       // TODO: Sending email with confirm link.
-      console.log('Confirm link for user ' + user.email + ': ', confirmEmailLink)
+      console.log('Confirm link for user ' + user.email + ': ', 'http:\/\/localhost:3000' + confirmEmailLink)
 
-      response.status(201).json(confirmEmailLink)
+      response.status(201).json({ messages: ['Użytkownik zarejestrowany pomyślnie. Potwierdź konto linkiem aktywacyjnym przesłanym na podany adres e-mail', 'http:\/\/localhost:3000' + confirmEmailLink]  })
 
     }, function(errors) {
 

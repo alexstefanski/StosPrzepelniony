@@ -44,7 +44,7 @@ module.exports.main = function (request, response) {
       })
 
     } else {
-      response.status(404).json()
+      response.status(404).json({ messages: ['Nieprawidłowy login lub hasło.']})
     }
   })
 }
