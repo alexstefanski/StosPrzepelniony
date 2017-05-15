@@ -4,10 +4,7 @@
 var Category = require('./../../models/category.js');
 
 
-
-
 module.exports.main = function (request, response) {
-
 
 
     Category.findAll({
@@ -36,7 +33,5 @@ module.exports.main = function (request, response) {
     function (errors) {
         response.status(406).json()
     })
-
-
 
 }

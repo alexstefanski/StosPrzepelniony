@@ -14,8 +14,9 @@ var admins = require('./controllers/admin/admins/index.js')
 var users = require('./controllers/admin/users/index.js')
 
 var categoryCreate  = require('./controllers/category/create')
-var categoryRead = require('./controllers/category/read.js')
+var categoryRead = require('./controllers/category/read')
 var categoryUpdate  = require('./controllers/category/update')
+var categoryDelete =  require('./controllers/category/delete')
 
 // Common middlewares
 var authenticatedUser = require('./middlewares/authenticatedUser.js')
@@ -58,13 +59,17 @@ module.exports = function(app) {
   app.get('/categories/list', categoryRead.main)
 
 
-    app.use('/categories/create', authenticatedUser.main)
-    app.use('/categories/create', isAdministrator.main)
-    app.post('/categories/create',categoryCreate.main)
+  app.use('/categories/create', authenticatedUser.main)
+  app.use('/categories/create', isAdministrator.main)
+  app.post('/categories/create',categoryCreate.main)
 
-    app.use('/categories/:categoryId/edit', authenticatedUser.main)
-    app.use('/categories/:categoryId/edit', isAdministrator.main)
-    app.post('/categories/:categoryId/edit', categoryUpdate.main)
+  app.use('/categories/:categoryId/edit', authenticatedUser.main)
+  app.use('/categories/:categoryId/edit', isAdministrator.main)
+  app.post('/categories/:categoryId/edit', categoryUpdate.main)
+
+  app.use('/categories/:categoryId/delete', authenticatedUser.main)
+  app.use('/categories/:categoryId/delete', isAdministrator.main)
+  app.delete('/categories/:categoryId/delete', categoryDelete.main )
 
   // Routes for admin/admins
   app.use('/api/v1/admins/add', authenticatedUser.main)
