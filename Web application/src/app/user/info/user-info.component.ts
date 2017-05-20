@@ -7,10 +7,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.css']
+  templateUrl: './user-info.component.html',
+  styleUrls: ['./user-info.component.css']
 })
-export class InfoComponent implements OnInit {
+export class UserInfoComponent implements OnInit {
 
   firstName: string = null;
   lastName: string = null;

@@ -6,10 +6,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: './user-register.component.html',
+  styleUrls: ['./user-register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class UserRegisterComponent implements OnInit {
 
   email: string;
   firstName: string;

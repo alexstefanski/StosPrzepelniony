@@ -6,10 +6,10 @@ import { logOutUser } from './../../api';
 
 @Component({
   selector: 'app-logout',
-  templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.css']
+  templateUrl: './user-logout.component.html',
+  styleUrls: ['./user-logout.component.css']
 })
-export class LogoutComponent implements OnInit {
+export class UserLogoutComponent implements OnInit {
 
   constructor(private http: Http, private router: Router) { }
 

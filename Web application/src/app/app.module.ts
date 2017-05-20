@@ -6,10 +6,14 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
-import { LogoutComponent } from './user/logout/logout.component';
-import { InfoComponent } from './user/info/info.component';
+
+// User components
+import { UserLoginComponent } from './user/login/user-login.component';
+import { UserRegisterComponent } from './user/register/user-register.component';
+import { UserLogoutComponent } from './user/logout/user-logout.component';
+import { UserInfoComponent } from './user/info/user-info.component';
+import { UserChangePasswordComponent } from './user/change-password/user-change-password.component';
+
 import { AdminComponent } from './admin/admin.component';
 import { CategoryComponent } from './admin/category/category.component';
 import { UserComponent } from './admin/user/user.component';
@@ -18,23 +22,25 @@ import { AddComponent } from './admin/category/add/add.component';
 import { EditComponent } from './admin/category/edit/edit.component';
 import { DeleteComponent } from './admin/category/delete/delete.component';
 
+
 const routes = [
   {path: '', component: HomeComponent},
 
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'logout', component: LogoutComponent},
-  {path: 'me', component: InfoComponent}
+  {path: 'login', component: UserLoginComponent},
+  {path: 'register', component: UserRegisterComponent},
+  {path: 'logout', component: UserLogoutComponent},
+  {path: 'me', component: UserInfoComponent},
+  {path: 'change-password', component: UserChangePasswordComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    UserLoginComponent,
     HomeComponent,
-    RegisterComponent,
-    LogoutComponent,
-    InfoComponent,
+    UserRegisterComponent,
+    UserLogoutComponent,
+    UserInfoComponent,
     AdminComponent,
     CategoryComponent,
     UserComponent,
@@ -42,6 +48,7 @@ const routes = [
     AddComponent,
     EditComponent,
     DeleteComponent,
+    UserChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
