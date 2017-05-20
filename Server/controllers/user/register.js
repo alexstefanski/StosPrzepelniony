@@ -17,6 +17,9 @@ validate.validators.uniqueEmail = function(value) {
         resolve('already in use.')
       }
     })
+    .catch(errors => {
+      console.log('Database error: connection is not established or table users does not exist.')
+    })
   })
 }
 
@@ -63,7 +66,7 @@ module.exports.main = function(request, response) {
     lastName: request.body.lastName,
     password: request.body.password
   })
-  .then(function(user) {
+  .then(user => {
 
     // Generating random token
     var token = "";
@@ -78,7 +81,7 @@ module.exports.main = function(request, response) {
       status: 0,
       userId: user.id
     })
-    .then(function(userToken) {
+    .then(userToken => {
 
       var confirmEmailLink = "/users/" + userToken.userId + "/register/confirm/" + userToken.id + "/" + userToken.token
 
@@ -87,28 +90,12 @@ module.exports.main = function(request, response) {
 
       response.status(201).json({ messages: ['Użytkownik zarejestrowany pomyślnie. Potwierdź konto linkiem aktywacyjnym przesłanym na podany adres e-mail', 'http:\/\/localhost:3000' + confirmEmailLink]  })
 
-    }, function(errors) {
-
-      response.status(406).json()
-
     })
-
-  }, function(errors) {
-
-    var emailExists = false;
-
-    errors.errors.forEach(function (error) {
-      if(error.type == "unique violation") {
-        emailExists = true
-      }
-    });
-
-    if(emailExists) {
-      response.status(409).json()
-    } else {
-      response.status(406).json()
-    }
-
+    .catch(errors => {
+      console.log('Database error: connection is not established or table userTokens does not exist.')
+    })
   })
-
+  .catch(errors => {
+      console.log('Database error: connection is not established or table users does not exist.')
+  })
 }

@@ -7,6 +7,7 @@ var login = require('./controllers/user/login.js')
 var isLoggedIn = require('./controllers/user/isLoggedIn.js')
 var logout = require('./controllers/user/logout.js')
 var info = require('./controllers/user/info.js')
+var changePassword = require('./controllers/user/changePassword.js')
 
 // API for admin/admins
 var admins = require('./controllers/admin/admins/index.js')
@@ -44,7 +45,7 @@ module.exports = function(app) {
   app.use('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.belongsToInactiveUser)
   app.post('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.main)
 
-  app.use('/api/v1/users/login', login.validEmail)
+  app.use('/api/v1/users/login', login.validation)
   app.post('/api/v1/users/login', login.main)
 
   app.use('/api/v1/users/isLoggedIn', isLoggedIn.validBasicAuthHeader)
@@ -55,6 +56,10 @@ module.exports = function(app) {
 
   app.use('/api/v1/users/:userId/info', authenticatedUser.main)
   app.get('/api/v1/users/:userId/info', info.main)
+
+  app.use('/api/v1/users/changepassword', authenticatedUser.main)
+  app.use('/api/v1/users/changepassword', changePassword.validation)
+  app.post('/api/v1/users/changepassword', changePassword.main)
 
   app.use('/categories/list', authenticatedUser.main)
   app.use('/categories/list', isAdministrator.main)
