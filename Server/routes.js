@@ -120,4 +120,8 @@ module.exports = function(app) {
   app.use('/api/v1/permissions/list', authenticatedUser.main)
   app.use('/api/v1/permissions/list', isAdministrator.main)
   app.get('/api/v1/permissions/list', permissions.list.main)
+
+  app.use('/api/v1/permissions/:permissionId/info', authenticatedUser.main)
+  app.use('/api/v1/permissions/:permissionId/info', isAdministrator.main)
+  app.get('/api/v1/permissions/:permissionId/info', permissions.info.main)
 };
