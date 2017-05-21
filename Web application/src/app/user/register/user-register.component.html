@@ -22,23 +22,24 @@
             </div>
 
             <input type="text" class="input_form" placeholder="nazwisko" name="lastName" [(ngModel)]="lastName" />
-            <div class="" *ngIf="error.firstName">
+            <div class="" *ngIf="error.lastName">
               <p>{{ error.lastName.join('. ') }}</p>
             </div>
 
             <input type="text" class="input_form" placeholder="e-mail" name="email" [(ngModel)]="email" />
-            <div class="" *ngIf="error.firstName">
+            <div class="" *ngIf="error.email">
               <p>{{ error.email.join('. ') }}</p>
             </div>
 
             <input type="password" class="input_form" placeholder="hasło" name="password" [(ngModel)]="password" />
-            <div class="" *ngIf="error.firstName">
+            <div class="" *ngIf="error.password">
               <p>{{ error.password.join('. ') }}</p>
             </div>
           </div>
           <div class="btn_container">
             <button class="btn">ZAREJESTRUJ SIĘ</button>
           </div>
+          <p><a routerLink="/resend-email">Wyślij e-mail aktywacyjny ponownie</a></p>
         </form>
       </div>
     </div>

@@ -13,6 +13,7 @@ import { UserRegisterComponent } from './user/register/user-register.component';
 import { UserLogoutComponent } from './user/logout/user-logout.component';
 import { UserInfoComponent } from './user/info/user-info.component';
 import { UserChangePasswordComponent } from './user/change-password/user-change-password.component';
+import { UserResendEmailComponent } from './user/resend-email/user-resend-email.component';
 
 import { AdminComponent } from './admin/admin.component';
 import { CategoryComponent } from './admin/category/category.component';
@@ -30,7 +31,8 @@ const routes = [
   {path: 'register', component: UserRegisterComponent},
   {path: 'logout', component: UserLogoutComponent},
   {path: 'me', component: UserInfoComponent},
-  {path: 'change-password', component: UserChangePasswordComponent}
+  {path: 'change-password', component: UserChangePasswordComponent},
+  {path: 'resend-email', component: UserResendEmailComponent}
 ];
 
 @NgModule({
@@ -49,6 +51,7 @@ const routes = [
     EditComponent,
     DeleteComponent,
     UserChangePasswordComponent,
+    UserResendEmailComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,3 +9,4 @@ export const isUserLogged = server + '/api/v1/users/isLoggedIn'
 export const logOutUser = server + '/api/v1/users/logout'
 export const userInfo = function(userId) {return server + '/api/v1/users/' + userId + '/info'}
 export const changePassword = server + '/api/v1/users/changepassword'
+export const resendEmail = server + '/api/v1/users/resendverificationemail'
