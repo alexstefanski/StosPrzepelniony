@@ -41,7 +41,7 @@ module.exports = function(app) {
   app.use('/api/v1/users/checkemail', checkEmail.validEmail);
   app.post('/api/v1/users/checkemail', checkEmail.main);
 
-  app.use('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.validEmail)
+  app.use('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.validation)
   app.use('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.belongsToInactiveUser)
   app.post('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.main)
 
