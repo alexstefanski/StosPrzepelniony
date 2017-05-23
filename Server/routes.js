@@ -16,10 +16,13 @@ var users = require('./controllers/admin/users/index.js')
 // API for admin/permissions
 var permissions = require('./controllers/admin/permissions/index.js')
 
-var categoryCreate  = require('./controllers/category/create')
-var categoryRead = require('./controllers/category/read')
-var categoryUpdate  = require('./controllers/category/update')
-var categoryDelete =  require('./controllers/category/delete')
+var categoryCreate  = require('./controllers/category/create.js')
+var categoryRead = require('./controllers/category/read.js')
+var categoryUpdate  = require('./controllers/category/update.js')
+var categoryDelete =  require('./controllers/category/delete.js')
+
+
+var messageList = require('./controllers/message/list.js')
 
 // Common middlewares
 var authenticatedUser = require('./middlewares/authenticatedUser.js')
@@ -77,6 +80,9 @@ module.exports = function(app) {
   app.use('/categories/:categoryId/delete', authenticatedUser.main)
   app.use('/categories/:categoryId/delete', isAdministrator.main)
   app.delete('/categories/:categoryId/delete', categoryDelete.main )
+
+  app.use('/messages/list', authenticatedUser.main)
+  app.get('/messages/list',messageList.main);
 
   // Routes for admin/admins
   app.use('/api/v1/admins/add', authenticatedUser.main)

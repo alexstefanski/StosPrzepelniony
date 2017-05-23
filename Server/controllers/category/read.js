@@ -43,7 +43,7 @@ module.exports.main = function(request, response) {
                 if(c.dataValues.categoryIdParent==0)
                     categoryTree.push(obj);
                 else
-                        FindParentInArray(obj, categoryTree).children.push(obj);
+                    FindParentInArray(obj, categoryTree).children.push(obj);
             });
 
             response.status(200).json(categoryTree);
