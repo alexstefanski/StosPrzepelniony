@@ -35,12 +35,12 @@ const routes = [
   {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard]},
   {path: 'register', component: UserRegisterComponent},
   {path: 'user', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
-    {path: 'home', component: HomeComponent},
+    {path: '', component: HomeComponent},
     {path: 'me', component: UserInfoComponent},
     {path: 'change-password', component: UserChangePasswordComponent}
   ]},
-  {path: 'admin', component: AppAdminComponent, children: [
-    {path: 'home', component: AddComponent }
+  {path: 'admin', component: AppAdminComponent, canActivate: [AdminGuard], children: [
+    {path: '', component: AddComponent}
   ]}
 ];
 
