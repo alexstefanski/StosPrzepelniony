@@ -28,11 +28,12 @@ import { AppAdminComponent } from './app-admin.component';
 import { AuthenticatedGuard } from './common/authenticated.guard';
 import { UserService } from './common/user.service';
 import { AdminGuard } from './common/admin.guard';
+import { PreventLoggedInAccess } from './common/prevent-logged-in-access';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
-  {path: 'login', component: UserLoginComponent},
-  {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard]},
+  {path: 'login', component: UserLoginComponent, canActivate: [PreventLoggedInAccess]},
+  {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard, AdminGuard]},
   {path: 'register', component: UserRegisterComponent},
   {path: 'user', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: HomeComponent},
@@ -70,7 +71,12 @@ const routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService, AuthenticatedGuard, AdminGuard],
+  providers: [
+    UserService,
+    AuthenticatedGuard,
+    AdminGuard,
+    PreventLoggedInAccess
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="nav">
     <div class="logo">
-      <img src="../assets/logo.png" class="logo-img" alt="logo">
+      <a routerLink="../user"><img src="../assets/logo.png" class="logo-img" alt="logo"></a>
     </div>
     <div class="nav_btns">
       <ul>
@@ -16,6 +16,9 @@
         </li>
         <li class="">
           <a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i>dodaj ogłoszenie </a>
+        </li>
+        <li class="" *ngIf="isAdminLogged">
+          <a routerLink="../admin"><i class="fa fa-users" aria-hidden="true"></i>administrator </a>
         </li>
       </ul>
     </div>
