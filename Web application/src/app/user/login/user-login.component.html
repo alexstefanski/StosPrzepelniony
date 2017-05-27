@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="logo_container">
+    <img src="../../assets/logo.png" class="logo-img" alt="logo">
+  </div>
+  <div class="main_container">
+    <div class="forms_container">
+
+      <div class="content">
+        <div class="" *ngIf="error.messages">
+          <p>{{ error.messages.join('. ') }}</p>
+        </div>
+
+        <form (submit)="handleLogin()">
+          <div class="info_inputs">
+            <input type="text" class="input_form" placeholder="e-mail" name="email" [(ngModel)]="email" />
+            <input type="password" class="input_form" placeholder="hasło" name="password" [(ngModel)]="password" />
+            <div class="forgot_pass"><a href="#" class="link_forgot_pass">Zapomniałeś hasła?</a></div>
+          </div>
+          <div class="btn_container">
+            <button class="btn">ZALOGUJ SIĘ</button>
+          </div>
+        </form>
+
+        <pre>
+          DEV TIP!
+          Email: admin1@localhost.com
+          Hasło: qwerty
+        </pre>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="main_container">
+    <div class="forms_container">
+
+      <div class="content">
+        <strong>Wyślij ponownie e-mail aktywacyjny</strong>
+        <div class="" *ngIf="success.messages">
+          <p>{{ success.messages.join('. ') }}</p>
+        </div>
+
+        <div class="" *ngIf="error.messages">
+          <p>{{ error.messages.join('. ') }}</p>
+        </div>
+
+        <form (submit)="handleResendEmail()">
+          <div class="info_inputs">
+            <input type="text" class="input_form" placeholder="Adres e-mail" name="email" [(ngModel)]="email" />
+            <div class="" *ngIf="error.email">
+              <p>{{ error.email.join(' ') }}</p>
+            </div>
+
+          </div>
+          <div class="btn_container">
+            <button class="btn">Wyślij</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

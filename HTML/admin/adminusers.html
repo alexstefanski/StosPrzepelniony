@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Stos Przepełniony</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="adminusers.css">    
+   </head>
+   <body>
+      <div class="admin_container">
+         <div class="label">
+            <div  class="logo-img">
+               <img src="logo.png" alt="img1">
+            </div>
+            <div class="admin-info">
+               <div id="admin-name">
+                  Madzia
+               </div>
+               <div class="admin-icon">
+                  <i class="fa fa-user-circle" aria-hidden="true"></i>
+               </div>
+            </div>
+         </div>
+        <ul class="sidenav">
+             <li>
+               <a href="#home">
+               <i class="fa fa-home" aria-hidden="true"></i>
+               Home
+               </a>
+            </li>
+            <li>
+               <a href="adminlist.html" >
+               <i class="fa fa-user-circle" aria-hidden="true"></i>
+               Administratorzy
+               </a>
+            </li>
+            <li>
+               <a href="admincategories.html">
+               <i class="fa fa-th-list" aria-hidden="true"></i>
+               Kategorie
+               </a>
+            </li>
+            <li>
+               <a href="adminusers.html" class="active">
+               <i class="fa fa-users" aria-hidden="true"></i>
+               Użytkownicy
+               </a>
+            </li>
+            <li>
+               <a href="advertisment.html">
+               <i class="fa fa-file-text-o" aria-hidden="true"></i>
+               Ogłoszenia
+               </a>
+            </li>
+            <li>
+               <a href="access.html">
+               <i class="fa fa-th" aria-hidden="true"></i>
+               Dostęp
+               </a>
+            </li>
+            <li>
+               <a href="adminactions.html">
+               <i class="fa fa-arrows" aria-hidden="true"></i>
+               Akcje
+               </a>
+            </li>
+         </ul>
+         <div class="content">
+            <div class="container">
+				<h2>Lista użytkowników</h2>
+               <table id="ads-list">
+                  <thead>
+                     <tr>
+                        <th scope="col">
+                           user id
+                        </th>
+                        <th scope="col">
+                           first name
+                        </th>
+                        <th scope="col">
+                           last name
+                        </th>
+                         <th scope="col">
+                           email
+                        </th>
+                         <th scope="col">
+                           status
+                        </th>
+                         <th scope="col">
+                           edit
+                        </th>
+                        <th scope="col">
+                           delete
+                        </th>
+                     </tr>
+                  </thead>
+					<tbody>
+						<tr>
+							<td class="user-id">
+							   1
+							</td>
+							<td class="user-firstname">
+							   John
+							</td>
+							<td class="user-lastname">
+							   Smith
+							</td>
+                            <td class="user-email">
+							   johnsmith@gmail.com
+							</td>
+                            <td class="user-status">
+							   0
+							</td>
+                            <td class="edit">
+							   <div class="btn">
+								  <i class="fa fa-pencil" aria-hidden="true">
+									  <span class="delete-span">
+									  Edytuj
+									  </span>
+								  </i>
+							   </div>
+							</td>
+							<td class="delete">
+							   <div class="btn">
+								  <i class="fa fa-times" aria-hidden="true">
+									  <span class="delete-span">
+									  Usuń
+									  </span>
+								  </i>
+							   </div>
+							</td>
+						</tr>
+						 <tr>
+							<td class="user-id">
+							   2
+							</td>
+							<td class="user-firstname">
+							   Leonardo
+							</td>
+							<td class="user-lastname">
+							   DiCaprio
+							</td>
+                            <td class="user-email">
+							   leooodicaprio@gmail.com
+							</td>
+                            <td class="user-status">
+							   1
+							</td>
+                             <td class="edit">
+							   <div class="btn">
+								  <i class="fa fa-pencil" aria-hidden="true">
+									  <span class="delete-span">
+									  Edytuj
+									  </span>
+								  </i>
+							   </div>
+							</td>
+							<td class="delete">
+							   <div class="btn">
+								  <i class="fa fa-times" aria-hidden="true">
+									  <span class="delete-span">
+									  Usuń
+									  </span>
+								  </i>
+							   </div>
+							</td>
+						</tr>
+                        <tr>
+							<td class="user-id">
+							   3
+							</td>
+							<td class="user-firstname">
+							   Ryan
+							</td>
+							<td class="user-lastname">
+							   Gosling
+							</td>
+                            <td class="user-email">
+							   rgosling@gmail.com
+							</td>
+                            <td class="user-status">
+							   0
+							</td>
+                            <td class="edit">
+							   <div class="btn">
+								  <i class="fa fa-pencil" aria-hidden="true">
+									  <span class="delete-span">
+									  Edytuj
+									  </span>
+								  </i>
+							   </div>
+							</td>
+							<td class="delete">
+							   <div class="btn">
+								  <i class="fa fa-times" aria-hidden="true">
+									  <span class="delete-span">
+									  Usuń
+									  </span>
+								  </i>
+							   </div>
+							</td>
+						</tr>
+                        <tr>
+							<td class="user-id">
+							   4
+							</td>
+							<td class="user-firstname">
+							   Brad
+							</td>
+							<td class="user-lastname">
+							   Pitt
+							</td>
+                            <td class="user-email">
+							   bradp@gmail.com
+							</td>
+                            <td class="user-status">
+							   0
+							</td>
+                            <td class="edit">
+							   <div class="btn">
+								  <i class="fa fa-pencil" aria-hidden="true">
+									  <span class="delete-span">
+									  Edytuj
+									  </span>
+								  </i>
+							   </div>
+							</td>
+							<td class="delete">
+							   <div class="btn">
+								  <i class="fa fa-times" aria-hidden="true">
+									  <span class="delete-span">
+									  Usuń
+									  </span>
+								  </i>
+							   </div>
+							</td>
+						</tr>
+					</tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

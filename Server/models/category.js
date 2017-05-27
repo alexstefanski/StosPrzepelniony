@@ -7,27 +7,26 @@ var sequelize = require('./../config/sequelize.js');
 
 var Category = sequelize.define('category',
     {
+        categoryId:{
+            type:Sequelize.INTEGER,
+            primaryKey:true,
+            autoIncrement: true
+        },
         categoryIdParent: {
             type: Sequelize.INTEGER,
-            validate: {
-                isNull: {
-                    msg: "Kategoria musi mieć ID rodzica lub wartość 0"
-                }
-            }
+            allowNull: false
         },
         name: {
             type: Sequelize.STRING,
-            validate: {
-                isNull: {
-                    msg: "Nazwa kategorii nie może być pusta!"
-                }
-            }
+            allowNull: false
         },
         description: {
             type: Sequelize.TEXT,
-            allowNull: true
+            allowNull: false
         }
 
+    }, {
+        timestamps: false
     });
 
 module.exports = Category;

@@ -1,6 +1,63 @@
 var User = require('./../../models/index.js').User
 var UserToken = require('./../../models/index.js').UserToken
 
+var validate = require('validate.js')
+
+// Własny walidator sprawdzający czy adres e-mail jest unikalny.
+validate.validators.uniqueEmail = function(value) {
+  return new validate.Promise(function(resolve, reject) {
+    User.findOne({
+      where: {email: value},
+      attributes: ['id']
+    })
+    .then(result => {
+      if(result == null) {
+        resolve()
+      } else {
+        resolve('already in use.')
+      }
+    })
+    .catch(errors => {
+      console.log('Database error: connection is not established or table users does not exist.')
+    })
+  })
+}
+
+// Walidacja przychodzących danych.
+module.exports.validate = function(request, response, next) {
+  var constraints = {
+    email: {
+      presence: true,
+      email: true,
+      uniqueEmail: true
+    },
+
+    firstName: {
+      presence: true,
+      length: {minimum: 4, maximum: 255},
+    },
+
+    lastName: {
+      presence: true,
+      length: {minimum: 4, maximum: 255},
+    },
+
+    password: {
+      presence: true,
+      length: {minimum: 6, maximum: 255},
+    }
+  }
+
+  validate.async(request.body, constraints)
+    .then(result => {
+      next()
+    })
+    .catch(result => {
+      result['messages'] = ['Coś poszło nie tak.']
+      response.status(406).json(result)
+    })
+}
+
 module.exports.main = function(request, response) {
 
   User.create({
@@ -9,7 +66,7 @@ module.exports.main = function(request, response) {
     lastName: request.body.lastName,
     password: request.body.password
   })
-  .then(function(user) {
+  .then(user => {
 
     // Generating random token
     var token = "";
@@ -24,37 +81,21 @@ module.exports.main = function(request, response) {
       status: 0,
       userId: user.id
     })
-    .then(function(userToken) {
+    .then(userToken => {
 
       var confirmEmailLink = "/users/" + userToken.userId + "/register/confirm/" + userToken.id + "/" + userToken.token
 
       // TODO: Sending email with confirm link.
-      console.log('Confirm link for user ' + user.email + ': ', confirmEmailLink)
+      console.log('Confirm link for user ' + user.email + ': ', 'http:\/\/localhost:3000' + confirmEmailLink)
 
-      response.status(201).json(confirmEmailLink)
-
-    }, function(errors) {
-
-      response.status(406).json()
+      response.status(201).json({ messages: ['Użytkownik zarejestrowany pomyślnie. Potwierdź konto linkiem aktywacyjnym przesłanym na podany adres e-mail', 'http:\/\/localhost:3000' + confirmEmailLink]  })
 
     })
-
-  }, function(errors) {
-
-    var emailExists = false;
-
-    errors.errors.forEach(function (error) {
-      if(error.type == "unique violation") {
-        emailExists = true
-      }
-    });
-
-    if(emailExists) {
-      response.status(409).json()
-    } else {
-      response.status(406).json()
-    }
-
+    .catch(errors => {
+      console.log('Database error: connection is not established or table userTokens does not exist.')
+    })
   })
-
+  .catch(errors => {
+      console.log('Database error: connection is not established or table users does not exist.')
+  })
 }
