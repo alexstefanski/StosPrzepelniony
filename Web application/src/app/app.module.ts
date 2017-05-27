@@ -22,17 +22,27 @@ import { IndexComponent } from './admin/category/index/index.component';
 import { AddComponent } from './admin/category/add/add.component';
 import { EditComponent } from './admin/category/edit/edit.component';
 import { DeleteComponent } from './admin/category/delete/delete.component';
+import { AppUserComponent } from './app-user.component';
+import { AppAdminComponent } from './app-admin.component';
 
+import { AuthenticatedGuard } from './common/authenticated.guard';
+import { UserService } from './common/user.service';
+import { AdminGuard } from './common/admin.guard';
+import { PreventLoggedInAccess } from './common/prevent-logged-in-access';
 
 const routes = [
-  {path: '', component: HomeComponent},
-
-  {path: 'login', component: UserLoginComponent},
+  {path: '', pathMatch: 'full', redirectTo: 'login'},
+  {path: 'login', component: UserLoginComponent, canActivate: [PreventLoggedInAccess]},
+  {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard]},
   {path: 'register', component: UserRegisterComponent},
-  {path: 'logout', component: UserLogoutComponent},
-  {path: 'me', component: UserInfoComponent},
-  {path: 'change-password', component: UserChangePasswordComponent},
-  {path: 'resend-email', component: UserResendEmailComponent}
+  {path: 'user', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
+    {path: '', component: HomeComponent},
+    {path: 'me', component: UserInfoComponent},
+    {path: 'change-password', component: UserChangePasswordComponent}
+  ]},
+  {path: 'admin', component: AppAdminComponent, canActivate: [AdminGuard], children: [
+    {path: '', component: AddComponent}
+  ]}
 ];
 
 @NgModule({
@@ -52,6 +62,8 @@ const routes = [
     DeleteComponent,
     UserChangePasswordComponent,
     UserResendEmailComponent,
+    AppUserComponent,
+    AppAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +71,12 @@ const routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    UserService,
+    AuthenticatedGuard,
+    AdminGuard,
+    PreventLoggedInAccess
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

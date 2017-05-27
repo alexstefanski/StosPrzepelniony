@@ -4,16 +4,13 @@
   </div>
   <div class="main_container">
     <div class="forms_container">
+      <div class="tabs_container">
+        <ul class='ul'>
+          <li><a routerLink="../login">ZALOGUJ SIĘ</a></li>
+          <li class="active"><a routerLink="../register">ZAREJESTRUJ SIĘ</a></li>
+        </ul>
+      </div>
       <div class="content">
-
-        <div class="" *ngIf="success.messages">
-          <p>{{ success.messages.join('. ') }}</p>
-        </div>
-
-        <div class="" *ngIf="error.messages">
-          <p>{{ error.messages.join('. ') }}</p>
-        </div>
-
         <form (submit)="handleRegister()">
           <div class="info_inputs">
             <input type="text" class="input_form" placeholder="imię" name="firstName" [(ngModel)]="firstName" />

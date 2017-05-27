@@ -1,0 +1,105 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color: white;
+}
+.container {
+  height: auto;
+  width: 100%;
+  margin: auto;
+}
+.logo-img {
+  width: 300px;
+}
+ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding-left: 30px;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav {
+  width: 80%;
+  margin: auto;
+  font-family: Arial;
+  background-color: white;
+}
+.logo {
+  float: left;
+}
+.nav_btns {
+  text-align: right;
+  padding-top: 15px;
+  font-size: 18px;
+}
+
+.bold {
+  font-weight: bold;
+}
+.checkbox-container {
+  float: left;
+  width: 20%;
+  padding-top: 3px;
+  padding-bottom: 10px;
+}
+
+.footer ul li{
+  font-family: Arial;
+  font-size: 16px;
+  color: white;
+  margin-right: 0;
+  padding: 2%;
+}
+.footer ul li a:hover {
+  color: white;
+}
+
+.footer {
+  margin-top: 20px;
+  background-color: #00d2ff;
+  padding: 2px;
+  font-size: 6px;
+  text-align: center;
+  font-family: Arial;
+  clear:both; /*tu tez ode mnie Sobiech*/
+}
+.footer ul li a {
+  color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .logo-img
+  {
+    width: 100%;
+
+  }
+  .control {
+    width: 40%;
+    display: block;
+    font-size: 15px;
+    margin-bottom: 15px;
+    padding-left: 30px;
+    cursor: pointer;
+  }
+  .control input {
+    z-index: -1;
+    opacity: 0;
+  }
+  .control__indicator {
+    top: 2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: #e6e6e6;
+  }
+  .footer {
+    margin: 10px auto;
+    width: 100%;
+  }
+
+}
