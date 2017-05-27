@@ -30,7 +30,7 @@ import { UserService } from './common/user.service';
 import { AdminGuard } from './common/admin.guard';
 
 const routes = [
-  {path: '', component: AppComponent},
+  {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'login', component: UserLoginComponent},
   {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard]},
   {path: 'register', component: UserRegisterComponent},
