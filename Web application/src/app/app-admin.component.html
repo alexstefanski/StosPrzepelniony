@@ -1,26 +1,70 @@
 <div class="admin_container">
   <div class="label">
-    <div  class="logo-img">
-      <img src="../assets/logo.png">
+    <div class="logo-img">
+      <a routerLink="../user"><img src="../assets/logo.png" alt="logo"></a>
     </div>
-    <div class="admin-info">
-      <div id="admin-name">
-        <a routerLink="../logout">Wyloguj</a>
-      </div>
-      <div class="admin-icon">
-        <i class="fa fa-user-circle" aria-hidden="true"></i>
-      </div>
+    <div class="admin-logout">
+      <a routerLink="../logout"><i class="fa fa-power-off" aria-hidden="true"></i> wyloguj się</a>
     </div>
   </div>
   <ul class="sidenav">
-    <li><a class="active" href="#home"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
-    <li><a href="#news"><i class="fa fa-user-circle" aria-hidden="true"></i>Admini</a></li><li><a href="#contact"><i class="fa fa-th-list" aria-hidden="true"></i>Kategorie</a></li>
-    <li><a href="#about"><i class="fa fa-users" aria-hidden="true"></i>Użytkownicy</a></li>
-    <li><a href="#about"><i class="fa fa-file-text-o" aria-hidden="true"></i>Ogłoszenia</a></li>
-    <li><a href="#about"><i class="fa fa-th" aria-hidden="true"></i>Dostęp</a></li>
-    <li><a href="#about"><i class="fa fa-arrows" aria-hidden="true"></i>Akcje</a></li>
+    <div id="admin-info">
+      <div id="icon">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+      </div>
+      Natalka
+      <div id="info">
+        <label>
+          admin
+        </label>
+      </div>
+      <div class="admin-logout2">
+        <a href="#"><i class="fa fa-power-off" aria-hidden="true"></i> wyloguj się</a>
+      </div>
+    </div>
+    <li>
+      <a href="#home">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        Home
+      </a>
+    </li>
+    <li>
+      <a href="admin.html">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        Administratorzy
+      </a>
+    </li>
+    <li>
+      <a href="categories.html">
+        <i class="fa fa-th-list" aria-hidden="true"></i>
+        Kategorie
+      </a>
+    </li>
+    <li>
+      <a href="users.html">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Użytkownicy
+      </a>
+    </li>
+    <li>
+      <a href="advertisments.html">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        Ogłoszenia
+      </a>
+    </li>
+    <li>
+      <a href="access.html" class="active">
+        <i class="fa fa-th" aria-hidden="true"></i>
+        Dostęp
+      </a>
+    </li>
+    <li>
+      <a href="actions.html">
+        <i class="fa fa-arrows" aria-hidden="true"></i>
+        Akcje
+      </a>
+    </li>
   </ul>
   <div class="content">
     <router-outlet></router-outlet>
   </div>
-</div>

@@ -33,7 +33,7 @@ import { PreventLoggedInAccess } from './common/prevent-logged-in-access';
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'login', component: UserLoginComponent, canActivate: [PreventLoggedInAccess]},
-  {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard, AdminGuard]},
+  {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard]},
   {path: 'register', component: UserRegisterComponent},
   {path: 'user', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: HomeComponent},
