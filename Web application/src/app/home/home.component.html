@@ -1,5 +1,229 @@
-<div class="row">
-  <div class="col-lg-12">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="search-main">
+  <div class="wrapper">
+    <div class="search-input">
+      <input type="text" name="phrase" id="search-phrase" placeholder="Czego szukasz?">
+    </div>
+    <div class="search-btn">
+      <button class="btn"><i class="fa fa-search" aria-hidden="true"></i>Szukaj</button>
+    </div>
+  </div>
+  <div class="search-filtres">
+    <ul>
+      <li>
+        <a href="#" id="nav_category" class="bold" onclick="showCategoryView()">
+          Kategoria
+          <hr id="line1" style="border: 1px solid #cccccc">
+        </a>
+      </li>
+      <li>
+        <a href="#" id="nav_salary" onclick="showSalaryView()">
+          Wynagrodzenie
+          <hr id="line2" style="border: 1px solid #cccccc">
+        </a>
+      </li>
+    </ul>
+
+    <div class="category">
+      <label class="control control--checkbox checkbox-container">
+        Android
+        <input type="checkbox"/>
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        Assembler
+        <input type="checkbox"/>
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        C
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        C#
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        C++
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        Delphi/Object Pascal
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        GO
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        HTML/CSS
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        IOS
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        Java
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        Javascript
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        Matlab
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        Objective-C
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        PHP
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+      <label class="control control--checkbox checkbox-container">
+        PL/SQL
+        <input type="checkbox" />
+        <div class="control__indicator"></div>
+      </label>
+    </div>
+    <div class="salary">
+      <div class="checkbox-salary">
+        <label class="control control--checkbox checkbox-container">
+          Za godzinę
+          <input type="checkbox"/>
+          <div class="control__indicator"></div>
+        </label>
+        <label class="control control--checkbox checkbox-container">
+          Za projekt
+          <input type="checkbox"/>
+          <div class="control__indicator"></div>
+        </label>
+      </div>
+      <div class="salary_range">
+        <div>
+          Minimalne
+        </div>
+        <input type="range" name="range-min" min="0" max="100000" onchange="showMin(this.value)"  />
+        <span id="range-min"></span>
+      </div>
+      <div class="salary_range">
+        <div>
+          Maksymalne
+        </div>
+        <input type="range" name="range-max" min="0" max="100000" onchange="showMax(this.value)"  />
+        <span id="range-max"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="list-wrapper">
+  <div class="title">
+    Ogłoszenia
+  </div>
+  <div class="list_container">
+    <div class="list-short">
+      <div class="header">
+        <a href="#">
+          Stworzenie sklepu internetowego dla młodej polskiej firmy odzieżowej
+        </a>
+      </div>
+      <div class="info">
+        <div class="author-name">
+          Młoda polska firma odzieżowa
+        </div>
+        <div class="date">
+          Dodane
+          <span class="add-date">
+									20-04-2017
+								</span>
+        </div>
+      </div>
+    </div>
+    <div class="list-short">
+      <div class="header">
+        <a href="#">
+          Senior Django Developer
+        </a>
+      </div>
+      <div class="info">
+        <div class="author-name">
+          Samsung Electronics Polska Sp.z.o.o
+        </div>
+        <div class="date">
+          Dodane
+          <span class="add-date">
+									17-04-2017
+								</span>
+        </div>
+      </div>
+    </div>
+    <div class="list-short">
+      <div class="header">
+        <a href="#">
+          Aplikacja na androida do zarządzania firmą
+        </a>
+      </div>
+      <div class="info">
+        <div class="author-name">
+          Sklep spożywczy Radek
+        </div>
+        <div class="date">
+          Dodane
+          <span class="add-date">
+									16-04-2017
+								</span>
+        </div>
+      </div>
+    </div>
+    <div class="list-short">
+      <div class="header">
+        <a href="#">
+          Junior Frontend developer
+        </a>
+      </div>
+      <div class="info">
+        <div class="author-name">
+          Microsoft Polska
+        </div>
+        <div class="date">
+          Dodane
+          <span class="add-date">
+									20-04-2017
+								</span>
+        </div>
+      </div>
+    </div>
+    <div class="list-short">
+      <div class="header">
+        <a href="#">
+          Zlecę zrobienie portfolio
+        </a>
+      </div>
+      <div class="info">
+        <div class="author-name">
+          Jan Kowalski
+        </div>
+        <div class="date">
+          Dodane
+          <span class="add-date">
+									15-04-2017
+								</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

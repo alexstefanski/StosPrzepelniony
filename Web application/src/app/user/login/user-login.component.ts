@@ -63,9 +63,10 @@ export class UserLoginComponent implements OnInit {
 
             // Zapisujemy lokalnie userName - te dane możemy podejrzeć w narzędziach developerskich przeglądarki. Zakładka DANE
             window.localStorage.setItem('userName', response.json().firstName)
-            this.router.navigate([''])
+            this.router.navigate(['user']);
           })
           .catch(response => {
+
             this.handlingLogin = false;
           })
 
