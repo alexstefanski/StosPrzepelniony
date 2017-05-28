@@ -18,11 +18,11 @@ module.exports.main = function(request, response) {
   .then(function(userToken) {
     if(userToken != null) {
       userToken.destroy()
-      response.status(204).json()
+      response.status(204).json(null)
     } else {
-      response.status(404).json()
+      response.status(404).json(null)
     }
   }, function(error) {
-    response.status(422).json()
+    response.status(422).json(null)
   })
 }

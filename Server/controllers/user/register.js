@@ -14,7 +14,7 @@ validate.validators.uniqueEmail = function(value) {
       if(result == null) {
         resolve()
       } else {
-        resolve('already in use.')
+        resolve('Ten adres e-mail jest już w użyciu.')
       }
     })
     .catch(errors => {
@@ -27,27 +27,52 @@ validate.validators.uniqueEmail = function(value) {
 module.exports.validate = function(request, response, next) {
   var constraints = {
     email: {
-      presence: true,
-      email: true,
-      uniqueEmail: true
+      presence: {
+        message: 'Adres e-mail jest wymagany.'
+      },
+      email: {
+        message: 'To nie przypomina adresu e-mail.'
+      },
+      uniqueEmail: {
+        message: 'Ten adres e-mail jest już w użyciu.'
+      }
     },
 
     firstName: {
-      presence: true,
-      length: {minimum: 4, maximum: 255},
+      presence: {
+        message: 'Imię jest wymagane.'
+      },
+      length: {
+        minimum: 4,
+        maximum: 255,
+        message: 'Imię musi zawierać od 4 do 255 znaków.'
+      },
     },
 
     lastName: {
-      presence: true,
-      length: {minimum: 4, maximum: 255},
+      presence: {
+        message: 'Nazwisko jest wymagane.'
+      },
+      length: {
+        minimum: 4,
+        maximum: 255,
+        message: 'Nazwisko musi zawierać od 4 do 255 znaków.'
+      },
     },
 
     password: {
-      presence: true,
-      length: {minimum: 6, maximum: 255},
+      presence: {
+        message: 'Hasło jest wymagane.'
+      },
+      length: {
+        minimum: 6,
+        maximum: 255,
+        message: 'Hasło musi zawierać od 6 do 255 znaków.'
+      },
     }
   }
 
+  validate.async.options = {fullMessages: false}
   validate.async(request.body, constraints)
     .then(result => {
       next()
