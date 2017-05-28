@@ -9,7 +9,7 @@ import { UserService } from 'app/common/user.service';
   selector: 'app-logout',
   templateUrl: './user-logout.component.html',
   styleUrls: ['./user-logout.component.css'],
-    providers: [UserService]
+  providers: [UserService]
 })
 export class UserLogoutComponent implements OnInit {
 
