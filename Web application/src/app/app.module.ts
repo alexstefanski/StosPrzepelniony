@@ -18,7 +18,6 @@ import { UserResendEmailComponent } from './user/resend-email/user-resend-email.
 import { AdminComponent } from './admin/admin.component';
 import { CategoryComponent } from './admin/category/category.component';
 import { UserComponent } from './admin/user/user.component';
-import { IndexComponent } from './admin/category/index/index.component';
 import { AddComponent } from './admin/category/add/add.component';
 import { EditComponent } from './admin/category/edit/edit.component';
 import { DeleteComponent } from './admin/category/delete/delete.component';
@@ -29,6 +28,10 @@ import { AuthenticatedGuard } from './common/authenticated.guard';
 import { UserService } from './common/user.service';
 import { AdminGuard } from './common/admin.guard';
 import { PreventLoggedInAccess } from './common/prevent-logged-in-access';
+import { AdComponent } from './ad/ad.component';
+import { IndexComponent } from './ad/index/index.component';
+import { ShowComponent } from './ad/show/show.component';
+import { ChangeStatusComponent } from './ad/change-status/change-status.component';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -56,14 +59,17 @@ const routes = [
     AdminComponent,
     CategoryComponent,
     UserComponent,
-    IndexComponent,
     AddComponent,
     EditComponent,
     DeleteComponent,
     UserChangePasswordComponent,
     UserResendEmailComponent,
     AppUserComponent,
-    AppAdminComponent
+    AppAdminComponent,
+    AdComponent,
+    IndexComponent,
+    ShowComponent,
+    ChangeStatusComponent
   ],
   imports: [
     BrowserModule,
