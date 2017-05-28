@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './change-status.component.html',
   styleUrls: ['./change-status.component.css']
 })
-export class ChangeStatusComponent implements OnInit {
+export class AdChangeStatusComponent implements OnInit {
 
   constructor() { }
 

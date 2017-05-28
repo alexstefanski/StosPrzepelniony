@@ -29,9 +29,12 @@ import { UserService } from './common/user.service';
 import { AdminGuard } from './common/admin.guard';
 import { PreventLoggedInAccess } from './common/prevent-logged-in-access';
 import { AdComponent } from './ad/ad.component';
-import { IndexComponent } from './ad/index/index.component';
-import { ShowComponent } from './ad/show/show.component';
-import { ChangeStatusComponent } from './ad/change-status/change-status.component';
+import { AdAddComponent } from './ad/add/add.component';
+import { AdDeleteComponent } from './ad/delete/delete.component';
+import { AdEditComponent } from './ad/edit/edit.component';
+import { AdIndexComponent } from './ad/index/index.component';
+import { AdShowComponent } from './ad/show/show.component';
+import { AdChangeStatusComponent } from './ad/change-status/change-status.component';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -67,9 +70,12 @@ const routes = [
     AppUserComponent,
     AppAdminComponent,
     AdComponent,
-    IndexComponent,
-    ShowComponent,
-    ChangeStatusComponent
+    AdAddComponent,
+    AdDeleteComponent,
+    AdEditComponent,
+    AdIndexComponent,
+    AdShowComponent,
+    AdChangeStatusComponent
   ],
   imports: [
     BrowserModule,
