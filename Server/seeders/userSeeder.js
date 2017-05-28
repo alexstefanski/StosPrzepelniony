@@ -15,6 +15,15 @@ User.create({
   })
 })
 
+// Static user
+User.create({
+  email: 'user1@localhost.com',
+  firstName: 'Alexander',
+  lastName: 'Grothendieck',
+  password: 'qwerty',
+  status: 1
+})
+
 // Extra random users
 var first_names = ['Maria', 'Krystyna', 'Anna', 'Barbara', 'Teresa', 'Elżbieta', 'Janina', 'Zofia', 'Jadwiga', 'Danuta', 'Halina', 'Irena', 'Ewa', 'Małgorzata', 'Helena', 'Grażyna', 'Bożena', 'Stanisława', 'Jolanta'];
 
