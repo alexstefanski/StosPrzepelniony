@@ -4,6 +4,7 @@ var Admin = require('./admin.js')
 var PermissionAction = require('./permissionAction.js')
 var Action = require('./action.js')
 var Permission = require('./permission.js')
+var Ad = require('./ad.js')
 
 User.hasMany(UserToken, {
   foreignKey: 'userId',
@@ -35,9 +36,18 @@ Action.belongsToMany(Permission, {
   foreignKey: 'actionId',
 })
 
+User.hasMany(Ad,{
+  foreignKey: 'userId'
+})
+
+Ad.belongsTo(User,{
+  foreignKey: 'userId'
+})
+
 module.exports.User = User
 module.exports.UserToken = UserToken
 module.exports.Admin = Admin
 module.exports.Permission = Permission
 module.exports.Action = Action
 module.exports.PermissionAction = PermissionAction
+module.exports.Ad = Ad

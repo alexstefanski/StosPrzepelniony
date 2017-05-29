@@ -24,6 +24,13 @@ var categoryDelete =  require('./controllers/category/delete.js')
 
 var messageList = require('./controllers/message/list.js')
 
+var adCreate  = require('./controllers/ad/create.js')
+var adInfo  = require('./controllers/ad/info.js')
+var adEdit  = require('./controllers/ad/edit.js')
+var adStatusChange  = require('./controllers/ad/statusChange.js')
+var adDelete  = require('./controllers/ad/delete.js')
+var adList = require('./controllers/ad/list.js')
+
 // Common middlewares
 var authenticatedUser = require('./middlewares/authenticatedUser.js')
 var isAdministrator = require('./middlewares/isAdministrator.js')
@@ -129,4 +136,24 @@ module.exports = function(app) {
   app.use('/api/v1/permissions/:permissionId/info', authenticatedUser.main)
   app.use('/api/v1/permissions/:permissionId/info', isAdministrator.main)
   app.get('/api/v1/permissions/:permissionId/info', permissions.info.main)
+
+  //Routes for user/ads
+  app.use('/ads/add',authenticatedUser.main)
+  app.use('/ads/add',adCreate.validate)
+  app.post('/ads/add', adCreate.main)
+
+  app.use('/ads/:adId/edit',authenticatedUser.main)
+  app.use('/ads/:adId/edit', adEdit.validate)
+  app.post('/ads/:adId/edit', adEdit.main)
+
+  app.use('/ads/:adId/status',authenticatedUser.main)
+  app.use('/ads/:adId/status', adStatusChange.validate)
+  app.post('/ads/:adId/status', adStatusChange.main)
+
+  app.use('/ads/:adId/delete',authenticatedUser.main)
+  app.delete('/ads/:adId/delete', adDelete.main)
+
+  app.get('/ads/:adId/info', adInfo.main)
+
+  app.get('/ads/list', adList.main)
 };
