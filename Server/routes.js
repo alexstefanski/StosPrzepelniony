@@ -111,8 +111,8 @@ module.exports = function(app) {
   app.use('/api/v1/admins/:adminId/edit', isAdministrator.main)
   app.post('/api/v1/admins/:adminId/edit', admins.edit.main)
 
-  //app.use('/api/v1/admins/:adminId/delete', authenticatedUser.main)
-  //app.use('/api/v1/admins/:adminId/delete', isAdministrator.main)
+  app.use('/api/v1/admins/:adminId/delete', authenticatedUser.main)
+  app.use('/api/v1/admins/:adminId/delete', isAdministrator.main)
   app.delete('/api/v1/admins/:adminId/delete', admins.delete.main)
 
   // Routes for admin/users
@@ -127,6 +127,7 @@ module.exports = function(app) {
 
   app.use('/api/v1/users/:userId/delete', authenticatedUser.main)
   app.use('/api/v1/users/:userId/delete', isAdministrator.main)
+  app.use('/api/v1/users/:userId/delete', users.delete.validate)
   app.delete('/api/v1/users/:userId/delete', users.delete.main)
 
   // Routes for admin/permissions

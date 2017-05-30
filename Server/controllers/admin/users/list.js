@@ -28,7 +28,7 @@ module.exports.main = function(request, response) {
         response.status(200).json(usersList)
       } else {
         // brak użytkowników w bazie
-        response.sendStatus(404)
+        response.status(404).json()
       } // koniec if
     })
 }
