@@ -15,6 +15,8 @@ var admins = require('./controllers/admin/admins/index.js')
 var users = require('./controllers/admin/users/index.js')
 // API for admin/permissions
 var permissions = require('./controllers/admin/permissions/index.js')
+// API for admin/ads
+var ad = require('./controllers/admin/ads/index.js')
 
 var categoryCreate  = require('./controllers/category/create.js')
 var categoryRead = require('./controllers/category/read.js')
@@ -138,6 +140,12 @@ module.exports = function(app) {
   app.use('/api/v1/permissions/:permissionId/info', authenticatedUser.main)
   app.use('/api/v1/permissions/:permissionId/info', isAdministrator.main)
   app.get('/api/v1/permissions/:permissionId/info', permissions.info.main)
+
+  // Routes for admin/ads
+  app.use('/api/v1/ads/:adId/status', authenticatedUser.main)
+  app.use('/api/v1/ads/:adId/status', isAdministrator.main)
+  app.use('/api/v1/ads/:adId/status', ad.editStatus.validate)
+  app.post('/api/v1/ads/:adId/status', ad.editStatus.main)
 
   //Routes for user/ads
   app.use('/ads/add',authenticatedUser.main)
