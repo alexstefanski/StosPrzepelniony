@@ -12,7 +12,7 @@ module.exports.main = function(request, response) {
     .then(function(admin) {
       if (admin != null) {
         // Użytkownik o podanym userId nie jest administratorem
-        response.sendStatus(204).json()
+        response.status(204).json()
       } else {
         // Użytkownik o podanym userId nie jest administratorem
         response.status(404).json({

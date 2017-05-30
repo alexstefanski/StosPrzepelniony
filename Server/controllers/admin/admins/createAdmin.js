@@ -49,7 +49,7 @@ function createAdmin(_userId, _permissionId, response) {
     .spread(function(admin, created) {
       if (created) {
         // Pomyślnie utworzono administratora
-        response.sendStatus(201).json()
+        response.status(201).json()
       } else {
         // Taki administrator już istnieje w bazie
         response.status(406).json({

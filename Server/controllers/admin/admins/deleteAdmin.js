@@ -26,7 +26,7 @@ module.exports.main = function(request, response) {
       if (admin != null) {
         admin.destroy().then(function() {
           // pomyślnie usunięto administratora
-          response.sendStatus(204).json()
+          response.status(204).json()
         })
       } else {
         // administrator o podanym adminId nie istnieje

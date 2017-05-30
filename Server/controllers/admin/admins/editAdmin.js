@@ -20,7 +20,7 @@ module.exports.main = function(request, response) {
               permissionId: _permissionId
             }).then(function() {
               // uaktualniono pomyślnie uprawnienia
-              response.sendStatus(201).json()
+              response.status(201).json()
             })
           } else {
             // nie ma takiego permissionId

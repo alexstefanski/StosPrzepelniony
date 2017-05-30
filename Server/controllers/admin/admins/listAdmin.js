@@ -44,7 +44,7 @@ module.exports.main = function(request, response) {
         response.status(200).json(adminsList)
       } else {
         // Lista administratorow jest pusta
-        response.sendStatus(404).json()
+        response.status(404).json()
       } // koniec if
     }) // koniec then
 
