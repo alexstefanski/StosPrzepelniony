@@ -9,7 +9,7 @@ module.exports.main = function(request, response) {
 
   // sprawdzenie czy nie następuje próba usunięcia samego siebie
   if (_adminId == _currentAdminId) {
-    response.status(403).send({
+    response.status(403).json({
       message: 'Nie można usunąć administratora',
       adminId: 'Administrator nie może usunąć sam siebie'
     })
@@ -26,11 +26,11 @@ module.exports.main = function(request, response) {
       if (admin != null) {
         admin.destroy().then(function() {
           // pomyślnie usunięto administratora
-          response.sendStatus(204)
+          response.sendStatus(204).json()
         })
       } else {
         // administrator o podanym adminId nie istnieje
-        response.status(406).send({
+        response.status(406).json({
           message: 'Nie można usunąć administratora',
           adminId: 'Administrator nie istnieje'
         })

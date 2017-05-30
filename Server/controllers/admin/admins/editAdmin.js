@@ -20,11 +20,11 @@ module.exports.main = function(request, response) {
               permissionId: _permissionId
             }).then(function() {
               // uaktualniono pomyślnie uprawnienia
-              response.sendStatus(201)
+              response.sendStatus(201).json()
             })
           } else {
             // nie ma takiego permissionId
-            response.status(406).send({
+            response.status(406).json({
               message: 'Nie można uaktualnić uprawnień',
               permissionId: 'Uprawnienie nie istnieje'
             })
@@ -32,7 +32,7 @@ module.exports.main = function(request, response) {
         }) // koniec isPermissionExist
       } else {
         // nie ma takiego administratora
-        response.status(406).send({
+        response.status(406).json({
           message: 'Nie można uaktualnić uprawnień',
           adminId: 'Administrator nie istnieje'
         })

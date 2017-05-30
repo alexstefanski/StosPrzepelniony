@@ -63,7 +63,7 @@ module.exports.main = function(request, response) {
         response.status(200).json(adminObj)
       } else {
         // administrator o podanym adminId nie istnieje
-        response.status(404).send({
+        response.status(404).json({
           message: 'Nie można wyświetlić informacji o administratorze',
           adminId: 'Administrator nie istnieje'
         })

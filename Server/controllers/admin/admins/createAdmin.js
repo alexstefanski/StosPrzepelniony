@@ -15,7 +15,7 @@ module.exports.main = function(request, response) {
           createAdmin(_userId, _permissionId, response)
         } else {
           // Uprawnienie o podanym permissionId nie istnieje
-          response.status(406).send({
+          response.status(406).json({
             message: `Nie można utworzyć administratora`,
             permissionId: 'Uprawnienie nie istnieje'
           })
@@ -23,7 +23,7 @@ module.exports.main = function(request, response) {
       }) // koniec isPermissionExist
     } else {
       // Użytkownik o podanym userId nie istnieje
-      response.status(406).send({
+      response.status(406).json({
         message: `Nie można utworzyć administratora`,
         userId: 'Użytkownik nie istnieje'
       })
@@ -49,10 +49,10 @@ function createAdmin(_userId, _permissionId, response) {
     .spread(function(admin, created) {
       if (created) {
         // Pomyślnie utworzono administratora
-        response.sendStatus(201)
+        response.sendStatus(201).json()
       } else {
         // Taki administrator już istnieje w bazie
-        response.status(406).send({
+        response.status(406).json({
           message: `Nie można utworzyć administratora`,
           userId: `Taki administrator już istnieje`
         })
