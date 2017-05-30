@@ -1,17 +1,51 @@
 var User = require('./../../../models/index.js').User
 
+var validate = require('validate.js')
+
+// Walidacja przychodzących danych
+module.exports.validate = function(request, response, next) {
+  var constraints = {
+    status: {
+      presence: {
+        message: 'Status jest wymagany'
+      },
+      format: {
+        pattern: '^[0-2]{1}$',
+        message: 'Status może przyjmować jedynie wartości [0,1,2]'
+      }
+    },
+
+    userId: {
+      presence: {
+        message: 'Id użytkownika jest wymagane'
+      },
+      format: {
+        pattern: '[0-9]+',
+        message: 'Id musi być liczbą'
+      }
+    }
+
+  }
+
+  const objToValidate = {
+    status: request.body.status,
+    userId: request.params.userId
+  }
+
+  validate.async.options = { fullMessages: false }
+  validate.async(objToValidate, constraints)
+    .then(result => {
+      next()
+    })
+    .catch(result => {
+      result['messages'] = ['Coś poszło nie tak.']
+      response.status(406).json(result)
+    })
+}
+
 module.exports.main = function(request, response) {
-  let _statusList = [ 0 , 1 , 2 ]
   let _userId = request.params.userId
   let _status = request.body.status
-
-  if (_statusList.indexOf(_status) <= -1) {
-    response.status(406).send({
-      message: 'Nie można zmienić statusu użytkownika',
-      status: 'Podany status nie istnieje'
-    })
-    return
-  }
 
   User
     .findOne({
@@ -25,10 +59,10 @@ module.exports.main = function(request, response) {
           status: _status
         }).then(function() {
           // uaktualniono pomyślnie status
-          response.sendStatus(204)
+          response.status(204).json()
         })
       } else {
-        response.status(404).send({
+        response.status(404).json({
           message: 'Nie można zaktualizować statusu użytkownika',
           userId: 'Podany użytkownik nie istnieje'
         })
