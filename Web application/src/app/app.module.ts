@@ -15,12 +15,17 @@ import { UserInfoComponent } from './user/info/user-info.component';
 import { UserChangePasswordComponent } from './user/change-password/user-change-password.component';
 import { UserResendEmailComponent } from './user/resend-email/user-resend-email.component';
 
+import { AdminUserComponent } from './admin/user/admin-user.component';
+import { AdminUserDeleteComponent } from './admin/user/delete/admin-user-delete.component';
+import { AdminUsersComponent } from './admin/user/index/admin-users.component';
+
 import { AdminComponent } from './admin/admin.component';
-import { CategoryComponent } from './admin/category/category.component';
-import { UserComponent } from './admin/user/user.component';
-import { AddComponent } from './admin/category/add/add.component';
-import { EditComponent } from './admin/category/edit/edit.component';
-import { DeleteComponent } from './admin/category/delete/delete.component';
+import { AdminCategoryComponent } from './admin/category/admin-category.component';
+import { AdminCategoryAddComponent } from './admin/category/add/admin-category-add.component';
+import { AdminCategoryEditComponent } from './admin/category/edit/admin-category-edit.component';
+import { AdminCategoryDeleteComponent } from './admin/category/delete/admin-category-delete.component';
+import { AdminCategoriesComponent } from './admin/category/index/admin-categories.component';
+
 import { AppUserComponent } from './app-user.component';
 import { AppAdminComponent } from './app-admin.component';
 
@@ -47,7 +52,7 @@ const routes = [
     {path: 'change-password', component: UserChangePasswordComponent}
   ]},
   {path: 'admin', component: AppAdminComponent, canActivate: [AdminGuard], children: [
-    {path: '', component: AddComponent}
+    {path: '', component: AdminCategoryAddComponent}
   ]}
 ];
 
@@ -60,13 +65,16 @@ const routes = [
     UserLogoutComponent,
     UserInfoComponent,
     AdminComponent,
-    CategoryComponent,
-    UserComponent,
-    AddComponent,
-    EditComponent,
-    DeleteComponent,
+    AdminCategoryComponent,
+    AdminCategoryAddComponent,
+    AdminCategoryEditComponent,
+    AdminCategoryDeleteComponent,
+    AdminCategoriesComponent,
     UserChangePasswordComponent,
     UserResendEmailComponent,
+    AdminUserComponent,
+    AdminUserDeleteComponent,
+    AdminUsersComponent,
     AppUserComponent,
     AppAdminComponent,
     AdComponent,

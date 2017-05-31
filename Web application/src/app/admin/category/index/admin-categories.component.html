@@ -1,0 +1,129 @@
+<div class="admin_container">
+  <div class="label">
+    <div  class="logo-img">
+      <img src="logo.png" alt="img1">
+    </div>
+    <div class="admin-info">
+      <div id="admin-name">
+        Natalka
+      </div>
+      <div class="admin-icon">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+  <ul class="sidenav">
+    <li>
+      <a href="#home">
+        <i class="fa fa-home" aria-hidden="true"></i>
+        Home
+      </a>
+    </li>
+    <li>
+      <a href="adminlist.html">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        Administratorzy
+      </a>
+    </li>
+    <li>
+      <a routerLink="adminCategoriesList" class="active">
+        <i class="fa fa-th-list" aria-hidden="true"></i>
+        Kategorie
+      </a>
+    </li>
+    <li>
+      <a href="adminusers.html">
+        <i class="fa fa-users" aria-hidden="true"></i>
+        Użytkownicy
+      </a>
+    </li>
+    <li>
+      <a href="advertisment.html">
+        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+        Ogłoszenia
+      </a>
+    </li>
+    <li>
+      <a href="access.html">
+        <i class="fa fa-th" aria-hidden="true"></i>
+        Dostęp
+      </a>
+    </li>
+    <li>
+      <a href="adminactions.html">
+        <i class="fa fa-arrows" aria-hidden="true"></i>
+        Akcje
+      </a>
+    </li>
+  </ul>
+  <div class="content">
+    <div class="container">
+      <h2>Lista kategorii</h2>
+      <div class="add_btn">
+        <a routerLink=../add">
+          <i class="fa fa-plus" aria-hidden="true">
+            <span class="delete-span">
+              Dodaj kategorie
+            </span>
+          </i>
+        </a>
+      </div>
+      <table id="ads-list">
+        <thead>
+        <tr>
+          <th scope="col">
+            category id
+          </th>
+          <th scope="col">
+            name
+          </th>
+          <th scope="col">
+            description
+          </th>
+          <th scope="col">
+            edit
+          </th>
+          <th scope="col">
+            delete
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let category of categories">
+          <td class="cat-id">
+            {{category.categoryId}}
+          </td>
+          <td class="cat-name">
+            {{category.name}}
+          </td>
+          <td class="cat-description">
+            {{category.description}}
+          </td>
+          <td class="edit">
+            <div class="btn">
+              <a routerLink="../edit">
+                <i class="fa fa-pencil" aria-hidden="true">
+                  <span class="delete-span">
+                    Edytuj
+                  </span>
+                </i>
+              </a>
+            </div>
+          </td>
+          <td class="delete">
+            <div class="btn">
+              <a routerLink="adminCategoryDelete">
+                <i class="fa fa-times" aria-hidden="true">
+                      <span class="delete-span">
+                      Usuń
+                      </span>
+                </i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

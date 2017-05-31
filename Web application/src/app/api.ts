@@ -11,3 +11,8 @@ export const userInfo = function(userId) {return server + '/api/v1/users/' + use
 export const changePassword = server + '/api/v1/users/changepassword';
 export const resendEmail = server + '/api/v1/users/resendverificationemail';
 export const isUserAdmin = function (userId) {return server + '/api/v1/admins/' + userId + '/isadmin'; };
+
+export const adminCategoriesList = server + '/categories/list';
+export const adminCategoryAdd = server + '/categories/create';
+export const adminCategoryDelete = function(categoryId) {return server + '/category/' + categoryId + '/delete'; };
+export const adminCategoryEdit = function(categoryId) {return server + '/category/ ' + categoryId + '/edit'; };
