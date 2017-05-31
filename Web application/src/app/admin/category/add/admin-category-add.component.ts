@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import { adminCategoryAdd } from './../../../api';
+import { adminCategoryAdd } from '../../../api';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -19,6 +19,17 @@ export class AdminCategoryAddComponent implements OnInit {
   constructor(private http: Http ) { }
 
   ngOnInit() {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    this.http.post(adminCategoryAdd, {headers: headers})
+      .toPromise()
+      .then(response => {
+        this.category = response.json();
+      })
+      .catch(response => {
+        console.log(response);
+      });
   }
 
   handleAdd() {

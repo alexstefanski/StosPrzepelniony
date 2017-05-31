@@ -17,14 +17,12 @@ import { UserResendEmailComponent } from './user/resend-email/user-resend-email.
 
 import { AdminUserComponent } from './admin/user/admin-user.component';
 import { AdminUserDeleteComponent } from './admin/user/delete/admin-user-delete.component';
-import { AdminUsersComponent } from './admin/user/index/admin-users.component';
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminCategoryComponent } from './admin/category/admin-category.component';
 import { AdminCategoryAddComponent } from './admin/category/add/admin-category-add.component';
 import { AdminCategoryEditComponent } from './admin/category/edit/admin-category-edit.component';
 import { AdminCategoryDeleteComponent } from './admin/category/delete/admin-category-delete.component';
-import { AdminCategoriesComponent } from './admin/category/index/admin-categories.component';
 
 import { AppUserComponent } from './app-user.component';
 import { AppAdminComponent } from './app-admin.component';
@@ -52,7 +50,12 @@ const routes = [
     {path: 'change-password', component: UserChangePasswordComponent}
   ]},
   {path: 'admin', component: AppAdminComponent, canActivate: [AdminGuard], children: [
-    {path: '', component: AdminCategoryAddComponent}
+    {path: '', component: AdminComponent},
+    {path: 'category', component: AdminCategoryComponent, canActivate: [AdminGuard], children: [
+        {path: 'add', component: AdminCategoryAddComponent},
+        {path: 'edit', component: AdminCategoryEditComponent},
+        {path: 'delete', component: AdminCategoryDeleteComponent}
+      ]}
   ]}
 ];
 
@@ -69,12 +72,10 @@ const routes = [
     AdminCategoryAddComponent,
     AdminCategoryEditComponent,
     AdminCategoryDeleteComponent,
-    AdminCategoriesComponent,
     UserChangePasswordComponent,
     UserResendEmailComponent,
     AdminUserComponent,
     AdminUserDeleteComponent,
-    AdminUsersComponent,
     AppUserComponent,
     AppAdminComponent,
     AdComponent,

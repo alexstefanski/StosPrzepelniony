@@ -1,3 +1,68 @@
-<p>
-  category works!
-</p>
+<div class="container">
+      <h2>Lista kategorii</h2>
+      <div class="add_btn">
+        <a routerLink="add">
+          <i class="fa fa-plus" aria-hidden="true">
+            <span class="delete-span">
+              Dodaj kategorie
+            </span>
+          </i>
+        </a>
+      </div>
+      <table id="ads-list">
+        <thead>
+        <tr>
+          <th scope="col">
+            Lp.
+          </th>
+          <th scope="col">
+            Nazwa
+          </th>
+          <th scope="col">
+            Opis
+          </th>
+          <th scope="col">
+            Edytuj
+          </th>
+          <th scope="col">
+            Usuń
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let category of categories">
+          <td class="cat-id">
+            {{category.categoryId}}
+          </td>
+          <td class="cat-name">
+            {{category.name}}
+          </td>
+          <td class="cat-description">
+            {{category.description}}
+          </td>
+          <td class="edit">
+            <div class="btn">
+              <a routerLink="edit">
+                <i class="fa fa-pencil" aria-hidden="true">
+                  <span class="delete-span">
+                    Edytuj
+                  </span>
+                </i>
+              </a>
+            </div>
+          </td>
+          <td class="delete">
+            <div class="btn">
+              <a routerLink="delete">
+                <i class="fa fa-times" aria-hidden="true">
+                      <span class="delete-span">
+                      Usuń
+                      </span>
+                </i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
