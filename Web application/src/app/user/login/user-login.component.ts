@@ -72,8 +72,6 @@ export class UserLoginComponent implements OnInit {
 
       })
       .catch(response => {
-        this.error.messages = response.json().messages
-
         this.handlingLogin = false;
       })
   }

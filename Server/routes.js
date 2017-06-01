@@ -94,58 +94,58 @@ module.exports = function(app) {
   app.get('/messages/list',messageList.main);
 
   // Routes for admin/admins
-  app.use('/api/v1/admins/add', authenticatedUser.main)
-  app.use('/api/v1/admins/add', isAdministrator.main)
-  app.post('/api/v1/admins/add', admins.create.main)
+  app.use('/admins/add', authenticatedUser.main)
+  app.use('/admins/add', isAdministrator.main)
+  app.post('/admins/add', admins.create.main)
 
-  app.use('/api/v1/admins/:userId/isadmin', authenticatedUser.main)
-  app.get('/api/v1/admins/:userId/isadmin', admins.isAdmin.main)
+  app.use('/admins/:userId/isadmin', authenticatedUser.main)
+  app.get('/admins/:userId/isadmin', admins.isAdmin.main)
 
-  app.use('/api/v1/admins/list', authenticatedUser.main)
-  app.use('/api/v1/admins/list', isAdministrator.main)
-  app.get('/api/v1/admins/list', admins.list.main)
+  app.use('/admins/list', authenticatedUser.main)
+  app.use('/admins/list', isAdministrator.main)
+  app.get('/admins/list', admins.list.main)
 
-  app.use('/api/v1/admins/:adminId/info', authenticatedUser.main)
-  app.use('/api/v1/admins/:adminId/info', isAdministrator.main)
-  app.get('/api/v1/admins/:adminId/info', admins.info.main)
+  app.use('/admins/:adminId/info', authenticatedUser.main)
+  app.use('/admins/:adminId/info', isAdministrator.main)
+  app.get('/admins/:adminId/info', admins.info.main)
 
-  app.use('/api/v1/admins/:adminId/edit', authenticatedUser.main)
-  app.use('/api/v1/admins/:adminId/edit', isAdministrator.main)
-  app.post('/api/v1/admins/:adminId/edit', admins.edit.main)
+  app.use('/admins/:adminId/edit', authenticatedUser.main)
+  app.use('/admins/:adminId/edit', isAdministrator.main)
+  app.post('/admins/:adminId/edit', admins.edit.main)
 
-  app.use('/api/v1/admins/:adminId/delete', authenticatedUser.main)
-  app.use('/api/v1/admins/:adminId/delete', isAdministrator.main)
-  app.delete('/api/v1/admins/:adminId/delete', admins.delete.main)
+  app.use('/admins/:adminId/delete', authenticatedUser.main)
+  app.use('/admins/:adminId/delete', isAdministrator.main)
+  app.delete('/admins/:adminId/delete', admins.delete.main)
 
   // Routes for admin/users
-  app.use('/api/v1/users/list', authenticatedUser.main)
-  app.use('/api/v1/users/list', isAdministrator.main)
-  app.get('/api/v1/users/list', users.list.main)
+  app.use('/users/list', authenticatedUser.main)
+  app.use('/users/list', isAdministrator.main)
+  app.get('/users/list', users.list.main)
 
-  app.use('/api/v1/users/:userId/status', authenticatedUser.main)
-  app.use('/api/v1/users/:userId/status', isAdministrator.main)
-  app.use('/api/v1/users/:userId/status', users.editStatus.validate)
-  app.post('/api/v1/users/:userId/status', users.editStatus.main)
+  app.use('/users/:userId/status', authenticatedUser.main)
+  app.use('/users/:userId/status', isAdministrator.main)
+  app.use('/users/:userId/status', users.editStatus.validate)
+  app.post('/users/:userId/status', users.editStatus.main)
 
-  app.use('/api/v1/users/:userId/delete', authenticatedUser.main)
-  app.use('/api/v1/users/:userId/delete', isAdministrator.main)
-  app.use('/api/v1/users/:userId/delete', users.delete.validate)
-  app.delete('/api/v1/users/:userId/delete', users.delete.main)
+  app.use('/users/:userId/delete', authenticatedUser.main)
+  app.use('/users/:userId/delete', isAdministrator.main)
+  app.use('/users/:userId/delete', users.delete.validate)
+  app.delete('/users/:userId/delete', users.delete.main)
 
   // Routes for admin/permissions
-  app.use('/api/v1/permissions/list', authenticatedUser.main)
-  app.use('/api/v1/permissions/list', isAdministrator.main)
-  app.get('/api/v1/permissions/list', permissions.list.main)
+  app.use('/permissions/list', authenticatedUser.main)
+  app.use('/permissions/list', isAdministrator.main)
+  app.get('/permissions/list', permissions.list.main)
 
-  app.use('/api/v1/permissions/:permissionId/info', authenticatedUser.main)
-  app.use('/api/v1/permissions/:permissionId/info', isAdministrator.main)
-  app.get('/api/v1/permissions/:permissionId/info', permissions.info.main)
+  app.use('/permissions/:permissionId/info', authenticatedUser.main)
+  app.use('/permissions/:permissionId/info', isAdministrator.main)
+  app.get('/permissions/:permissionId/info', permissions.info.main)
 
   // Routes for admin/ads
-  app.use('/api/v1/ads/:adId/status', authenticatedUser.main)
-  app.use('/api/v1/ads/:adId/status', isAdministrator.main)
-  app.use('/api/v1/ads/:adId/status', ad.editStatus.validate)
-  app.post('/api/v1/ads/:adId/status', ad.editStatus.main)
+  app.use('/ads/:adId/status', authenticatedUser.main)
+  app.use('/ads/:adId/status', isAdministrator.main)
+  app.use('/ads/:adId/status', ad.editStatus.validate)
+  app.post('/ads/:adId/status', ad.editStatus.main)
 
   //Routes for user/ads
   app.use('/ads/add',authenticatedUser.main)
