@@ -5,6 +5,7 @@ var bodyParser = require('body-parser')
 var routes = require('./routes.js')
 
 var app = express()
+app.disable('etag')
 app.use(cors())
 app.use(bodyParser.json())
 routes(app)
