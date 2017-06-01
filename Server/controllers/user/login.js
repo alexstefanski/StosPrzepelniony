@@ -27,17 +27,28 @@ validate.validators.emailExists = function(value) {
 module.exports.validation = function (request, response, next) {
   var constraints = {
     email: {
-      presence: true,
-      email: true,
+      presence: {
+        message: 'Adres e-mail jest wymagany.'
+      },
+      email: {
+        message: 'To nie przypomina adresu e-mail.'
+      },
       emailExists: true
     },
 
     password: {
-      presence: true,
-      length: {minimum: 6, maximum: 255},
+      presence: {
+        message: 'Hasło jest wymagane.'
+      },
+      length: {
+        minimum: 6,
+        maximum: 255,
+        message: 'Hasło musi zawierać od 5 do 255 znaków.'
+      },
     }
   }
 
+  validate.async.options = {fullMessages: false}
   validate.async(request.body, constraints)
     .then(result => {
       next()
@@ -58,8 +69,8 @@ module.exports.main = function (request, response) {
     if(user != null) {
 
       // Generating random token
-      var token = "";
-      var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var token = '';
+      var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
       for( var i = 0; i < 32; i++ ) {
         token += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -93,4 +104,5 @@ module.exports.main = function (request, response) {
   .catch(errors => {
     console.log('Database error: connection is not established or table users does not exist.')
   })
+
 }

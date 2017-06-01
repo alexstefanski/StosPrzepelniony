@@ -23,18 +23,17 @@ validate.validators.uniqueEmail = function(value) {
   })
 }
 
-// Walidacja przychodzących danych.
+// Podstawowa walidacja przychodzących danych.
 module.exports.validate = function(request, response, next) {
+
   var constraints = {
     email: {
       presence: {
         message: 'Adres e-mail jest wymagany.'
       },
+
       email: {
         message: 'To nie przypomina adresu e-mail.'
-      },
-      uniqueEmail: {
-        message: 'Ten adres e-mail jest już w użyciu.'
       }
     },
 
@@ -42,33 +41,36 @@ module.exports.validate = function(request, response, next) {
       presence: {
         message: 'Imię jest wymagane.'
       },
+
       length: {
-        minimum: 4,
+        minimum: 2,
         maximum: 255,
-        message: 'Imię musi zawierać od 4 do 255 znaków.'
-      },
+        message: 'Imię musi zawierać od 2 do 255 znaków.'
+      }
     },
 
     lastName: {
       presence: {
         message: 'Nazwisko jest wymagane.'
       },
+
       length: {
-        minimum: 4,
+        minimum: 2,
         maximum: 255,
-        message: 'Nazwisko musi zawierać od 4 do 255 znaków.'
-      },
+        message: 'Nazwisko musi zawierać od 2 do 255 znaków.'
+      }
     },
 
     password: {
       presence: {
         message: 'Hasło jest wymagane.'
       },
+
       length: {
         minimum: 6,
         maximum: 255,
         message: 'Hasło musi zawierać od 6 do 255 znaków.'
-      },
+      }
     }
   }
 
@@ -81,6 +83,28 @@ module.exports.validate = function(request, response, next) {
       result['messages'] = ['Coś poszło nie tak.']
       response.status(406).json(result)
     })
+
+}
+
+// Walidacja czy adres e-mail jest unikalny.
+module.exports.validateEmailUnique = function(request, response, next) {
+
+  var constraints = {
+    email: {
+      uniqueEmail: true
+    }
+  }
+
+  validate.async.options = {fullMessages: false}
+  validate.async(request.body, constraints)
+    .then(result => {
+      next()
+    })
+    .catch(result => {
+      result['messages'] = ['Coś poszło nie tak.']
+      response.status(409).json(result)
+    })
+
 }
 
 module.exports.main = function(request, response) {
@@ -123,4 +147,5 @@ module.exports.main = function(request, response) {
   .catch(errors => {
       console.log('Database error: connection is not established or table users does not exist.')
   })
+
 }
