@@ -1,13 +1,5 @@
-// Controllers
-var register = require('./controllers/user/register.js');
-var confirmRegistration = require('./controllers/user/confirmRegistration.js');
-var checkEmail = require('./controllers/user/checkEmail.js');
-var resendConfirmRegistrationEmail = require('./controllers/user/resendConfirmRegistrationEmail.js');
-var login = require('./controllers/user/login.js')
-var isLoggedIn = require('./controllers/user/isLoggedIn.js')
-var logout = require('./controllers/user/logout.js')
-var info = require('./controllers/user/info.js')
-var changePassword = require('./controllers/user/changePassword.js')
+// API for user/users
+var usersPublic = require('./controllers/user/index.js')
 
 // API for admin/admins
 var admins = require('./controllers/admin/admins/index.js')
@@ -43,35 +35,43 @@ module.exports = function(app) {
     response.send('Hello world from server!')
   })
 
-  app.use('/api/v1/users/register', register.validate)
-  app.post('/api/v1/users/register', register.main);
+  // Routes for user/users
+  app.use('/users/register', usersPublic.register.validate)
+  app.use('/users/register', usersPublic.register.validateEmailUnique)
+  app.post('/users/register', usersPublic.register.main)
 
-  app.use('/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.validUserMiddleware);
-  app.use('/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.validTokenMiddleware);
-  app.get('/users/:userId/register/confirm/:tokenId/:token', confirmRegistration.main);
+  app.use('/users/:userId/register/confirm/:tokenId/:token', usersPublic.confirmRegistration.basicValidation)
+  app.use('/users/:userId/register/confirm/:tokenId/:token', usersPublic.confirmRegistration.userExistsValidation)
+  app.use('/users/:userId/register/confirm/:tokenId/:token', usersPublic.confirmRegistration.userInactiveValidation)
+  app.use('/users/:userId/register/confirm/:tokenId/:token', usersPublic.confirmRegistration.correctTokenValidation)
+  app.use('/users/:userId/register/confirm/:tokenId/:token', usersPublic.confirmRegistration.liveTokenValidation)
+  app.get('/users/:userId/register/confirm/:tokenId/:token', usersPublic.confirmRegistration.main)
 
-  app.use('/api/v1/users/checkemail', checkEmail.validEmail);
-  app.post('/api/v1/users/checkemail', checkEmail.main);
+  app.use('/users/checkemail', usersPublic.checkEmail.validation);
+  app.post('/users/checkemail', usersPublic.checkEmail.main);
 
-  app.use('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.validation)
-  app.use('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.belongsToInactiveUser)
-  app.post('/api/v1/users/resendverificationemail', resendConfirmRegistrationEmail.main)
+  app.use('/users/resendverificationemail', usersPublic.resendConfirmRegistrationEmail.validation)
+  app.use('/users/resendverificationemail', usersPublic.resendConfirmRegistrationEmail.inactiveUserValidation)
+  app.post('/users/resendverificationemail', usersPublic.resendConfirmRegistrationEmail.main)
 
-  app.use('/api/v1/users/login', login.validation)
-  app.post('/api/v1/users/login', login.main)
+  app.use('/users/login', usersPublic.login.validation)
+  app.post('/users/login', usersPublic.login.main)
 
-  app.use('/api/v1/users/isLoggedIn', isLoggedIn.validBasicAuthHeader)
-  app.get('/api/v1/users/isLoggedIn', isLoggedIn.main)
+  app.use('/users/isLoggedIn', authenticatedUser.main)
+  app.get('/users/isLoggedIn', usersPublic.isLoggedIn.main)
 
-  app.use('/api/v1/users/logout', authenticatedUser.main)
-  app.post('/api/v1/users/logout', logout.main)
+  app.use('/users/logout', authenticatedUser.main)
+  app.post('/users/logout', usersPublic.logout.main)
 
-  app.use('/api/v1/users/:userId/info', authenticatedUser.main)
-  app.get('/api/v1/users/:userId/info', info.main)
+  app.use('/users/:userId/info', authenticatedUser.main)
+  app.use('/users/:userId/info', usersPublic.info.validation)
+  app.use('/users/:userId/info', usersPublic.info.userExistsValidation)
+  app.get('/users/:userId/info', usersPublic.info.main)
 
-  app.use('/api/v1/users/changepassword', authenticatedUser.main)
-  app.use('/api/v1/users/changepassword', changePassword.validation)
-  app.post('/api/v1/users/changepassword', changePassword.main)
+  app.use('/users/changepassword', authenticatedUser.main)
+  app.use('/users/changepassword', usersPublic.changePassword.validation)
+  app.use('/users/changepassword', usersPublic.changePassword.validOldPassword)
+  app.post('/users/changepassword', usersPublic.changePassword.main)
 
   app.use('/categories/list', authenticatedUser.main)
   app.use('/categories/list', isAdministrator.main)
