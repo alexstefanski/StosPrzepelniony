@@ -3,26 +3,61 @@ var UserToken = require('./../../models/index.js').UserToken
 
 var validate = require('validate.js')
 
-module.exports.validEmail = function (request, response, next) {
-  validate.async(request.body, {email: {email: true}})
-    .then(function (success) {
-      next()
-    },
-    function (error) {
-      response.status(403).json()
+// Własny walidator sprawdzający czy adres e-mail jest unikalny.
+validate.validators.uniqueEmail = function(value) {
+  return new validate.Promise(function(resolve, reject) {
+    User.findOne({
+      where: {email: value},
+      attributes: ['id']
     })
+    .then(result => {
+      if(result == null) {
+        resolve()
+      } else {
+        resolve('Ten adres e-mail jest już w użyciu.')
+      }
+    })
+    .catch(errors => {
+      console.log('Database error: connection is not established or table users does not exist.')
+    })
+  })
+}
+
+// Walidacja przychodzących danych.
+module.exports.validation = function (request, response, next) {
+
+  var constraints = {
+    email: {
+      presence: {
+        message: 'Adres e-mail jest wymagany.'
+      },
+
+      email: {
+        message: 'To nie przypomina adresu e-mail.'
+      },
+
+      uniqueEmail: true
+    }
+  }
+
+  validate.async.options = {fullMessages: false}
+  validate.async(request.body, constraints)
+    .then(result => {
+      next()
+    })
+    .catch(result => {
+      result['messages'] = ['Coś poszło nie tak.']
+      response.status(403).json(result)
+    })
+
 }
 
 module.exports.main = function (request, response) {
-  User.findOne({
-    where: { email: request.body.email }
-  })
-    .then(function (user) {
 
-      if(user != null ) {
-        response.status(403).json()
-      } else {
-        response.status(204).json()
-      }
-    })
+  // Odpowiedź
+  var responseObject = {
+    messages: ['Adres e-mail jest dostępny.']
+  }
+
+  response.status(200).json(responseObject)
 }

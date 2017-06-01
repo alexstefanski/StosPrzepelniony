@@ -5,27 +5,12 @@ var UserToken = sequelize.define('user_token', {
   token: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false,
-
-    validate: {
-      // size: function(value) {
-      //   if(value.length != 512) {
-      //     throw new Error('Token powinien zawierać 512 znaków.')
-      //   }
-      // }
-    }
+    allowNull: false
   },
 
   status: {
     type: Sequelize.INTEGER,
     allowNull: false,
-
-    validate: {
-      isInt: true,
-      isIn: [
-        [0, 1, 10, 20, 21]
-      ]
-    }
   },
 
   userId: {
