@@ -142,6 +142,10 @@ module.exports = function(app) {
   app.use('/permissions/:permissionId/info', isAdministrator.main)
   app.get('/permissions/:permissionId/info', permissions.info.main)
 
+  app.use('/api/v1/permissions/add', authenticatedUser.main)
+  app.use('/api/v1/permissions/add', isAdministrator.main)
+  app.post('/api/v1/permissions/add', permissions.add.main)
+
   // Routes for admin/ads
   app.use('/ads/:adId/status', authenticatedUser.main)
   app.use('/ads/:adId/status', isAdministrator.main)
