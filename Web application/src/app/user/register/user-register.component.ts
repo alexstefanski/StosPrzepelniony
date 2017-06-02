@@ -48,6 +48,8 @@ export class UserRegisterComponent implements OnInit {
         this.lastName = null;
         this.password = null;
 
+        this.handlingRegister = false
+        scroll(0,0)
       })
       .catch(response => {
         this.error.email = response.json().email;
@@ -55,6 +57,9 @@ export class UserRegisterComponent implements OnInit {
         this.error.lastName = response.json().lastName;
         this.error.password = response.json().password;
         this.error.messages = response.json().messages;
+
+        this.handlingRegister = false
+        scroll(0,0)
       })
   }
 

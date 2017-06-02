@@ -10,33 +10,43 @@
           <li class="active"><a routerLink="../register">ZAREJESTRUJ SIĘ</a></li>
         </ul>
       </div>
+
       <div class="content">
+        <div class="info" *ngIf="error.messages">
+          <p>{{ error.messages.join(' ') }}</p>
+        </div>
+
+        <div class="info" *ngIf="success.messages">
+          <p>{{ success.messages.join(' ') }}</p>
+        </div>
+
         <form (submit)="handleRegister()">
           <div class="info_inputs">
             <input type="text" class="input_form" placeholder="imię" name="firstName" [(ngModel)]="firstName" />
-            <div class="" *ngIf="error.firstName"> <!-- TODO: Klasa do wyświetlania błędów -->
-              <p>{{ error.firstName.join('. ') }}</p>
+            <div class="info_inputs" *ngIf="error.firstName">
+              <p>{{ error.firstName.join(' ') }}</p>
             </div>
 
             <input type="text" class="input_form" placeholder="nazwisko" name="lastName" [(ngModel)]="lastName" />
-            <div class="" *ngIf="error.lastName">
-              <p>{{ error.lastName.join('. ') }}</p>
+            <div class="info_inputs" *ngIf="error.lastName">
+              <p>{{ error.lastName.join(' ') }}</p>
             </div>
 
             <input type="text" class="input_form" placeholder="e-mail" name="email" [(ngModel)]="email" />
-            <div class="" *ngIf="error.email">
-              <p>{{ error.email.join('. ') }}</p>
+            <div class="info_inputs" *ngIf="error.email">
+              <p>{{ error.email.join(' ') }}</p>
             </div>
 
             <input type="password" class="input_form" placeholder="hasło" name="password" [(ngModel)]="password" />
-            <div class="" *ngIf="error.password">
-              <p>{{ error.password.join('. ') }}</p>
+            <div class="info_inputs" *ngIf="error.email">
+              <p>{{ error.password.join(' ') }}</p>
             </div>
           </div>
           <div class="btn_container">
-            <button class="btn">ZAREJESTRUJ SIĘ</button>
+            <button class="btn" *ngIf="!handlingRegister">ZAREJESTRUJ SIĘ</button>
+            <button class="btn disabled" *ngIf="handlingRegister" disabled="true">REJESTRACJA ... </button>
           </div>
-          <p><a routerLink="/resend-email">Wyślij e-mail aktywacyjny ponownie</a></p>
+          <p><a routerLink="/resend-email" class="link_forgot_pass">Wyślij e-mail aktywacyjny ponownie</a></p>
         </form>
       </div>
     </div>

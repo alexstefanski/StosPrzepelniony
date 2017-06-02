@@ -44,6 +44,7 @@ const routes = [
   {path: 'login', component: UserLoginComponent, canActivate: [PreventLoggedInAccess]},
   {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard]},
   {path: 'register', component: UserRegisterComponent},
+  {path: 'resend-email', component: UserResendEmailComponent },
   {path: 'user', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: HomeComponent},
     {path: 'me', component: UserInfoComponent},

@@ -1,27 +1,38 @@
 <div class="container">
+  <div class="logo_container">
+    <img src="../../assets/logo.png" class="logo-img" alt="logo">
+  </div>
   <div class="main_container">
     <div class="forms_container">
+      <p class="title">WYŚLIJ PONOWNIE MIAL AKTYWACYJNY</p>
+
+      <div class="tabs_container">
+        <ul class='ul'>
+          <li><a routerLink="../login">ZALOGUJ SIĘ</a></li>
+          <li><a routerLink="../register">ZAREJESTRUJ SIĘ</a></li>
+        </ul>
+      </div>
 
       <div class="content">
-        <strong>Wyślij ponownie e-mail aktywacyjny</strong>
-        <div class="" *ngIf="success.messages">
-          <p>{{ success.messages.join('. ') }}</p>
+        <div class="info" *ngIf="success.messages">
+          <p>{{ success.messages.join(' ') }}</p>
         </div>
 
-        <div class="" *ngIf="error.messages">
-          <p>{{ error.messages.join('. ') }}</p>
+        <div class="info" *ngIf="error.messages">
+          <p>{{ error.messages.join(' ') }}</p>
         </div>
 
         <form (submit)="handleResendEmail()">
           <div class="info_inputs">
-            <input type="text" class="input_form" placeholder="Adres e-mail" name="email" [(ngModel)]="email" />
-            <div class="" *ngIf="error.email">
+            <input type="text" class="input_form" placeholder="e-mail" name="email" [(ngModel)]="email" />
+            <div class="info" *ngIf="error.email">
               <p>{{ error.email.join(' ') }}</p>
             </div>
 
           </div>
           <div class="btn_container">
-            <button class="btn">Wyślij</button>
+            <button class="btn" *ngIf="!handlingResedEmail">WYŚLIJ</button>
+            <button class="btn disabled" disabled="true" *ngIf="handlingResedEmail">WYSYŁANIE ... </button>
           </div>
         </form>
       </div>

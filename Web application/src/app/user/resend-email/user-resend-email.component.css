@@ -47,6 +47,15 @@ body {
 .ul > .active > a  {
     color: #00d2ff;
 }
+
+.title {
+  text-decoration: none;
+  font-family: Arial;
+  font-size: 16px;
+  color: #00d2ff;
+  display: block;
+}
+
 .content {
     height: auto;
 
@@ -115,6 +124,14 @@ p {
     margin-top: 20px;
     margin-bottom: 20px;
     cursor: pointer;
+}
+
+.btn.disabled {
+  cursor: not-allowed;
+  filter: alpha(opacity=50);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  opacity: .50;
 }
 
 @media only screen and (max-width: 600px) {

@@ -66,13 +66,18 @@ export class UserLoginComponent implements OnInit {
             this.router.navigate(['user']);
           })
           .catch(response => {
-
+            this.error.messages = response.json().messages
             this.handlingLogin = false;
+
+            scroll(0,0)
           })
 
       })
       .catch(response => {
+        this.error.messages = response.json().messages
         this.handlingLogin = false;
+
+        scroll(0,0)
       })
   }
 }

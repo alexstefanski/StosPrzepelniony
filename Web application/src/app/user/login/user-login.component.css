@@ -113,6 +113,14 @@ p {
     cursor: pointer;
 }
 
+.btn.disabled {
+  cursor: not-allowed;
+  filter: alpha(opacity=50);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  opacity: .50;
+}
+
 @media only screen and (max-width: 600px) {
     .main_container {
         width: 100%;

@@ -17,12 +17,16 @@ export class UserResendEmailComponent implements OnInit {
   success: { messages: Array<String>} = { messages: null };
   error: { email: Array<String>, messages: Array<String> } = { email: null, messages: null };
 
+  handlingResedEmail: boolean = false;
+
   constructor(private http: Http) { }
 
   ngOnInit() {
   }
 
   handleResendEmail() {
+    this.handlingResedEmail = true
+
     this.success = { messages: null };
     this.error = { email: null, messages: null };
 
@@ -35,10 +39,16 @@ export class UserResendEmailComponent implements OnInit {
       .then(response => {
         this.success.messages = response.json().messages
         this.email = null
+
+        this.handlingResedEmail = false
+        scroll(0,0)
       })
       .catch(response => {
         this.error.messages = response.json().messages
         this.error.email = response.json().email
+
+        this.handlingResedEmail = false
+        scroll(0,0)
       })
   }
 
