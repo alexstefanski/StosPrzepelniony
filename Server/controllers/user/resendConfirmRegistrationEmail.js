@@ -4,7 +4,7 @@ var UserToken = require('./../../models/index.js').UserToken
 var validate = require('validate.js')
 
 // Własny walidator sprawdzający czy adres e-mail użytkownika istnieje.
-validate.validators.emailExistsValidator = function(value) {
+validate.validators.userExistsValidatorByEmail = function(value) {
   return new validate.Promise(function(resolve, reject) {
     User.findOne({
       where: {
@@ -57,10 +57,8 @@ module.exports.validation = function (request, response, next) {
       },
 
       email: {
-        messages: 'To nie przypomina adresu e-mail.'
-      },
-
-      emailExistsValidator: true
+        message: 'To nie przypomina adresu e-mail.'
+      }
     }
   }
 
@@ -74,6 +72,28 @@ module.exports.validation = function (request, response, next) {
 
       response.status(404).json(result)
     })
+}
+
+// Walidacja czy adres e-mail użytkownika istnieje.
+module.exports.exitingUserValidation = function(request, response, next) {
+
+  var constraints = {
+    email: {
+      userExistsValidatorByEmail: true
+    }
+  }
+
+  validate.async.options = {fullMessages: false}
+  validate.async(request.body, constraints)
+    .then(result => {
+      next()
+    })
+    .catch(result => {
+      result['messages'] = ['Coś poszło nie tak.']
+
+      response.status(409).json(result)
+    })
+
 }
 
 // Walidacja czy konto użytkownika nie jest jeszcze aktywowane.

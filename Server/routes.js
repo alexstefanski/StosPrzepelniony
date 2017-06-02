@@ -51,6 +51,7 @@ module.exports = function(app) {
   app.post('/users/checkemail', usersPublic.checkEmail.main);
 
   app.use('/users/resendverificationemail', usersPublic.resendConfirmRegistrationEmail.validation)
+  app.use('/users/resendverificationemail', usersPublic.resendConfirmRegistrationEmail.exitingUserValidation)
   app.use('/users/resendverificationemail', usersPublic.resendConfirmRegistrationEmail.inactiveUserValidation)
   app.post('/users/resendverificationemail', usersPublic.resendConfirmRegistrationEmail.main)
 
