@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
@@ -57,6 +57,14 @@ const routes = [
         {path: 'edit', component: AdminCategoryEditComponent},
         {path: 'delete', component: AdminCategoryDeleteComponent}
       ]}
+  ]},
+  {path: 'ad', canActivate: [AuthenticatedGuard], children: [
+    {path: '', component: AdComponent, pathMath: 'full'},
+    {path: 'add', component: AdAddComponent},
+    {path: ':id', component: AdShowComponent},
+    {path: ':id/edit', component: AdEditComponent},
+    {path: ':id/delete', component: AdDeleteComponent},
+    {path: ':id/show', component: AdShowComponent}
   ]}
 ];
 
@@ -91,13 +99,14 @@ const routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
     UserService,
     AuthenticatedGuard,
     AdminGuard,
-    PreventLoggedInAccess
+    PreventLoggedInAccess,
   ],
   bootstrap: [AppComponent]
 })

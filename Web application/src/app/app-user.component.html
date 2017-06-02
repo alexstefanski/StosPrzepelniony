@@ -16,7 +16,7 @@
           </div>
         </li>
         <li class="">
-          <a href="#"><i class="fa fa-plus-square-o" aria-hidden="true"></i>dodaj ogłoszenie </a>
+          <a [routerLink]="['/ad/add']"><i class="fa fa-plus-square-o" aria-hidden="true"></i>dodaj ogłoszenie </a>
         </li>
         <li class="" *ngIf="isAdminLogged">
           <a routerLink="../admin"><i class="fa fa-users" aria-hidden="true"></i>administrator </a>

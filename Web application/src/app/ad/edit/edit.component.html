@@ -1,3 +1,130 @@
-<p>
-  edit works!
-</p>
+
+<script>
+  $(document).ready(function() {
+    $(".salary").hide();
+    $("#line2").hide();
+    $('input[type=range]').on('input', function(e){
+      var min = e.target.min,
+        max = e.target.max,
+        val = e.target.value;
+      $(e.target).css({
+        'backgroundSize': (val - min) * 100 / (max - min) + '% 100%'
+      });
+    }).trigger('input');
+    var val1 = $('input[name=range-min]').val();
+    document.getElementById("range-min").innerHTML = val1+" zł";
+    var val2 = $('input[name=range-max]').val();
+    document.getElementById("range-max").innerHTML = val2+" zł";
+  });
+  function showMin(newValue)
+  {
+    document.getElementById("range-min").innerHTML=newValue+" zł";
+  }
+  function showMax(newValue)
+  {
+    document.getElementById("range-max").innerHTML=newValue+" zł";
+  }
+  function showCategoryView()
+  {
+    $(".salary").hide();
+    $("#nav_salary").removeClass("bold");
+    $("#nav_category").addClass("bold");
+    $("#line2").hide();
+    $("#line1").show();
+    $(".category").show(1000);
+    //$(".salary").show(1000);
+  }
+  function showSalaryView()
+  {
+    $(".category").hide();
+    $("#nav_category").removeClass("bold");
+    $("#nav_salary").addClass("bold");
+    $("#line1").hide();
+    $("#line2").show();
+    $(".salary").show(1000);
+    //$(".salary").show(1000);
+  }
+</script>
+<script src="./poster_script.js"></script>
+
+
+<div class="container">
+  <div class="nav">
+    <div class="logo">
+      <img src="../../../assets/logo.png" class="logo-img" alt="img1">
+    </div>
+    <div class="nav_btns">
+      <ul>
+        <li class="">
+          <a href="#">
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+            moje konto
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="poster_wrapper">
+    <form [formGroup]="addForm" (ngSubmit)="addAdv()">
+      <span class="poster_input_title">Edytuj Ogłoszenie</span>
+      <input type="text" class="poster_input_text" placeholder="Tytuł ogłoszenia" formControlName="title"/><br/>
+      <select class="poster_select" formControlName="category">
+        <option selected disabled>Kategoria</option>
+        <option value="category_name1">Android</option>
+        <option value="category_name2">C++</option>
+        <option value="category_name3">IOS</option>
+        <option value="category_name4">Objective-C</option>
+        <option value="category_name5">Assembler</option>
+        <option value="category_name6">Delphi/Object Pascal</option>
+        <option value="category_name7">Java</option>
+        <option value="category_name8">PHP</option>
+        <option value="category_name9">C</option>
+        <option value="category_name10">GO</option>
+        <option value="category_name11">Javascript</option>
+        <option value="category_name12">PL/SQL</option>
+        <option value="category_name13">C#</option>
+        <option value="category_name14">HTML/CSS</option>
+        <option value="category_name15">Matlab</option>
+      </select>
+      <div class="poster_textarea_wrapper">
+        <textarea class="poster_textarea" placeholder="Opis ogłoszenia" formControlName="description"></textarea>
+      </div>
+      <select class="poster_select_hours" id="poster_hours_select_input" formControlName="salaryType">
+        <option selected disabled>Wynagrodzenie</option>
+        <option value="monthly">Miesięczne</option>
+        <option value="hourly">Godzinowe</option>
+      </select>
+      <input type="text" class="poster_input_hours" id="poster_hours_text_input" placeholder="" formControlName="salary"/><br/>
+      <button type="submit" class="poster_btn_container">WYŚLIJ OGŁOSZENIE</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    <div class="footer_nav">
+      <ul>
+        <li class="">
+          <a href="#">
+            Regulamin
+          </a>
+        </li>
+        <li class="">
+          <a href="#">
+            FAQ
+          </a>
+        </li>
+        <li class="">
+          <a href="#">
+            Polityka prywatności
+          </a>
+        </li>
+        <li class="">
+          <a href="#">
+            O nas
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
