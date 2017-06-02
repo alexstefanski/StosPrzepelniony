@@ -37,7 +37,7 @@ export class AdAddComponent implements OnInit {
       costTotal: (this.addForm.value.salaryType === 'monthly') ? this.addForm.value.salary : null
     };
 
-    this.http.post('/ads/add', payload).toPromise().then(response => {
+    this.http.post('http://localhost:3000/ads/add', payload).toPromise().then(response => {
       this.success = response.json().message;
       this.addForm.value.title = null;
       this.addForm.value.category = null;

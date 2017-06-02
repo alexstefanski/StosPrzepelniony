@@ -38,7 +38,7 @@ module.exports.main = function(request, response, next) {
           response.status(408).json()
         }
       } else {
-        response.status(404).json()
+        response.status(405).json()
       }
     }, function(response) {
       response.status(422).json()
