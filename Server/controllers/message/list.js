@@ -5,9 +5,10 @@
 var Message = require('./../../models/message.js');
 var MessagesList = require('./../../models/messageList.js');
 var User = require('./../../models/user.js');
+var Ad = require('./../../models/ad.js');
 
-var auth = require('basic-auth')
-var moment = require('moment')
+var auth = require('basic-auth');
+var moment = require('moment');
 var Sequelize = require('sequelize');
 
 
@@ -24,27 +25,34 @@ module.exports.main = function(request, response) {
                             attributes: { exclude :['id','createdAt','updatedAt','userId','email','password','status']},
                             where:{userId:userId === message.dataValues.userId ? message.dataValues.userIdSender : message.dataValues.userId}
                         }).then(function (user) {
-                            obj = new Object();
-                            obj.receiverId = e.dataValues.receiverId;
-                            obj.senderId = e.dataValues.senderId;
-                            obj.date  = e.dataValues.date;
+                            Ad.findOne({
+                                attributes: { exclude :['id','createdAt','updatedAt']},
+                                where:{adId:message.adId}
+                            }).then(function(ad){
 
-                            obj.ad = new Object();
-                            obj.ad.adId = message.adId;
+                                obj = new Object();
+                                obj.receiverId = e.dataValues.receiverId;
+                                obj.senderId = e.dataValues.senderId;
+                                obj.date  = e.dataValues.date;
+
+                                obj.ad = new Object();
+                                obj.ad.adId = message.adId;
+                                obj.ad.subject = ad.subject;
 
 
-                            obj.user = new Object();
-                            obj.user.userId = userId === message.dataValues.userId ? message.dataValues.userIdSender : message.dataValues.userId;
-                            obj.user.firstName = user.firstName;
-                            obj.user.lastName = user.lastName;
+                                obj.user = new Object();
+                                obj.user.userId = userId === message.dataValues.userId ? message.dataValues.userIdSender : message.dataValues.userId;
+                                obj.user.firstName = user.firstName;
+                                obj.user.lastName = user.lastName;
 
 
 
-                            obj.LastMessage = new Object();
-                            obj.LastMessage.user = new Object();
-                            obj.LastMessage.user.userId = message.dataValues.userIdSender;
-                            obj.LastMessage.content = message.dataValues.content;
-                            response.status(200).json(obj);
+                                obj.LastMessage = new Object();
+                                obj.LastMessage.user = new Object();
+                                obj.LastMessage.user.userId = message.dataValues.userIdSender;
+                                obj.LastMessage.content = message.dataValues.content;
+                                response.status(200).json(obj);
+                            })
                         })
 
                 })

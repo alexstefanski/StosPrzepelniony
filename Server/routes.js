@@ -17,6 +17,7 @@ var categoryDelete =  require('./controllers/category/delete.js')
 
 
 var messageList = require('./controllers/message/list.js')
+var showMessages = require('./controllers/message/show.js')
 
 var adCreate  = require('./controllers/ad/create.js')
 var adInfo  = require('./controllers/ad/info.js')
@@ -93,6 +94,9 @@ module.exports = function(app) {
 
   app.use('/messages/list', authenticatedUser.main)
   app.get('/messages/list',messageList.main);
+
+  app.use('/messages/list', authenticatedUser.main)
+  app.get('/messages/:adId/:userIdSender', showMessages.main)
 
   // Routes for admin/admins
   app.use('/admins/add', authenticatedUser.main)

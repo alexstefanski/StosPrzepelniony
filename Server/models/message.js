@@ -28,6 +28,10 @@ var Message = sequelize.define('message',
         content: {
             type: Sequelize.TEXT,
             allowNull: false
+        },
+        date: {
+            type: Sequelize.DATE,
+            allowNull: false
         }
     });
 
