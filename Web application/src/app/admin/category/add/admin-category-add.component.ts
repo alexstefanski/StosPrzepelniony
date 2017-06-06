@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Category } from '../../../common/models/category';
-import { CategoryService } from '../../../common/services/category.service';
+import { Headers, Http } from '@angular/http';
 
+import { adminCategoryAdd } from '../../../api';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -18,6 +17,8 @@ export class AdminCategoryAddComponent implements OnInit {
   }
 
   ngOnInit() {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
 
   }
 
@@ -32,4 +33,5 @@ export class AdminCategoryAddComponent implements OnInit {
       }
     })
   }
+
 }

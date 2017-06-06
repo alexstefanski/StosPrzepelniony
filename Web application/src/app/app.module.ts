@@ -54,7 +54,7 @@ const routes = [
   {path: 'admin', component: AppAdminComponent, canActivate: [AdminGuard], children: [
     {path: '', component: AdminComponent},
     {path: 'category', component: AdminCategoryComponent, canActivate: [AdminGuard], children: [
-        {path: 'add', component: AdminCategoryAddComponent},
+        {path: 'create', component: AdminCategoryAddComponent},
         {path: 'edit', component: AdminCategoryEditComponent},
         {path: 'delete', component: AdminCategoryDeleteComponent}
       ]}
