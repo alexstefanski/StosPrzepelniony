@@ -30,7 +30,9 @@ module.exports.main = function(request, response) {
                         where:{adId:ad.dataValues.adId, userIdSender:user.dataValues.userId }
                     }).then(function (messages) {
                         obj = new Array();
-                        messages.forEach(function (element,id) {
+                        messages.sort(function (a,b) {
+                            return a.date < b.date;
+                        }).forEach(function (element,id) {
 
                             User.findOne({
                                 attributes: {exclude :['id','createdAt','updatedAt','email','password','status']},
@@ -71,5 +73,5 @@ module.exports.main = function(request, response) {
             response.status(404).json();
         }
     )
-    
+
 }

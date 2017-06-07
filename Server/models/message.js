@@ -31,8 +31,10 @@ var Message = sequelize.define('message',
         },
         date: {
             type: Sequelize.DATE,
-            allowNull: false
+            defaultValue: Sequelize.DataTypes.NOW
         }
+    }, {
+        timestamps: false
     });
 
 module.exports = Message;
