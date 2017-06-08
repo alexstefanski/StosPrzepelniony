@@ -14,7 +14,7 @@ module.exports.main = function(request, response) {
         where:{userId:request.params.userIdSender}
     }).then(function (user) {
         if(user===null)
-            response.status(404).json();
+            response.status(404).json({messages:"Rozmowa nie istnieje", userIdSender:'Nie znaleziono takiego użytkownika!'});
         else{
 
             Ad.findOne({
@@ -22,7 +22,7 @@ module.exports.main = function(request, response) {
                 where:{adId:request.params.adId}
             }).then(function(ad){
                 if(ad === null)
-                    response.status(404).json();
+                    response.status(404).json({messages:"Rozmowa nie istnieje", adId:'Nie znaleziono takiego ogłoszenia!'});
                 else {
 
                     Message.findAll({
@@ -69,8 +69,8 @@ module.exports.main = function(request, response) {
         }
 
     },
-        function () {
-            response.status(404).json();
+        function (errors) {
+            response.status(404).json({messages:'DB ERROR', info:errors.toString()});
         }
     )
 

@@ -10,7 +10,8 @@ var Category = sequelize.define('category',
         categoryId:{
             type:Sequelize.INTEGER,
             primaryKey:true,
-            autoIncrement: true
+            autoIncrement: true,
+            allowNull: false
         },
         categoryIdParent: {
             type: Sequelize.INTEGER,

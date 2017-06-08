@@ -77,7 +77,7 @@ module.exports.main = function(request, response) {
                     where:{senderId: userID}
                 }).then(function(list) {
                     if(list.length < 1)
-                        response.status(404).json();
+                        response.status(404).json({messages:"Rozmowa nie istnieje"});
                     NextStep(list,userID);
                 });
                 break;
@@ -87,7 +87,7 @@ module.exports.main = function(request, response) {
                     where:{receiverId: userID}
                 }).then(function(list) {
                     if(list.length < 1)
-                        response.status(404).json();
+                        response.status(404).json({messages:"Rozmowa nie istnieje"});
                     NextStep(list,userID);
                 });
 
@@ -98,13 +98,13 @@ module.exports.main = function(request, response) {
                     where: Sequelize.or({senderId: userID },{receiverId: userID })
                 }).then(function(list) {
                     if (list.length < 1)
-                        response.status(404).json();
+                        response.status(404).json({messages:"Rozmowa nie istnieje"});
                     NextStep(list,userID);
                 });
                 break;
         }
     }
-    else response.json(404);
+    else response.status(406).json({messages:"Niepoprawne dane autoryzacji", username:userID});
 
 
 }

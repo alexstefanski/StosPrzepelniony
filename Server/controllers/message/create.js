@@ -26,7 +26,7 @@ module.exports.main = function(request, response) {
                     if(ad !== null)
                     {
                         if(!request.body.content)
-                            response.status(406).json();
+                            response.status(406).json({messages:"Nie udało się wysłać wiadomości",content:"Treść wiadomości nie może być pusta!"});
                         else {
                              Message.create({
                                 adId: ad.dataValues.adId,
@@ -34,7 +34,7 @@ module.exports.main = function(request, response) {
                                  userIdSender: ad.dataValues.userId,
                                  content: request.body.content
                              }).then(function (message) {
-                                response.status(200).json(message);
+                                response.status(200).json({messages:"Wiadomość pomyślnie wysłana!"});
                              });
 
 
@@ -42,19 +42,19 @@ module.exports.main = function(request, response) {
 
                     }
                     else
-                        response.status(404).json();
+                        response.status(404).json({messages:"Rozmowa nie istnieje", adId:'Nie znaleziono takiego ogłoszenia!'});
 
                 })
 
             }
             else
-                response.status(404).json();
+                response.status(404).json({messages:"Rozmowa nie istnieje", userIdSender:'Nie znaleziono takiego użytkownika!'});
 
         })
 
     }
     else
-        response.status(406).json();
+        response.status(406).json({messages:"Autoryzacja użytkownika nie powiodła się!", username:'Nie podano userId!'});
 
 
 }

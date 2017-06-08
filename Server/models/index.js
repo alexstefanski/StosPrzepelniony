@@ -5,6 +5,9 @@ var PermissionAction = require('./permissionAction.js')
 var Action = require('./action.js')
 var Permission = require('./permission.js')
 var Ad = require('./ad.js')
+var Category = require('./category.js')
+var Message = require('./message.js')
+var MessageList = require('./messageList.js')
 
 User.hasMany(UserToken, {
   foreignKey: 'userId',
@@ -43,6 +46,17 @@ User.hasMany(Ad,{
 Ad.belongsTo(User,{
   foreignKey: 'userId'
 })
+Ad.belongsTo(Category,{
+  foreignKey: 'categoryId'
+})
+Message.belongsTo(Ad,{
+  foreignKey: 'adId'
+})
+MessageList.belongsTo(Ad,{
+  foreignKey: 'adId'
+})
+
+
 
 module.exports.User = User
 module.exports.UserToken = UserToken
@@ -51,3 +65,6 @@ module.exports.Permission = Permission
 module.exports.Action = Action
 module.exports.PermissionAction = PermissionAction
 module.exports.Ad = Ad
+module.exports.Category = Category
+module.exports.Message = Message
+module.exports.MessageList = MessageList

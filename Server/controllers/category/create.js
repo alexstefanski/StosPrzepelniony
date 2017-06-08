@@ -11,27 +11,33 @@ module.exports.main = function (request, response) {
         where:  {categoryId: request.body.categoryIdParent},
         attributes: {exclude: ['id','createdAt', 'updatedAt'], include:['categoryId']}
     }).then( function (category) {
-        if ( category.length === 0 &&  request.body.categoryIdParent != 0)
-            response.status(404).json()
+        if ( (category.length === 0 &&  request.body.categoryIdParent != 0) || request.body.categoryIdParent < 0)
+            response.status(404).json({messages:'Nie udało się dodać kategorii!',categoryIdParent:'Id rodzica musi zostać zdefiniowane i być równe przynajmniej 0!'})
         else
         {
-            if(typeof request.body.name === 'undefined' || !request.body.name ||
-                typeof request.body.description === 'undefined' || !request.body.description || request.body.categoryIdParent < 0)
-                    response.status(406).json()
+            if(typeof request.body.name === 'undefined' || !request.body.name )
+                response.status(406).json({messages:'Nie udało się dodać kategorii!',name:'Nazwa kategorii musi zostać podana.'})
             else
             {
-                Category.create({
-                    categoryIdParent: request.body.categoryIdParent,
+                if(typeof request.body.description === 'undefined' || !request.body.description )
+                    response.status(406).json({messages:'Nie udało się dodać kategorii!',description:'Opis kategorii musi zostać podany'})
+
+                else
+                {
+                    Category.create({
+                        categoryIdParent: request.body.categoryIdParent,
                         name: request.body.name,
                         description: request.body.description
                     }).then(function (category) {
-                    response.status(200).json()
-                })
+                        response.status(204).json({messages:'Kategoria pomyślnie dodana do bazy!'})
+                    })
+                }
             }
+
         }
     },
     function (errors) {
-        response.status(406).json()
+        response.status(406).json({messages:'DB ERROR',info:errors.toString()});
     })
 
 }

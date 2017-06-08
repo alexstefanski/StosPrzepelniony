@@ -43,12 +43,17 @@ module.exports.main = function(request, response) {
                 if(c.dataValues.categoryIdParent==0)
                     categoryTree.push(obj);
                 else
-                    FindParentInArray(obj, categoryTree).children.push(obj);
+                {
+                    tmp = FindParentInArray(obj, categoryTree);
+                    if(tmp !== null)
+                        tmp.children.push(obj);
+                }
+
             });
 
             response.status(200).json(categoryTree);
         }, function(errors) {
-            console.log(errors);
+            response.status(404).json({messages:'DB ERROR', info:errors.toString()});
         })
 
 }
