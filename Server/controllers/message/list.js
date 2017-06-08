@@ -64,7 +64,7 @@ module.exports.main = function(request, response) {
     if (typeof authData != 'undefined') {
         var userID = authData.name;
         var type = '0';
-        if(request.query.type !== {})
+        if(request.query.type)
             type = request.query.type;
 
 

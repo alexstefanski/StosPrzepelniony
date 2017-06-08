@@ -28,14 +28,24 @@ module.exports.main = function(request, response) {
                         if(!request.body.content)
                             response.status(406).json({messages:"Nie udało się wysłać wiadomości",content:"Treść wiadomości nie może być pusta!"});
                         else {
-                             Message.create({
-                                adId: ad.dataValues.adId,
-                                 userId: userID,
-                                 userIdSender: ad.dataValues.userId,
-                                 content: request.body.content
-                             }).then(function (message) {
-                                response.status(200).json({messages:"Wiadomość pomyślnie wysłana!"});
-                             });
+                            console.log(userID);
+                            console.log(ad.dataValues.userId);
+                            if(userID == request.params.userIdSender || userID == ad.dataValues.userId)
+                            {
+                                Message.create({
+                                    adId: ad.dataValues.adId,
+                                    userId: userID,
+                                    userIdSender:request.params.userIdSender,
+                                    content: request.body.content
+                                }).then(function (message) {
+                                    response.status(200).json({messages:"Wiadomość pomyślnie wysłana!"});
+                                });
+                            }
+                            else {
+                                response.status(404).json({messages:"Rozmowa nie istnieje lub nie masz uprawnień"})
+
+                            }
+
 
 
                         }
