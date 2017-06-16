@@ -7,9 +7,8 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/startWith';
 
-import { User } from './user';
-import { isUserLogged , isUserAdmin } from '../api';
-
+import { User } from '../models/user';
+import { isUserLogged , isUserAdmin } from '../../api';
 
 @Injectable()
 export class UserService {

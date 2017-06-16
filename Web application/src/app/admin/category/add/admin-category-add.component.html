@@ -1,10 +1,34 @@
 <div class="container">
-  <h2>Dodaj kategorie</h2>
-      <form action="#">
+    <h2>Dodaj kategorie</h2>
+
+    <form (ngSubmit)="onSubmit()" #addForm="ngForm" >
         <div class="inputs">
-          <span class="cat-input"><input type="text" class="input_form" placeholder="name" name="name" /></span>
-          <span class="cat-input"><input type="text" class="input_form" placeholder="description" name="description" /></span>
-          <span class="cat-input"><input type="submit" value="Dodaj kategorie" /></span>
+
+            <span class="cat-input">
+                <input type="text" class="input_form" placeholder="Nazwa" name="name"
+                        required
+                        [(ngModel)]="category.name"
+                        #name="ngModel"/>
+            </span>
+            <div class="error" [hidden]="name.valid || name.pristine">
+                Nazwa jest wymagana
+            </div>
+
+            <span class="cat-input">
+                <input type="text" class="input_form" placeholder="Opis" name="description"
+                        required
+                        [(ngModel)]="category.description"
+                        #description="ngModel"/>
+            </span>
+            <div class="error" [hidden]="description.valid || description.pristine">
+                Opis jest wymagany
+            </div>
+
+            <span *ngIf="message"> {{message}}</span>
+            <span class="cat-input">
+                <input type="submit" [disabled]="!addForm.form.valid" [ngClass]="{'not-allowed': !addForm.form.valid }" value="Dodaj"/>
+            </span>
+
         </div>
-      </form>
+    </form>
 </div>

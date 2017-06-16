@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Router } from '@angular/router';
+import { Category } from '../../../common/models/category';
+import { CategoryService } from '../../../common/services/category.service';
 
-import { adminCategoryAdd } from '../../../api';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -10,34 +11,25 @@ import 'rxjs/add/operator/toPromise';
   styleUrls: ['./admin-category-add.component.css']
 })
 export class AdminCategoryAddComponent implements OnInit {
-
-  category: Array<{name: string, description: string, categoryIdParent: number}> = null;
-  categoryId: number;
-  name: string;
-  description: string;
-
-  constructor(private http: Http ) { }
+  category: Category = new Category();
+  message: string = null;
+  constructor(private categoryService: CategoryService, private router: Router) {
+    this.category.categoryIdParent = 0; // ustalone, że każda kategoria jest główna
+  }
 
   ngOnInit() {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    this.http.post(adminCategoryAdd, {headers: headers})
-      .toPromise()
-      .then(response => {
-        this.category = response.json();
-      })
-      .catch(response => {
-        console.log(response);
-      });
   }
 
-  handleAdd() {
-    const categoryData = {
-      id: this.categoryId,
-      name: this.name,
-      description: this.description
-    };
+  onSubmit() {
+    this.categoryService.postAddCategory(this.category, (errors, response) => {
+      if (!errors) {
+        if (response.status === 204) {
+         this.router.navigate(['admin/category']);
+        }
+      } else {
+        this.message = errors.messages.join(' ');
+      }
+    })
   }
-
 }
