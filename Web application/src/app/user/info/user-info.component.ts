@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 import { userInfo } from './../../api'
-import { UserService } from 'app/common/user.service';
+import { UserService } from '../../common/services/user.service';
 
 import 'rxjs/add/operator/toPromise';
 

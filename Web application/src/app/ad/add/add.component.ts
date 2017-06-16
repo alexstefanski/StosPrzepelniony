@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { addAds } from '../../api';
-import { UserService } from '../../common/user.service';
+import { UserService } from '../../common/services/user.service';
 
 @Component({
   selector: 'app-add',

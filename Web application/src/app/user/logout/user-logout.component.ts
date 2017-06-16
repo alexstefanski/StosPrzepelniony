@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 import { Router } from '@angular/router';
 
 import { logOutUser } from './../../api';
-import { UserService } from 'app/common/user.service';
+import { UserService } from '../../common/services/user.service';
 
 @Component({
   selector: 'app-logout',

@@ -4,7 +4,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { changePassword } from './../../api'
-import { UserService } from 'app/common/user.service'
+import { UserService } from '../../common/services/user.service'
 
 @Component({
   selector: 'app-user-change-password',
