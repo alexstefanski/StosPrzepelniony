@@ -25,7 +25,7 @@ export class AdminCategoryAddComponent implements OnInit {
     this.categoryService.postAddCategory(this.category, (errors, response) => {
       if (!errors) {
         if (response.status === 204) {
-         this.router.navigate(['admin/category']);
+         this.router.navigate(['admin/category', this.category]);
         }
       } else {
         this.message = errors.messages.join(' ');
