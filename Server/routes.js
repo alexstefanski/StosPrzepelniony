@@ -160,6 +160,10 @@ module.exports = function(app) {
   app.use('/ads/:adId/status', ad.editStatus.validate)
   app.post('/ads/:adId/status', ad.editStatus.main)
 
+  app.use('/ads/list', authenticatedUser.main)
+  app.use('/ads/list', isAdministrator.main)
+  app.get('/ads/list', ad.list.main)
+
   //Routes for user/ads
   app.use('/ads/add',authenticatedUser.main)
   app.use('/ads/add',adCreate.validate)
