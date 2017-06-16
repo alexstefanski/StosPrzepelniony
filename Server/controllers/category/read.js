@@ -37,6 +37,7 @@ module.exports.main = function(request, response) {
                 obj = new Object();
                 obj.categoryId = c.dataValues.categoryId;
                 obj.categoryIdParent = c.dataValues.categoryIdParent;
+                obj.description = c.dataValues.description;
                 obj.name = c.dataValues.name;
                 obj.children = new Array();
 
