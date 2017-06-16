@@ -28,7 +28,7 @@ import { AppUserComponent } from './app-user.component';
 import { AppAdminComponent } from './app-admin.component';
 
 import { AuthenticatedGuard } from './common/authenticated.guard';
-import { UserService } from './common/user.service';
+import { UserService } from './common/services/user.service';
 import { AdminGuard } from './common/admin.guard';
 import { PreventLoggedInAccess } from './common/prevent-logged-in-access';
 import { AdComponent } from './ad/ad.component';
@@ -38,6 +38,7 @@ import { AdEditComponent } from './ad/edit/edit.component';
 import { AdIndexComponent } from './ad/index/index.component';
 import { AdShowComponent } from './ad/show/show.component';
 import { AdChangeStatusComponent } from './ad/change-status/change-status.component';
+import { CategoryService } from './common/services/category.service';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -104,6 +105,7 @@ const routes = [
   ],
   providers: [
     UserService,
+    CategoryService,
     AuthenticatedGuard,
     AdminGuard,
     PreventLoggedInAccess,
