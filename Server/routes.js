@@ -7,6 +7,8 @@ var admins = require('./controllers/admin/admins/index.js')
 var users = require('./controllers/admin/users/index.js')
 // API for admin/permissions
 var permissions = require('./controllers/admin/permissions/index.js')
+// API for admin/actions
+var actions = require('./controllers/admin/actions/index.js')
 // API for admin/ads
 var ad = require('./controllers/admin/ads/index.js')
 
@@ -165,6 +167,16 @@ module.exports = function(app) {
   app.use('/permissions/:permissionId/edit', permissions.edit.basicValidation)
   app.use('/permissions/:permissionId/edit', permissions.edit.permissionExistsValidation)
   app.post('/permissions/:permissionId/edit', permissions.edit.main)
+
+  // Routes for admin/actions
+  app.use('/actions/:actionId/info', authenticatedUser.main)
+  app.use('/actions/:actionId/info', isAdministrator.main)
+  app.use('/actions/:actionId/info', actions.info.actionExistsValidation)
+  app.get('/actions/:actionId/info', actions.info.main)
+
+  app.use('/actions/:actionId/info', authenticatedUser.main)
+  app.use('/actions/:actionId/info', isAdministrator.main)
+  app.get('/actions/list', actions.list.main)
 
   // Routes for admin/ads
   app.use('/ads/:adId/status', authenticatedUser.main)
