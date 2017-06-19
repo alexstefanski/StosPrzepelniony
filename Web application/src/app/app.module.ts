@@ -21,8 +21,6 @@ import { AdminUserDeleteComponent } from './admin/user/delete/admin-user-delete.
 import { AdminComponent } from './admin/admin.component';
 import { AdminCategoryComponent } from './admin/category/admin-category.component';
 import { AdminCategoryAddComponent } from './admin/category/add/admin-category-add.component';
-import { AdminCategoryEditComponent } from './admin/category/edit/admin-category-edit.component';
-import { AdminCategoryDeleteComponent } from './admin/category/delete/admin-category-delete.component';
 
 import { AppUserComponent } from './app-user.component';
 import { AppAdminComponent } from './app-admin.component';
@@ -55,8 +53,6 @@ const routes = [
     {path: '', component: AdminComponent},
     {path: 'category', component: AdminCategoryComponent, canActivate: [AdminGuard], children: [
         {path: 'create', component: AdminCategoryAddComponent},
-        {path: 'edit', component: AdminCategoryEditComponent},
-        {path: 'delete', component: AdminCategoryDeleteComponent}
       ]}
   ]},
   {path: 'ad', canActivate: [AuthenticatedGuard], children: [
@@ -80,8 +76,6 @@ const routes = [
     AdminComponent,
     AdminCategoryComponent,
     AdminCategoryAddComponent,
-    AdminCategoryEditComponent,
-    AdminCategoryDeleteComponent,
     UserChangePasswordComponent,
     UserResendEmailComponent,
     AdminUserComponent,

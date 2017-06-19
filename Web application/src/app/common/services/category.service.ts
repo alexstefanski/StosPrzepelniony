@@ -1,6 +1,6 @@
 import { Injectable , } from '@angular/core';
 import { Http } from '@angular/http';
-import {adminCategories, adminCategoryAdd} from '../../api';
+import {adminCategories, adminCategoryAdd, adminCategoryEdit, adminCategoryDelete} from '../../api';
 import { UserService } from './user.service';
 import { Category } from '../models/category';
 
@@ -16,9 +16,9 @@ export class CategoryService {
         this.http.get(adminCategories, {headers: headers})
             .toPromise()
             .then((response) => {
-                let categoryArray = new Array<Category>();
+                const categoryArray = new Array<Category>();
                 response.json().forEach((category) => {
-                    let cat = new Category();
+                    const cat = new Category();
                     cat.categoryId = category.categoryId;
                     cat.categoryIdParent = category.categoryIdParent;
                     cat.name = category.name;
@@ -44,7 +44,33 @@ export class CategoryService {
             })
             .catch((errors) => {
                 callback(errors, null);
-            })
+            });
+    }
+
+    postDeleteCategory(categoryId, callback) {
+      const headers = this.userService.getAuthenticatedHeader();
+
+      this.http.delete(adminCategoryDelete(categoryId), {headers: headers})
+        .toPromise()
+        .then((response) => {
+          callback(null, response);
+        })
+        .catch((errors) => {
+          callback(errors, null);
+        });
+    }
+
+    postEditCategory(category, callback) {
+      const headers = this.userService.getAuthenticatedHeader();
+
+      this.http.post(adminCategoryEdit(category.categoryId), category, {headers: headers})
+        .toPromise()
+        .then((response) => {
+          callback(null, response);
+        })
+        .catch((errors) => {
+          callback(errors, null);
+        });
     }
 
 }

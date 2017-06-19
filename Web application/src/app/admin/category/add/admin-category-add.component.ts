@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { Router } from '@angular/router';
+import { Category } from '../../../common/models/category';
+import { CategoryService } from '../../../common/services/category.service';
 
-import { adminCategoryAdd } from '../../../api';
 import 'rxjs/add/operator/toPromise';
 
 @Component({

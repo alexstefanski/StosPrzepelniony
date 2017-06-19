@@ -3,4 +3,5 @@ export class Category {
     categoryIdParent: number;
     name: string;
     description: string;
+    edited: boolean;
 }

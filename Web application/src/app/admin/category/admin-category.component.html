@@ -14,7 +14,7 @@
         <thead>
         <tr>
           <th scope="col">
-            Lp.
+            Id
           </th>
           <th scope="col">
             Nazwa
@@ -35,18 +35,27 @@
           <td class="cat-id">
             {{category.categoryId}}
           </td>
-          <td class="cat-name">
+          <td class="cat-name" *ngIf="!category.edited">
             {{category.name}}
           </td>
-          <td class="cat-description">
+          <td class="cat-id" *ngIf="category.edited">
+            <input [(ngModel)]="category.name" name="name"/>
+          </td>
+          <td class="cat-description" *ngIf="!category.edited">
             {{category.description}}
+          </td>
+          <td class="cat-id" *ngIf="category.edited">
+            <input [(ngModel)]="category.description" name="description"/>
           </td>
           <td class="edit">
             <div class="btn">
-              <a routerLink="edit">
+              <a>
                 <i class="fa fa-pencil" aria-hidden="true">
-                  <span class="delete-span">
+                  <span class="delete-span" (click)="handleEdit(category)" *ngIf="!category.edited">
                     Edytuj
+                  </span>
+                  <span class="delete-span" (click)="editCategory(category)" *ngIf="category.edited">
+                    Zatwierdź
                   </span>
                 </i>
               </a>
@@ -54,10 +63,13 @@
           </td>
           <td class="delete">
             <div class="btn">
-              <a routerLink="delete">
+              <a>
                 <i class="fa fa-times" aria-hidden="true">
-                      <span class="delete-span">
+                      <span class="delete-span" (click)="deleteCategory(category)" *ngIf="!category.edited">
                       Usuń
+                      </span>
+                  <span class="delete-span" (click)="cancel(category)" *ngIf="category.edited">
+                      Anuluj
                       </span>
                 </i>
               </a>
