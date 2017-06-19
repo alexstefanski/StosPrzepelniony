@@ -154,6 +154,18 @@ module.exports = function(app) {
   app.use('/api/v1/permissions/add', isAdministrator.main)
   app.post('/api/v1/permissions/add', permissions.add.main)
 
+  app.use('/permissions/:permissionId/delete', authenticatedUser.main)
+  app.use('/permissions/:permissionId/delete', isAdministrator.main)
+  app.use('/permissions/:permissionId/delete', permissions.delete.permissionExistsValidation)
+  app.use('/permissions/:permissionId/delete', permissions.delete.hasNoAdministratorsValidation)
+  app.delete('/permissions/:permissionId/delete', permissions.delete.main)
+
+  app.use('/permissions/:permissionId/edit', authenticatedUser.main)
+  app.use('/permissions/:permissionId/edit', isAdministrator.main)
+  app.use('/permissions/:permissionId/edit', permissions.edit.basicValidation)
+  app.use('/permissions/:permissionId/edit', permissions.edit.permissionExistsValidation)
+  app.post('/permissions/:permissionId/edit', permissions.edit.main)
+
   // Routes for admin/ads
   app.use('/ads/:adId/status', authenticatedUser.main)
   app.use('/ads/:adId/status', isAdministrator.main)
