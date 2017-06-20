@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {UserService} from "./common/services/user.service";
+import {User} from "./common/models/user";
 
 @Component({
   selector: 'app-app-admin',
@@ -7,11 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./app-admin.component.css']
 })
 export class AppAdminComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  currentAdmin: User;
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-
+    this.currentAdmin = this.userService.currentUser;
   }
 
 }

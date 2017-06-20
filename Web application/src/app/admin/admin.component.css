@@ -1,0 +1,134 @@
+
+#admin-info{
+    background: #1F293A;
+    padding: 3%;
+    color: #fafafa;
+    text-align: center;
+    font-weight: 1000000000;
+}
+#icon {
+    padding: 2%;
+    font-size: 40px;
+}
+label {
+    font-size: 12px;
+    color: lightgray;
+    text-align: center;
+}
+#admin-name {
+    float: left;
+    width: 30%;
+    text-align: right;
+    padding-right: 10px;
+}
+ul.sidenav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    background-color: #2C3C55;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+ul.sidenav li a {
+    display: block;
+    color: #8693A8;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+ul.sidenav li a.active {
+    background-color: #1F293A;
+    color: white;
+}
+ul.sidenav li a:hover:not(.active) {
+    background-color: #1F293A;
+    color: white;
+}
+ul.sidenav li a .fa {
+    padding-right: 10px;
+}
+.content {
+    margin-left: 20%;
+    padding: 1px 16px;
+    margin-top: 40px;
+    background: #fafafa;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-left: 0px;
+    color: #4a4a4d;
+    font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: auto;
+    width: 100%;
+}
+th,td {
+    padding: 10px 15px;
+    vertical-align: middle;
+}
+thead {
+    margin: auto;
+    width: 100%;
+    background-color: #fafafa;
+    color: black;
+    border-bottom: 1px solid #333333;
+    text-align: left;
+}
+th {
+    font-weight: bold;
+    border-bottom: 1px solid #787878;
+}
+th:first-child {
+    text-align: left;
+}
+tbody tr:nth-child(even) {
+    background: #f0f0f2;
+}
+td {
+    border-bottom: 1px solid #cecfd5;
+}
+td:first-child {
+
+}
+.btn {
+    text-decoration: none;
+    padding: 4px 6px 4px 6px;
+    background-color: #384C6B;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+a.btn .fa {
+    padding-right: 2px;
+}
+.btn:hover {
+    background-color: #2C3C55;
+}
+input {
+    padding: 5px;
+}
+
+.delete-span {
+    font-family: Arial;
+}
+.ad-id {
+    width: 5px;
+}
+.edit, .delete {
+    width: 100px;
+}
+.add-btn {
+    width: 200px;
+    margin-bottom: 2%;
+}
+.add-span {
+    margin-bottom: 1%;
+}
+.add-span a {
+    text-decoration: none;
+    color: white;
+}

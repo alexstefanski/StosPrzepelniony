@@ -1,3 +1,99 @@
-<p>
-  admin works!
-</p>
+<div class="container">
+  <h2>Lista administratorów</h2>
+  <div class="btn add-btn">
+    <i class="fa fa-plus" aria-hidden="true">
+      <span class="add-span">
+          <a href="addAdmin.html">Dodaj administratora</a>
+      </span>
+    </i>
+  </div>
+  <table id="ads-list">
+    <thead>
+    <tr>
+      <th scope="col">
+        admin id
+      </th>
+      <th scope="col">
+        user id
+      </th>
+      <th scope="col">
+        first name
+      </th>
+      <th scope="col">
+        last name
+      </th>
+      <th scope="col">
+        permission
+      </th>
+      <th scope="col">
+        edit
+      </th>
+      <th scope="col">
+        delete
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let admin of adminsList">
+      <td class="admin-id">
+        {{admin.id}}
+      </td>
+      <td class="user-id">
+        {{admin.userId}}
+      </td>
+      <td class="admin-firstname">
+        <a href="adminList.html">
+          {{admin.firstName}}
+        </a>
+      </td>
+      <td class="admin-lastname">
+        <a href="adminList.html">
+          {{admin.lastName}}
+        </a>
+      </td>
+      <td class="admin-permissionname" *ngIf="!admin.edited">
+        {{admin.permission.name}}
+      </td>
+      <td class="admin-permissionname" *ngIf="admin.edited">
+        <select [(ngModel)]="newAdminPermissionId" name="permission">
+          <option *ngFor="let perm of permissionsList" [value]="perm.id">{{perm.name}}</option>
+        </select>
+      </td>
+      <td class="edit">
+        <div *ngIf="!admin.edited" class="btn" (click)="handleEdit(admin)">
+          <i class="fa fa-pencil" aria-hidden="true">
+              <span class="delete-span">
+              Edytuj
+              </span>
+          </i>
+        </div>
+        <div *ngIf="admin.edited" class="btn" (click)="editPermission(admin)">
+          <i class="fa fa-pencil" aria-hidden="true">
+              <span class="delete-span">
+              Zatwierdź
+              </span>
+          </i>
+        </div>
+      </td>
+      <td class="delete">
+        <div *ngIf="!admin.edited" class="btn" (click)="deleteAdmin(admin)">
+          <i class="fa fa-times" aria-hidden="true">
+              <span class="delete-span">
+              Usuń
+              </span>
+          </i>
+        </div>
+        <div *ngIf="admin.edited" class="btn" (click)="handleCancel(admin)">
+          <i class="fa fa-times" aria-hidden="true">
+              <span class="delete-span">
+              Anuluj
+              </span>
+          </i>
+        </div>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

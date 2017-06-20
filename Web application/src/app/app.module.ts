@@ -37,6 +37,8 @@ import { AdIndexComponent } from './ad/index/index.component';
 import { AdShowComponent } from './ad/show/show.component';
 import { AdChangeStatusComponent } from './ad/change-status/change-status.component';
 import { CategoryService } from './common/services/category.service';
+import { AdminService } from './common/services/admin.service';
+import { PermissionService } from './common/services/permission.service';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -100,6 +102,8 @@ const routes = [
   providers: [
     UserService,
     CategoryService,
+    AdminService,
+    PermissionService,
     AuthenticatedGuard,
     AdminGuard,
     PreventLoggedInAccess,
