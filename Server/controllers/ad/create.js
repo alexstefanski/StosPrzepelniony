@@ -6,12 +6,12 @@ module.exports.validate = function(request, response, next) {
   var constraints = {
     subject:{
       presence:{
-        message:"Pole subject nie może być puste."
+        message:"Tytuł ogłoszenia nie może być pusty."
       }
     },
     content:{
       presence:{
-        message:"Pole content nie może być puste."
+        message:"Opis ogłoszenia nie może być pusty."
       },
     },
     categoryId: {
@@ -21,12 +21,12 @@ module.exports.validate = function(request, response, next) {
     },
     costTotal:{
       numericality:{
-        message:"Wartości pola costTotal muszą być typu float"
+        message:"Wynagrodzenie miesięczne musi być liczbą"
       }
     },
     costHour:{
       numericality:{
-        message:"Wartości pola costHour muszą być typu float"
+        message:"Wynagrodzenie godzinowe musi być liczbą"
       }
     }
   }
@@ -36,7 +36,7 @@ module.exports.validate = function(request, response, next) {
     next()
   })
   .catch(result => {
-    result['messages'] = ['Nieprawidłowe dane.']
+    result['messages'] = ['Dodanie ogłoszenia nie powiodło się.', 'Popraw zaznaczone pola.']
     response.status(406).json(result)
   })
 }
@@ -44,9 +44,14 @@ module.exports.validate = function(request, response, next) {
 module.exports.main = function (request, response) {
   var authData = auth(request)
   var userID = authData.name
-
+  var responseObject;
   if(typeof request.body.costTotal==='undefined' && typeof request.body.costHour === 'undefined'){
-    response.status(406).json('Przynajmniej jedno z pól costTotal i costHour musi być wypełnione.')
+    responseObject = {
+      messages:['Dodanie ogłoszenia nie powiodło się.', 'Popraw zaznaczone pola.'],
+      costTotal:['Wpisz wynagrodzenie miesięczne lub wynagrodzenie godzinowe.'],
+      costHour:['Wpisz wynagrodzenie godzinowe lub wynagrodzenie miesięczne.']
+    }
+    response.status(406).json(responseObject)
   } else {
     Ad.create({
       userId: userID,
@@ -55,12 +60,14 @@ module.exports.main = function (request, response) {
       costTotal: request.body.costTotal,
       costHour: request.body.costHour,
       categoryId: request.body.categoryId
-    }).then(function (success) {
-          response.status(201).json(success)
-        },
-        function (error) {
-          response.status(406).json(error)
+    }).then(function () {
+        responseObject={
+          messages: ['Ogłoszenie zostało dodane.']
         }
-      )
+        response.status(201).json(responseObject)
+      }, function (error) {
+        response.status(406).json(error)
+      }
+    )
   }
 }

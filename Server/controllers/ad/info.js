@@ -10,7 +10,10 @@ module.exports.main = function (request, response) {
     }],
   }).then(function (ad) {
     if(ad===null){
-      response.status(404).json('Brak ogłoszenia o podanym id.')
+      responseObject = {
+          messages: ['Nie udało sie wyświetlić ogłoszenia.', 'Wybrane ogłosznie nie istnieje.']
+      }
+      response.status(404).json(responseObject)
     } else{
       responseObject = {
         adId:ad.id,
