@@ -69,6 +69,7 @@ export class AdminService {
         this.http.delete(adminDelete(admin.id), {headers: headers})
             .toPromise()
             .then((response) => {
+                this.adminAvailableSource.next();
                 callback(null, response);
             })
             .catch((errors) => {
