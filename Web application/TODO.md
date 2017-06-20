@@ -57,10 +57,10 @@ Autor: _Natalia_
 
 |     | Lokalizacja komponentu | Ścieżka w aplikacji                |
 | --- | ---------------------- | ---------------------------------- |
-|     | admin/category/index   | /admin/categories                  |
-|     | admin/category/add     | /admin/category/add                |
-|     | admin/category/edit    | /admin/category/:categoryId/edit   |
-|     | admin/category/delete  | /admin/category/:categoryId/delete |
+| :ok:| admin/category/index   | /admin/categories                  |
+| :ok:| admin/category/add     | /admin/category/add                |
+| :ok:| admin/category/edit    | /admin/category/:categoryId/edit   |
+| :ok:| admin/category/delete  | /admin/category/:categoryId/delete |
 
 **Admin/User**
 
