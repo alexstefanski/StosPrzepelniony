@@ -7,8 +7,22 @@ module.exports.main = function(request, response) {
   var _authData = auth(request)
   var _currentAdminId = _authData.name
 
+  if (isNaN(_adminId)) {
+    response.status(406).json({
+      message: 'Nie można usunąć administratora',
+      adminId: 'To nie wygląda jak id'
+    })
+    return
+  } else if (isNaN(_currentAdminId)) {
+    response.status(406).json({
+      message: 'Nie można usunąć administratora',
+      currentAdminId: 'To nie wygląda jak id'
+    })
+    return
+  }
+
   // sprawdzenie czy nie następuje próba usunięcia samego siebie
-  if (_adminId == _currentAdminId) {
+  if (+_adminId === +_currentAdminId) {
     response.status(403).json({
       message: 'Nie można usunąć administratora',
       adminId: 'Administrator nie może usunąć sam siebie'
