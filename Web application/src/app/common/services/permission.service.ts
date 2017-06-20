@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { permissionsList } from '../../api';
+import { adminPermissionsList } from '../../api';
 import { UserService } from './user.service';
 import { Permission } from '../models/permission';
 
@@ -13,7 +13,7 @@ export class PermissionService {
     getAllPermissions(callback) {
         const headers = this.userService.getAuthenticatedHeader();
 
-        this.http.get(permissionsList, {headers: headers})
+        this.http.get(adminPermissionsList, {headers: headers})
             .toPromise()
             .then((response) => {
                 const permissionsArray = new Array<Permission>();

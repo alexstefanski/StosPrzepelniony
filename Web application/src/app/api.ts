@@ -10,16 +10,20 @@ export const logOutUser = server + '/users/logout';
 export const userInfo = function(userId) {return server + '/users/' + userId + '/info'; };
 export const changePassword = server + '/users/changepassword';
 export const resendEmail = server + '/users/resendverificationemail';
-export const isUserAdmin = function (userId) {return server + '/admins/' + userId + '/isadmin'; };
-
-export const adminsList = server + '/admins/list';
-export const adminDelete = function(adminId) {return server + '/admins/' + adminId + '/delete'; };
-export const adminCategories = server + '/categories/list';
-export const adminCategoryAdd = server + '/categories/create';
-export const adminCategoryDelete = function(categoryId) {return server + '/categories/' + categoryId + '/delete'; };
-export const adminCategoryEdit = function(categoryId) {return server + '/categories/ ' + categoryId + '/edit'; };
-
-export const permissionsList = server + '/permissions/list';
-export const adminPermissionEdit = function(adminId) {return server + '/admins/ ' + adminId + '/edit'; };
 
 export const addAds = server + '/ads/add';
+
+// Admin APIs
+export const isUserAdmin = function (userId) {return server + '/admin/admins/' + userId + '/isadmin'; };
+
+export const adminsList = server + '/admin/admins/list';
+export const adminDelete = function(adminId) {return server + '/admin/admins/' + adminId + '/delete'; };
+export const adminCategories = server + '/admin/categories/list';
+export const adminCategoryAdd = server + '/admin/categories/create';
+export const adminCategoryDelete = function(categoryId) {return server + '/admin/categories/' + categoryId + '/delete'; };
+export const adminCategoryEdit = function(categoryId) {return server + '/admin/categories/ ' + categoryId + '/edit'; };
+
+export const adminPermissionsList = server + '/admin/permissions/list';
+export const adminPermissionEdit = function(adminId) {return server + '/admin/admins/ ' + adminId + '/edit'; };
+
+
