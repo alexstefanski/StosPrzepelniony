@@ -36,7 +36,7 @@ module.exports.main = function (request, response) {
                                 {
                                     where: {categoryId: request.params.categoryId}
                                 }).then(function (category) {
-                                response.status(200).json({messages:"Kategoria została pomyślnie zaktualizowana"})
+                                response.status(204).json({messages:"Kategoria została pomyślnie zaktualizowana"})
                             })
                         }
 
