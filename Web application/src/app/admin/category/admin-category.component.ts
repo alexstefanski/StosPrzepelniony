@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../common/models/category';
 import { CategoryService } from '../../common/services/category.service';
-import {ActivatedRoute, Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-category',
@@ -12,14 +12,13 @@ export class AdminCategoryComponent implements OnInit {
   categories: Array<Category>;
   message: string;
 
-  constructor(private categoryService: CategoryService, private route: ActivatedRoute, private router: Router) {
-    route.params.subscribe(val => {
-      this.prepareCategoriesList();
-    })
-  }
+  constructor(private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit() {
     this.prepareCategoriesList();
+    this.categoryService.categoryAvailable$.subscribe(
+        () => this.prepareCategoriesList()
+    );
   }
 
   prepareCategoriesList() {
@@ -32,11 +31,7 @@ export class AdminCategoryComponent implements OnInit {
 
   deleteCategory(category) {
     this.categoryService.postDeleteCategory(category.categoryId, (errors, response) => {
-      if (!errors) {
-        if (response.status === 204) {
-          this.router.navigate(['admin/category', this.categories]);
-        }
-      } else {
+      if (errors) {
         this.message = errors.message.join(' ');
       }
     });
@@ -51,7 +46,6 @@ export class AdminCategoryComponent implements OnInit {
       if (!errors) {
         if (response.status === 204) {
           category.edited = false;
-          this.router.navigate(['admin/category', this.categories]); //TODO odświeżanie strony
         }
       } else {
         this.message = errors.message;
@@ -62,6 +56,5 @@ export class AdminCategoryComponent implements OnInit {
 
   cancel(category) {
     category.edited = false;
-    this.router.navigate(['admin/category', this.categories]);
   }
 }

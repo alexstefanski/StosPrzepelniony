@@ -5,9 +5,13 @@ import { UserService } from './user.service';
 import { Category } from '../models/category';
 
 import 'rxjs/add/operator/toPromise';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class CategoryService {
+    private categoryAvailableSource = new Subject();
+    categoryAvailable$ = this.categoryAvailableSource.asObservable();
+
     constructor(private http: Http, private userService: UserService) { }
 
     getAllCategories(callback) {
@@ -40,6 +44,7 @@ export class CategoryService {
         this.http.post(adminCategoryAdd, category, {headers: headers})
             .toPromise()
             .then((response) => {
+                this.categoryAvailableSource.next();
                 callback(null, response);
             })
             .catch((errors) => {
@@ -53,6 +58,7 @@ export class CategoryService {
       this.http.delete(adminCategoryDelete(categoryId), {headers: headers})
         .toPromise()
         .then((response) => {
+          this.categoryAvailableSource.next();
           callback(null, response);
         })
         .catch((errors) => {
@@ -66,6 +72,7 @@ export class CategoryService {
       this.http.post(adminCategoryEdit(category.categoryId), category, {headers: headers})
         .toPromise()
         .then((response) => {
+          this.categoryAvailableSource.next();
           callback(null, response);
         })
         .catch((errors) => {

@@ -19,8 +19,6 @@ export class AdminCategoryAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
   }
 
@@ -28,7 +26,7 @@ export class AdminCategoryAddComponent implements OnInit {
     this.categoryService.postAddCategory(this.category, (errors, response) => {
       if (!errors) {
         if (response.status === 204) {
-         this.router.navigate(['admin/category', this.category]);
+         this.router.navigate(['admin/category']);
         }
       } else {
         this.message = errors.messages.join(' ');
