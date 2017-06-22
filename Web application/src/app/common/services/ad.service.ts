@@ -64,7 +64,7 @@ export class AdService {
         ad.costHour = item.costHour;
         ad.date = new Date(item.date);
         ad.content = item.content;
-        debugger
+
         if (!isNullOrUndefined(item.status)) {
             if (+item.status === 0)
                 ad.status = 'aktywne';
