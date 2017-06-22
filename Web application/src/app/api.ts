@@ -12,6 +12,7 @@ export const changePassword = server + '/users/changepassword';
 export const resendEmail = server + '/users/resendverificationemail';
 
 export const addAds = server + '/ads/add';
+export const listAds = server + '/ads/list';
 
 // Admin APIs
 export const isUserAdmin = function (userId) {return server + '/admin/admins/' + userId + '/isadmin'; };

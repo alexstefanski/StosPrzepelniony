@@ -57,6 +57,7 @@
 a {
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 .fa {
     padding-right: 5px;

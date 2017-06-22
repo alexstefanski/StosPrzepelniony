@@ -10,20 +10,20 @@
   <div class="search-filtres">
     <ul>
       <li>
-        <a href="#" id="nav_category" class="bold" onclick="showCategoryView()">
+        <a id="nav_category" [ngClass]="{'bold': !salaryViewSelected}"(click)="changeCategoryView()">
           Kategoria
           <hr id="line1" style="border: 1px solid #cccccc">
         </a>
       </li>
       <li>
-        <a href="#" id="nav_salary" onclick="showSalaryView()">
+        <a id="nav_salary" [ngClass]="{'bold': salaryViewSelected}" (click)="changeSalaryView()">
           Wynagrodzenie
           <hr id="line2" style="border: 1px solid #cccccc">
         </a>
       </li>
     </ul>
 
-    <div class="category">
+    <div class="category" *ngIf="!salaryViewSelected">
       <label class="control control--checkbox checkbox-container">
         Android
         <input type="checkbox"/>
@@ -100,7 +100,7 @@
         <div class="control__indicator"></div>
       </label>
     </div>
-    <div class="salary">
+    <div class="salary" *ngIf="salaryViewSelected">
       <div class="checkbox-salary">
         <label class="control control--checkbox checkbox-container">
           Za godzinę
@@ -117,7 +117,7 @@
         <div>
           Minimalne
         </div>
-        <input type="range" name="range-min" min="0" max="100000" onchange="showMin(this.value)"  />
+        <input type="range" name="range-min" min="{{salaryRangeMin}}" max="{{salaryRangeMax}}" [(ngModel)]="salaryValue"/>
         <span id="range-min"></span>
       </div>
       <div class="salary_range">
@@ -135,95 +135,25 @@
     Ogłoszenia
   </div>
   <div class="list_container">
-    <div class="list-short">
+
+    <div class="list-short" *ngFor="let ad of adsList">
       <div class="header">
         <a href="#">
-          Stworzenie sklepu internetowego dla młodej polskiej firmy odzieżowej
+          {{ad.subject}}
         </a>
       </div>
       <div class="info">
         <div class="author-name">
-          Młoda polska firma odzieżowa
+          {{ad.userFirstName}}
         </div>
         <div class="date">
           Dodane
           <span class="add-date">
-									20-04-2017
-								</span>
+              {{formatDate(ad.date)}}
+          </span>
         </div>
       </div>
     </div>
-    <div class="list-short">
-      <div class="header">
-        <a href="#">
-          Senior Django Developer
-        </a>
-      </div>
-      <div class="info">
-        <div class="author-name">
-          Samsung Electronics Polska Sp.z.o.o
-        </div>
-        <div class="date">
-          Dodane
-          <span class="add-date">
-									17-04-2017
-								</span>
-        </div>
-      </div>
-    </div>
-    <div class="list-short">
-      <div class="header">
-        <a href="#">
-          Aplikacja na androida do zarządzania firmą
-        </a>
-      </div>
-      <div class="info">
-        <div class="author-name">
-          Sklep spożywczy Radek
-        </div>
-        <div class="date">
-          Dodane
-          <span class="add-date">
-									16-04-2017
-								</span>
-        </div>
-      </div>
-    </div>
-    <div class="list-short">
-      <div class="header">
-        <a href="#">
-          Junior Frontend developer
-        </a>
-      </div>
-      <div class="info">
-        <div class="author-name">
-          Microsoft Polska
-        </div>
-        <div class="date">
-          Dodane
-          <span class="add-date">
-									20-04-2017
-								</span>
-        </div>
-      </div>
-    </div>
-    <div class="list-short">
-      <div class="header">
-        <a href="#">
-          Zlecę zrobienie portfolio
-        </a>
-      </div>
-      <div class="info">
-        <div class="author-name">
-          Jan Kowalski
-        </div>
-        <div class="date">
-          Dodane
-          <span class="add-date">
-									15-04-2017
-								</span>
-        </div>
-      </div>
-    </div>
+
   </div>
 </div>
