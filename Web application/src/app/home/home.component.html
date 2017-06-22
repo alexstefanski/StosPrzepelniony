@@ -24,79 +24,9 @@
     </ul>
 
     <div class="category" *ngIf="!salaryViewSelected">
-      <label class="control control--checkbox checkbox-container">
-        Android
-        <input type="checkbox"/>
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        Assembler
-        <input type="checkbox"/>
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        C
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        C#
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        C++
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        Delphi/Object Pascal
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        GO
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        HTML/CSS
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        IOS
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        Java
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        Javascript
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        Matlab
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        Objective-C
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        PHP
-        <input type="checkbox" />
-        <div class="control__indicator"></div>
-      </label>
-      <label class="control control--checkbox checkbox-container">
-        PL/SQL
-        <input type="checkbox" />
+      <label *ngFor="let cat of categoriesList" class="control control--checkbox checkbox-container">
+        {{cat.name}}
+        <input type="checkbox" (click)="checkedCategory(cat)"/>
         <div class="control__indicator"></div>
       </label>
     </div>

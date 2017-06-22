@@ -4,4 +4,5 @@ export class Category {
     name: string;
     description: string;
     edited: boolean;
+    checked: boolean = false;
 }
