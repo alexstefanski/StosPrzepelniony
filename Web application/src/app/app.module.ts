@@ -58,7 +58,7 @@ const routes = [
         {path: 'create', component: AdminCategoryAddComponent},
       ]}
   ]},
-  {path: 'ad', canActivate: [AuthenticatedGuard], children: [
+  {path: 'ad', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: AdComponent, pathMath: 'full'},
     {path: 'add', component: AdAddComponent},
     {path: ':id', component: AdShowComponent},

@@ -68,7 +68,7 @@
 
     <div class="list-short" *ngFor="let ad of adsList">
       <div class="header">
-        <a href="#">
+        <a routerLink="../ad/{{ad.id}}/show">
           {{ad.subject}}
         </a>
       </div>

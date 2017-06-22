@@ -126,8 +126,8 @@ a {
   -moz-border-radius: 3px;
   border-radius: 8px;
   /*-webkit-box-shadow: 3px -3px 94px 4px rgba(242,242,242,0.47);
-    -moz-box-shadow: 3px -3px 94px 4px rgba(242,242,242,0.47);
-    box-shadow: 3px -3px 94px 4px rgba(242,242,242,0.47); */
+  -moz-box-shadow: 3px -3px 94px 4px rgba(242,242,242,0.47);
+  box-shadow: 3px -3px 94px 4px rgba(242,242,242,0.47); */
 
 }
 .subject {

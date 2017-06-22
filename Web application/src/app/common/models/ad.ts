@@ -4,7 +4,9 @@ export class Ad {
     userFirstName: string;
     categoryId: number;
     subject: string;
+    content: string;
     costTotal?: number;
     costHour?: number;
     date: Date;
+    status: string;
 }

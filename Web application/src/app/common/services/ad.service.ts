@@ -1,6 +1,6 @@
 import { Injectable , } from '@angular/core';
 import { Http , RequestOptions , URLSearchParams } from '@angular/http';
-import { listAds } from '../../api';
+import {listAds, showAd} from '../../api';
 import { UserService } from './user.service';
 
 import { Subject } from 'rxjs/Subject';
@@ -25,15 +25,7 @@ export class AdService {
                 let adsArray = new Array<Ad>();
 
                 response.json().forEach((item) => {
-                   let ad = new Ad();
-                   ad.id = item.adId;
-                   ad.userId = item.user.userId;
-                   ad.userFirstName = item.user.firstName;
-                   ad.categoryId = item.categoryId;
-                   ad.subject = item.subject;
-                   ad.costTotal = item.costTotal;
-                   ad.costHour = item.costHour;
-                   ad.date = new Date(item.date);
+                   let ad = this.assignAdValues(item);
 
                    adsArray.push(ad);
                 });
@@ -43,6 +35,44 @@ export class AdService {
             .catch((errors) => {
                 callback(errors, null);
             });
+    }
+
+    getAdById(adId, callback) {
+        const headers = this.userService.getAuthenticatedHeader();
+
+        this.http.get(showAd(adId), {headers: headers})
+            .toPromise()
+            .then((response) => {
+                let ad = this.assignAdValues(response.json());
+
+                callback(null, ad);
+            })
+            .catch((errors) => {
+                callback(errors, null);
+            });
+    }
+
+    private assignAdValues(item): Ad {
+        let ad = new Ad();
+
+        ad.id = item.adId;
+        ad.userId = item.user.userId;
+        ad.userFirstName = item.user.firstName;
+        ad.categoryId = item.categoryId;
+        ad.subject = item.subject;
+        ad.costTotal = item.costTotal;
+        ad.costHour = item.costHour;
+        ad.date = new Date(item.date);
+        ad.content = item.content;
+        debugger
+        if (!isNullOrUndefined(item.status)) {
+            if (+item.status === 0)
+                ad.status = 'aktywne';
+            else if (+item.status === 1)
+                ad.status = 'nieaktywne';
+        }
+
+        return ad;
     }
 
     private getParamsQuery(adsFilters: AdFilters): URLSearchParams {
