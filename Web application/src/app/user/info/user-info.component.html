@@ -1,10 +1,36 @@
-<div class="">
-  <strong>Imię</strong>
-  <p>{{ firstName }}</p>
+<div class = "UserPicture">
+  <img src = "https://image.spreadshirtmedia.net/image-server/v1/compositions/120513895/views/1,width=300,height=300,version=1478003241/geek-anonymous-koszulki-koszulka-meska.jpg" alt = "UserPic">
+  <div class = "UserName">
+    {{firstName}}
+  </div>
+</div>
 
-  <strong>Nazwisko</strong>
-  <p>{{ lastName }}</p>
 
-  <strong>Adres e-mail</strong>
-  <p>{{ email }}</p>
+
+<div class = "DataSection">
+  <div class = "SectionTitle" >Dane
+    <div class = "SectionBtn">
+      <i class="fa fa-pencil-square-o" aria-hidden="true" ></i>
+    </div>
+  </div>
+  <div class = "TitleData">Imie</div>
+  <div class ="GivenData">
+    {{firstName}}
+  </div>
+  <div class = "TitleData">Nazwisko</div>
+  <div class ="GivenData">
+    {{lastName}}
+  </div>
+
+</div>
+
+<div class = "DataSection">
+  <div class = "SectionTitle" >Adres e-mail
+    <div class = "SectionBtn">
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class ="GivenDataEmail">
+    {{email}}
+  </div>
 </div>
