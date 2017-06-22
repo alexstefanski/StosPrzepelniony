@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
   permissionsList: Array<Permission>;
   messages: string = null;
   newAdminPermissionId: number;
+  handlingEditing: boolean = false;
   constructor(private adminService: AdminService, private permissionService: PermissionService) { }
 
   ngOnInit() {
@@ -44,11 +45,12 @@ export class AdminComponent implements OnInit {
   }
 
   handleEdit(admin: Admin) {
+    this.handlingEditing = true;
     this.preparePermissionsList(admin);
   }
 
   editPermission(admin: Admin) {
-    if (admin.permission.id === this.newAdminPermissionId) {
+    if (admin.permission.id == this.newAdminPermissionId) {
       return;
     }
 
@@ -56,6 +58,7 @@ export class AdminComponent implements OnInit {
     this.adminService.postEditAdminPermission(admin, (errors, response) => {
       if (response.status === 201) {
         // pomyslnie edytowano
+        this.handlingEditing = false;
       }
       this.newAdminPermissionId = null;
     });
@@ -64,6 +67,7 @@ export class AdminComponent implements OnInit {
 
   handleCancel(admin: Admin) {
     admin.edited = false;
+    this.handlingEditing = false;
   }
 
   deleteAdmin(admin: Admin) {

@@ -132,3 +132,7 @@ input {
     text-decoration: none;
     color: white;
 }
+
+.not-allowed {
+    pointer-events: none;
+}
