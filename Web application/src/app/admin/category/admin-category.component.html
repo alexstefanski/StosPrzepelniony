@@ -48,10 +48,10 @@
             <input [(ngModel)]="category.description" name="description"/>
           </td>
           <td class="edit">
-            <div class="btn" *ngIf="!category.edited" (click)="handleEdit(category)" >
+            <div class="btn" *ngIf="!category.edited" [ngClass]="{'not-allowed': handlingEditing}" (click)="handleEdit(category)" >
               <a>
                 <i class="fa fa-pencil" aria-hidden="true">
-                  <span class="delete-span" (click)="handleEdit(category)" *ngIf="!category.edited">
+                  <span class="delete-span" >
                     Edytuj
                   </span>
                 </i>
@@ -68,7 +68,7 @@
             </div>
           </td>
           <td class="delete">
-            <div class="btn" *ngIf="!category.edited" (click)="deleteCategory(category)">
+            <div class="btn" *ngIf="!category.edited" [ngClass]="{'not-allowed': handlingEditing}" (click)="deleteCategory(category)">
               <a>
                 <i class="fa fa-times" aria-hidden="true">
                       <span class="delete-span" >

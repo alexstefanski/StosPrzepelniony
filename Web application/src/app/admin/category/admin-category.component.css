@@ -207,6 +207,11 @@ input {
 .edit-btn {
   cursor: pointer;
 }
+
 .delete-span {
   font-family: Arial;
+}
+
+.not-allowed {
+  pointer-events: none;
 }

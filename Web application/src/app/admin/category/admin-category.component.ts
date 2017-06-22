@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AdminCategoryComponent implements OnInit {
   categories: Array<Category>;
+  handlingEditing: boolean = false;
   message: string;
 
   constructor(private categoryService: CategoryService, private router: Router) { }
@@ -39,6 +40,7 @@ export class AdminCategoryComponent implements OnInit {
 
   handleEdit(category) {
     category.edited = true;
+    this.handlingEditing = true;
   }
 
   editCategory(category) {
@@ -46,6 +48,7 @@ export class AdminCategoryComponent implements OnInit {
       if (!errors) {
         if (response.status === 204) {
           category.edited = false;
+          this.handlingEditing = false;
         }
       } else {
         this.message = errors.message;
@@ -56,5 +59,6 @@ export class AdminCategoryComponent implements OnInit {
 
   cancel(category) {
     category.edited = false;
+    this.handlingEditing = false;
   }
 }
