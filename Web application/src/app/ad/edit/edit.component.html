@@ -66,7 +66,7 @@
   </div>
 
   <div class="poster_wrapper">
-    <form [formGroup]="addForm" (ngSubmit)="addAdv()">
+    <form [formGroup]="editForm" (ngSubmit)="editAdv()">
       <span class="poster_input_title">Edytuj Ogłoszenie</span>
       <input type="text" class="poster_input_text" placeholder="Tytuł ogłoszenia" formControlName="title"/><br/>
       <select class="poster_select" formControlName="category">
