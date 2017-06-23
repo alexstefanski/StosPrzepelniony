@@ -64,7 +64,8 @@ const routes = [
     {path: ':id', component: AdShowComponent},
     {path: ':id/edit', component: AdEditComponent},
     {path: ':id/delete', component: AdDeleteComponent},
-    {path: ':id/show', component: AdShowComponent}
+    {path: ':id/show', component: AdShowComponent},
+    {path: ':id/status', component: AdChangeStatusComponent}
   ]}
 ];
 

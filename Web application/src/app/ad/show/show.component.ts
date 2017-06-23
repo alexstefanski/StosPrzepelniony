@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AdService} from "../../common/services/ad.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Ad} from "../../common/models/ad";
+import { AdService } from "../../common/services/ad.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Ad } from "../../common/models/ad";
 
 @Component({
   selector: 'app-show',
