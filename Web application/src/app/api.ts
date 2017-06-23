@@ -14,7 +14,7 @@ export const resendEmail = server + '/users/resendverificationemail';
 export const addAds = server + '/ads/add';
 export const listAds = server + '/ads/list';
 export const showAd = function (adId) { return server + '/ads/' + adId + '/info'; };
-export const deleteAd = function (adId) { return server + '/ads/' + adId + '/delete'; };
+export const deleteAd = function (adId) { return server + '/ads' + adId + '/delete'; };
 export const changeAdStatus = function (adId) { return server + '/ads/' + adId + '/status'; };
 // Admin APIs
 export const isUserAdmin = function (userId) {return server + '/admin/admins/' + userId + '/isadmin'; };

@@ -16,7 +16,6 @@ export class AdChangeStatusComponent implements OnInit {
   private adId: number;
   private ad: Ad = null;
   private adStatus = null;
-  private success = { messages: null };
 
   constructor(private adService: AdService,
               private ar: ActivatedRoute,
