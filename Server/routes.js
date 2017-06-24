@@ -78,11 +78,10 @@ module.exports = function(app) {
   app.use('/users/changepassword', usersPublic.changePassword.validOldPassword)
   app.post('/users/changepassword', usersPublic.changePassword.main)
 
-  // API for admin/categories
-  app.use('/admin/categories/list', authenticatedUser.main)
-  app.use('/admin/categories/list', isAdministrator.main)
-  app.get('/admin/categories/list', categoryRead.main)
+  app.use('/categories/list', authenticatedUser.main)
+  app.get('/categories/list', categoryRead.main)
 
+  // API for admin/categories
   app.use('/admin/categories/create', authenticatedUser.main)
   app.use('/admin/categories/create', isAdministrator.main)
   app.post('/admin/categories/create',categoryCreate.main)

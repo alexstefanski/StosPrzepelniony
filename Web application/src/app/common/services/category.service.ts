@@ -1,6 +1,6 @@
 import { Injectable , } from '@angular/core';
 import { Http } from '@angular/http';
-import {adminCategories, adminCategoryAdd, adminCategoryEdit, adminCategoryDelete} from '../../api';
+import { categoriesList , adminCategoryAdd, adminCategoryEdit, adminCategoryDelete} from '../../api';
 import { UserService } from './user.service';
 import { Category } from '../models/category';
 
@@ -17,7 +17,7 @@ export class CategoryService {
     getAllCategories(callback) {
         const headers = this.userService.getAuthenticatedHeader();
 
-        this.http.get(adminCategories, {headers: headers})
+        this.http.get(categoriesList, {headers: headers})
             .toPromise()
             .then((response) => {
                 const categoryArray = new Array<Category>();
