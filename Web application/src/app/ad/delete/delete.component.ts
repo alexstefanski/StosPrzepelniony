@@ -35,10 +35,11 @@ export class AdDeleteComponent implements OnInit {
   deleteAdv() {
     let header = this.userService.getAuthenticatedHeader();
 
-    this.http.delete(deleteAd(this.adId), {headers: header}).toPromise().then(function() {
+    this.http.delete(deleteAd(this.adId), {headers: header}).toPromise().then(result => {
+      console.log(result);
     }).catch(function(error) {
       console.log(error);
-    })
+    });
   }
 
 }

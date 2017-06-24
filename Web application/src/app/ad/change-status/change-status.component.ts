@@ -52,12 +52,8 @@ export class AdChangeStatusComponent implements OnInit {
 
     let header = this.userService.getAuthenticatedHeader();
 
-    this.http.post(changeAdStatus(this.adId), payload, {headers: header}).toPromise().then(function() {
-      console.log('HOORAY');
-      //this.adId = null;
-      //this.ad = null;
-      //this.adStatus = null;
-    }).catch(function(error) {
+    this.http.post(changeAdStatus(this.adId), payload, {headers: header}).toPromise().then()
+      .catch(function(error) {
       console.log(error);
     })
   }

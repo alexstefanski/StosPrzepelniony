@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { addAds } from '../../api';
 import { UserService } from '../../common/services/user.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-add',
@@ -14,7 +15,7 @@ export class AdAddComponent implements OnInit {
   private success = { messages: null };
   private error = { subject: null, categoryId: null, content: null, costHour: null, costTotal: null };
 
-  constructor(private formBuilder: FormBuilder, private http: Http, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private http: Http, private userService: UserService, private router: Router) {
     this.addForm = formBuilder.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
@@ -46,6 +47,7 @@ export class AdAddComponent implements OnInit {
       this.addForm.value.description = null;
       this.addForm.value.salaryType = null;
       this.addForm.value.salary = null;
+      this.router.navigate(['/user']);
     }).catch(response => {
       this.error.subject = response.json().subject;
       this.error.categoryId = response.json().categoryId;
@@ -54,5 +56,4 @@ export class AdAddComponent implements OnInit {
       this.error.costTotal = response.json().costTotal;
     });
   }
-
 }
