@@ -1,5 +1,6 @@
 var Ad = require('./../../models/ad.js')
 var User = require('./../../models/user.js')
+var Category = require('./../../models/category.js')
 
 module.exports.main = function (request, response) {
   var filters=request.query
@@ -8,6 +9,10 @@ module.exports.main = function (request, response) {
     include  : [{
       model: User,
       attributes: ['id','firstName']
+    },
+    {
+      model: Category,
+      attributes: ['categoryId','name']
     }],
     attributes: {
       include: ['id','categoryId','subject','costTotal','costHour','date'],
@@ -24,6 +29,10 @@ module.exports.main = function (request, response) {
             user:{
               userId: ad.user.id,
               firstName: ad.user.firstName
+            },
+            category:{
+              categoryId: ad.categoryId,
+              categoryName: ad.category.name
             },
             categoryId: ad.categoryId,
             subject: ad.subject,

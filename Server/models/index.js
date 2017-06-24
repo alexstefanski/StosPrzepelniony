@@ -46,6 +46,15 @@ User.hasMany(Ad,{
 Ad.belongsTo(User,{
   foreignKey: 'userId'
 })
+
+Category.hasMany(Ad,{
+  foreignKey: 'categoryId'
+})
+
+Ad.belongsTo(Category,{
+  foreignKey: 'categoryId'
+})
+
 Ad.belongsTo(Category,{
   foreignKey: 'categoryId'
 })
