@@ -25,7 +25,6 @@
       </span>
     </div>
     <div class="ad-salary">
-      Wynagrodzenie:
       <span class="ad-costTotal" *ngIf="ad.costTotal">
         {{ad.costTotal}} zł
       </span>
@@ -38,6 +37,6 @@
     </div>
   </div>
   <div class="btn_container">
-    <button class="btn">APLIKUJ</button>
+    <button class="btn" *ngIf="ad.status === 'aktywne'">APLIKUJ</button>
   </div>
 </div>
