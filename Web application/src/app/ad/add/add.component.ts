@@ -35,7 +35,7 @@ export class AdAddComponent implements OnInit {
       categoryId: this.addForm.value.category,
       content: this.addForm.value.description,
       costHour: (this.addForm.value.salaryType === 'hourly') ? this.addForm.value.salary : null,
-      costTotal: (this.addForm.value.salaryType === 'monthly') ? this.addForm.value.salary : null
+      costTotal: (this.addForm.value.salaryType === 'monthly') ? this.addForm.value.salary : null,
     };
 
     let header = this.userService.getAuthenticatedHeader();

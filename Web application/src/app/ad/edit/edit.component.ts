@@ -46,7 +46,9 @@ export class AdEditComponent implements OnInit {
             this.editForm.controls['title'].setValue(this.ad.subject);
             this.editForm.controls['category'].setValue(this.ad.categoryId);
             this.editForm.controls['description'].setValue(this.ad.content);
-            this.editForm.controls['salary'].setValue(this.ad.costTotal);
+            console.log(this.ad.costTotal);
+            this.editForm.controls['salaryType'].setValue((this.ad.costTotal != null) ? 'monthly' : 'hourly');
+            this.editForm.controls['salary'].setValue((this.ad.costTotal != null) ? this.ad.costTotal : this.ad.costHour);
 
           } else {
             this.router.navigate(['/user']);

@@ -12,7 +12,6 @@ import { UserService } from "../../common/services/user.service";
 })
 export class AdDeleteComponent implements OnInit {
   private adId: number;
-  private ad: Ad = null;
 
   constructor(private ar: ActivatedRoute,
               private router: Router,
@@ -35,9 +34,7 @@ export class AdDeleteComponent implements OnInit {
   deleteAdv() {
     let header = this.userService.getAuthenticatedHeader();
 
-    this.http.delete(deleteAd(this.adId), {headers: header}).toPromise().then(result => {
-      console.log(result);
-    }).catch(function(error) {
+    this.http.delete(deleteAd(this.adId), {headers: header}).toPromise().then().catch(function(error) {
       console.log(error);
     });
   }
