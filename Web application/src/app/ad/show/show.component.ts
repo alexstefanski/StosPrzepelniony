@@ -22,7 +22,6 @@ export class AdShowComponent implements OnInit {
         this.adService.getAdById(this.adId, (errors, adInfo) => {
           if (errors == null) {
             this.ad = adInfo;
-            this.categoryName = this.changeCategoryNumberToText(this.ad.categoryId);
           } else {
             this.router.navigate(['/user']);
           }
@@ -32,41 +31,6 @@ export class AdShowComponent implements OnInit {
       }
 
     });
-  }
-
-  changeCategoryNumberToText(nmb: number) {
-    switch(nmb) {
-      case 1:
-        return 'Android';
-      case 2:
-        return 'C++';
-      case 3:
-        return 'IOS';
-      case 4:
-        return 'Objective-C';
-      case 5:
-        return 'Assembler';
-      case 6:
-        return 'Delphi/Object Pascal';
-      case 7:
-        return 'Java';
-      case 8:
-        return 'PHP';
-      case 9:
-        return 'C';
-      case 10:
-        return 'GO';
-      case 11:
-        return 'Javascript';
-      case 12:
-        return 'PL/SQL';
-      case 13:
-        return 'C#';
-      case 14:
-        return 'HTML/CSS';
-      case 15:
-        return 'Matlab';
-    }
   }
 
 }

@@ -1,34 +1,35 @@
 <div class="poster_wrapper">
-  <form [formGroup]="addForm" (ngSubmit)="addAdv()">
-    <span class="poster_input_title">Edytuj Ogłoszenie</span>
-    <input type="text" class="poster_input_text" placeholder="Tytuł ogłoszenia" formControlName="title"/><br/>
-    <select class="poster_select" formControlName="category">
-      <option selected disabled>Kategoria</option>
-      <option value="1">Android</option>
-      <option value="2">C++</option>
-      <option value="3">IOS</option>
-      <option value="4">Objective-C</option>
-      <option value="5">Assembler</option>
-      <option value="6">Delphi/Object Pascal</option>
-      <option value="7">Java</option>
-      <option value="8">PHP</option>
-      <option value="9">C</option>
-      <option value="10">GO</option>
-      <option value="11">Javascript</option>
-      <option value="12">PL/SQL</option>
-      <option value="13">C#</option>
-      <option value="14">HTML/CSS</option>
-      <option value="15">Matlab</option>
+  <form [formGroup]="addForm" (ngSubmit)="addAdv()" #adForm="ngForm">
+    <span class="poster_input_title">Dodaj Ogłoszenie</span>
+    <input type="text" class="poster_input_text"
+           [ngClass]="{'error-input': error.subject}"
+           placeholder="Tytuł ogłoszenia"
+           formControlName="title"/><br/>
+    <div class="error-messages" *ngIf="error.subject"> &nbsp; {{ error.subject }}</div>
+    <select class="poster_select" [ngClass]="{'error-input': error.categoryId}"
+            formControlName="category"
+            [(ngModel)]="selectedCategory">
+      <option selected value="0" disabled>Kategoria</option>
+      <option *ngFor="let cat of categoriesList" [value]="cat.categoryId">{{cat.name}}</option>
     </select>
-    <div class="poster_textarea_wrapper">
+    <div class="error-messages" *ngIf="error.categoryId"> &nbsp; {{ error.categoryId }}</div>
+    <div class="poster_textarea_wrapper" [ngClass]="{'error-input': error.content}">
       <textarea class="poster_textarea" placeholder="Opis ogłoszenia" formControlName="description"></textarea>
     </div>
-    <select class="poster_select_hours" id="poster_hours_select_input" formControlName="salaryType">
-      <option selected disabled>Wynagrodzenie</option>
+    <div class="error-messages" *ngIf="error.content"> &nbsp; {{ error.content }}</div>
+    <select class="poster_select_hours" id="poster_hours_select_input"
+            [ngClass]="{'error-input': error.salaryType}"
+            formControlName="salaryType" ngModel="nooption">
+      <option selected value="nooption" disabled>Wynagrodzenie</option>
       <option value="monthly">Miesięczne</option>
       <option value="hourly">Godzinowe</option>
     </select>
-    <input type="text" class="poster_input_hours" id="poster_hours_text_input" placeholder="" formControlName="salary"/><br/>
-    <button type="submit" class="poster_btn_container">WYŚLIJ OGŁOSZENIE</button>
+    <input type="text" [ngClass]="{'error-input': error.salaryValue}" class="poster_input_hours"
+           id="poster_hours_text_input"
+           placeholder="Wielkość wynagrodzenia..."
+           formControlName="salary"/><br/>
+    <div class="error-messages" *ngIf="error.salaryType"> &nbsp; {{ error.salaryType }} </div>
+    <div class="error-messages" *ngIf="error.salaryValue"> &nbsp; {{ error.salaryValue }} </div>
+    <button type="submit" class="poster_btn_container" >WYŚLIJ OGŁOSZENIE</button>
   </form>
 </div>

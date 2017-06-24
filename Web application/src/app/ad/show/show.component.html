@@ -21,12 +21,12 @@
       </span>
       | Kategoria:
       <span class="ad-category">
-          {{categoryName}}
+          {{ad.categoryName}}
       </span>
     </div>
     <div class="ad-salary">
       <span class="ad-costTotal" *ngIf="ad.costTotal">
-        {{ad.costTotal}} zł
+        | Wynagrodzenie: {{ad.costTotal}} zł
       </span>
       <span class="ad-costHour" *ngIf="ad.costHour">
         | Wynagrodzenie/h: {{ad.costHour}}

@@ -3,6 +3,7 @@ export class Ad {
     userId: number;
     userFirstName: string;
     categoryId: number;
+    categoryName?: string;
     subject: string;
     content: string;
     costTotal?: number;

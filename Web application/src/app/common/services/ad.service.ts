@@ -44,6 +44,8 @@ export class AdService {
             .toPromise()
             .then((response) => {
                 let ad = this.assignAdValues(response.json());
+                ad.categoryId = response.json().category.categoryId;
+                ad.categoryName = response.json().category.categoryName;
 
                 callback(null, ad);
             })

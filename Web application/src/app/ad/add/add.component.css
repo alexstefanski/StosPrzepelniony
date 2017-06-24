@@ -253,6 +253,18 @@ input[type=range]::-moz-range-thumb {
 
 }
 
+.error-input {
+  margin-bottom: 0px !important;
+  border-left: 3px solid red !important;
+}
+
+.error-messages {
+  font-size: 14px;
+  color: red;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
 .control {
   font-size: 18px;
   position: relative;

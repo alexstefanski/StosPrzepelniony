@@ -30,7 +30,8 @@ module.exports.validate = function(request, response, next) {
       }
     }
   }
-
+  
+  validate.async.options = { fullMessages: false }
   validate.async(request.body, constraints)
     .then(result => {
     next()
