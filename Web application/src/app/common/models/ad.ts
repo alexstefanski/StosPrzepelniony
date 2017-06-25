@@ -2,6 +2,7 @@ export class Ad {
     id: number;
     userId: number;
     userFirstName: string;
+    userLastName: string;
     categoryId: number;
     categoryName?: string;
     subject: string;

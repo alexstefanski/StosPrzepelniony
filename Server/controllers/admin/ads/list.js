@@ -6,7 +6,7 @@ module.exports.main = function(request, response) {
 
   Ad
     .findAll({
-      attributes: [ 'id' , 'subject' , 'costTotal' , 'costHour' , 'date'],
+      attributes: [ 'id' , 'subject' , 'costTotal' , 'costHour' , 'date', 'status' ],
       include: [
         {
           model: User,
@@ -38,6 +38,7 @@ module.exports.main = function(request, response) {
           obj.costTotal = ad.costTotal;
           obj.costHour = ad.costHour;
           obj.date = ad.date;
+          obj.status = ad.status;
 
           adsList.push(obj);
         }); // koniec forEach

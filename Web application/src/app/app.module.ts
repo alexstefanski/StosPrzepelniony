@@ -48,6 +48,8 @@ import { AdminPermissionAddComponent } from './admin/permission/admin-permission
 import { AdminPermissionEditComponent } from './admin/permission/admin-permission-edit/admin-permission-edit.component';
 import { AdminActionComponent } from './admin/action/action.component';
 import { ActionService } from './common/services/action.service';
+import { AdminAdComponent } from './admin/ad/admin-ad.component';
+import { AdminAdService } from './common/services/admin.ad.service';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -70,7 +72,8 @@ const routes = [
     {path: 'category', component: AdminCategoryComponent, canActivate: [AdminGuard], children: [
         {path: 'create', component: AdminCategoryAddComponent},
     ]},
-    {path: 'actions', component: AdminActionComponent}
+    {path: 'actions', component: AdminActionComponent},
+    {path: 'ads', component: AdminAdComponent}
   ]},
   {path: 'ad', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: AdComponent, pathMath: 'full'},
@@ -112,7 +115,8 @@ const routes = [
     AdminPermissionAddComponent,
     AdminPermissionEditComponent,
     AdminPermissionComponent,
-    AdminActionComponent
+    AdminActionComponent,
+    AdminAdComponent
   ],
   imports: [
     BrowserModule,
@@ -127,6 +131,7 @@ const routes = [
     AdminService,
     AdService,
     ActionService,
+    AdminAdService,
     PermissionService,
     AuthenticatedGuard,
     AdminGuard,
