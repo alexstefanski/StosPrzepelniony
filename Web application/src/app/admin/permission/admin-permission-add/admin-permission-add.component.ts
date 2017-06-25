@@ -26,7 +26,6 @@ export class AdminPermissionAddComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.addForm.controls['name'].value);
     let permission = {
       name: this.addForm.controls['name'].value,
       actions: []

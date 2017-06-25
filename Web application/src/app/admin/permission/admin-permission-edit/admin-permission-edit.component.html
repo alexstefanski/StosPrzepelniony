@@ -38,7 +38,7 @@
           {{ action.description }}
         </td>
         <td class="action-name">
-          <input type="checkbox" />
+          <input type="checkbox" [checked]="userHasAction(action)" />
         </td>
       </tr>
       </tbody>

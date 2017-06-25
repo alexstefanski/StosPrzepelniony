@@ -28,13 +28,12 @@ export class AdminPermissionIndexComponent implements OnInit {
         console.log(errors);
       }
     });
-
   }
 
   onDelete(permissionId) {
     this.permissionService.deletePermission(permissionId, (errors, response) => {
       if (!errors) {
-        if (response.status === 204) {
+        if (response.status === 201) {
           this.router.navigate(['/admin/permission'])
         }
       } else {

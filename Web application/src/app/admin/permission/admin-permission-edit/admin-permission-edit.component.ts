@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Permission } from "../../../common/models/permission";
 import { PermissionService } from "../../../common/services/permission.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { Action } from "../../../common/models/action";
 import {ActionService} from "app/common/services/action.service";
 
@@ -40,15 +40,26 @@ export class AdminPermissionEditComponent implements OnInit {
         });
         this.permissionService.getPermissionById(this.permissionId, (errors, permission) => {
           if (!errors) {
+            console.log(permission);
             this.permission = permission;
+            this.editForm.controls['name'].setValue(permission.name);
           } else {
             console.log(errors);
           }
         });
+
+        //this.actionList.forEach(items => {
+          //this.editForm.addControl('action' + items.id, new FormControl(this.permission.actions.indexOf(items.id) > 0))
+        //});
       } else {
         console.log('Wrong param!');
       }
     });
+  }
+
+  userHasAction(action: Action) {
+    return false;
+    //return (this.permission.actions.indexOf(action) > 0);
   }
 
   onSubmit() {

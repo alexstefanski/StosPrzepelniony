@@ -66,10 +66,10 @@ export class PermissionService {
   getPermissionById(permissionId, callback) {
     const headers = this.userService.getAuthenticatedHeader();
 
-    this.http.get(adminPermissionShow(permissionId), callback).toPromise()
+    this.http.get(adminPermissionShow(permissionId), {headers: headers}).toPromise()
       .then(response => {
         let ad = {
-          permissionId: response.json().permissionId,
+          permissionId: response.json().id,
           name: response.json().name,
           actions: response.json().actions
         };
