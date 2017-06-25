@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {adminPermissionsList, adminPermissionShow, adminPermissionAdd} from '../../api';
+import {adminPermissionsList, adminPermissionShow, adminPermissionAdd, adminPermissionDelete} from '../../api';
 import { UserService } from './user.service';
 import { Permission } from '../models/permission';
 
@@ -39,6 +39,20 @@ export class PermissionService {
   addPermission(permission, callback) {
     const headers = this.userService.getAuthenticatedHeader();
     this.http.post(adminPermissionAdd, permission, {headers: headers})
+      .toPromise()
+      .then((response) => {
+        this.permissionAvailableSource.next();
+        callback(null, response);
+      })
+      .catch((errors) => {
+        callback(errors, null);
+      });
+  }
+
+  deletePermission(categoryId, callback) {
+    const headers = this.userService.getAuthenticatedHeader();
+
+    this.http.delete(adminPermissionDelete(categoryId), {headers: headers})
       .toPromise()
       .then((response) => {
         this.permissionAvailableSource.next();
