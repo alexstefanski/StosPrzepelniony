@@ -20,14 +20,14 @@ Autor: _Jakub_
 
 Autor: _Maciej G._
 
-|     | Lokalizacja komponentu | Ścieżka w aplikacji     |
-| --- | ---------------------- | ----------------------- |
-|     | ad/index               | /ads                    |
-|     | ad/show                | /ad/:adId               |
-|     | ad/add                 | /ad/add                 |
-|     | ad/edit                | /ad/:adId/edit          |
-|     | ad/change-status       | /ad/:adId/change-status |
-|     | ad/delete              | /ad/:adId/delete        |
+|      | Lokalizacja komponentu | Ścieżka w aplikacji     |
+| ---  | ---------------------- | ----------------------- |
+|      | ad/index               | /ads                    |
+| :ok: | ad/show                | /ad/:adId               |
+| :ok: | ad/add                 | /ad/add                 |
+| :ok: | ad/edit                | /ad/:adId/edit          |
+| :ok: | ad/change-status       | /ad/:adId/change-status |
+| :ok: | ad/delete              | /ad/:adId/delete        |
 
 **Message**
 
