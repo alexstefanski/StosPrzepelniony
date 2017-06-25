@@ -13,22 +13,21 @@ export class AdminPermissionIndexComponent implements OnInit {
   constructor(private permissionService: PermissionService) { }
 
   ngOnInit() {
-    this.permissionService.getAllPermissions(result => {
-      this.permissionService.getAllPermissions((errors, permissionsArray) => {
-        this.permissionArray = permissionsArray;
-      });
-    });
-
-    //this.preparePermissionList();
-    //this.permissionService.permissionAvailable$.subscribe();
+    this.preparePermissionList();
+    this.permissionService.permissionAvailable$.subscribe(
+        () => this.preparePermissionList()
+    );
   }
 
   preparePermissionList() {
-    this.permissionService.getAllPermissions(result => {
-      this.permissionService.getAllPermissions((errors, permissionsArray) => {
+    this.permissionService.getAllPermissions((errors, permissionsArray) => {
+      if (errors === null) {
         this.permissionArray = permissionsArray;
-      });
+      } else {
+        console.log(errors);
+      }
     });
+
   }
 
   onDelete() {}
