@@ -1,34 +1,59 @@
-var Admin = require('./../../../models/index.js').Admin
 var Permission = require('./../../../models/index.js').Permission
-var Action = require('./../../../models/index.js').Action
+var PermissionAction = require('./../../../models/index.js').PermissionAction
+
+var isPermissionExist = require('./helpers/isPermissionExist.js').main
+var isActionsExist = require('./helpers/isActionsExist.js').main
+
 
 module.exports.main = function(request, response) {
-  let _permissionId = request.params.permissionId
-  let _permissionName = request.params.name
-  let _actionId = request.params.actionId
+  let _permissionName = request.body.name
+  let _actionIds = new Array()
+  request.body.actions.map(i => _actionIds.push(i.actionId))
 
+  isPermissionExist(_permissionName, (err, res) => {
+    if (res == null) {
+      isActionsExist(_actionIds, (err, res) => {
+        if (res != null) {
+          // Tworzenie nowego dostępu
+          createPermissionAction(_permissionName, _actionIds, response)
+        } else {
+          response.status(406).json({
+            message: 'Nie można utworzyć nowego dostępu',
+            actions: 'Przynajmniej jedna akcja nie istnieje'
+          })
+        }
+      }) // koniec isActionsExist
+    } else {
+      response.status(406).json({
+        message: 'Nie można utworzyć nowego dostępu',
+        name: 'Podane uprawnienie już istnieje'
+      })
+    } // koniec if
+  }) // koniec isPermissionExist
+
+} // koniec main
+
+function createPermissionAction(permissionName, actionIds, response) {
   Permission
-    .findOrCreate({
-      where: {
-        permissionId: _permissionId
-      },
-      defaults: {
-        permissionName: _permissionName,
-        actionId: _actionId
-      },
-      transaction: null
-    })
-    .spread(function(permission, created) {
-      if (created) {
-        // Pomyślnie utworzono
-        response.sendStatus(201)
-      } else {
-        // istnieje w bazie
-        response.status(406).send({
-          message: `Nie można utworzyć uprawnienia`,
-          permissionId: `Takie uprawnienie już istnieje`
+    .create({name: permissionName})
+    .then(function(addedPermission) {
+        var permissionActions = new Array()
+        actionIds.forEach(id => {
+            permissionActions.push({permissionId: addedPermission.id, actionId: id})
         })
-      } // koniec if
-    }) // koniec spread
 
-}
+        PermissionAction
+          .bulkCreate(permissionActions)
+          .then(function(result) {
+            if (result != null) {
+              response.status(201).json()
+            } else {
+              response.status(400).json({
+                message: 'Coś poszło nie tak'
+              })
+            }
+          }) //koniec then
+
+    }) // koniec then
+
+} // koniec createPermissionAction
