@@ -1,0 +1,57 @@
+<div class="container">
+  <h2>Lista dostępów</h2>
+  <div class="btn add-btn" [routerLink]="['add']">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    <span class="add-span">
+      Dodaj
+    </span>
+  </div>
+  <router-outlet></router-outlet>
+  <table id="ads-list">
+    <thead>
+    <tr>
+      <th scope="col">
+        id
+      </th>
+      <th scope="col">
+        nazwa
+      </th>
+      <th scope="col">
+        edytuj
+      </th>
+      <th scope="col">
+        usuń
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let permission of permissionArray">
+      <td class="ad-id">
+        {{ permission.id }}
+      </td>
+      <td class="user-id">
+        <a href="userslist.html">
+          {{ permission.name }}
+        </a>
+      </td>
+      <td class="edit">
+        <div class="btn" [routerLink]="[permission.id]">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <span class="edit-span">
+            Edytuj
+          </span>
+        </div>
+      </td>
+      <td class="delete btn-col">
+        <div class="btn" [routerLink]="[permission.id, 'delete']">
+          <i class="fa fa-times" aria-hidden="true">
+            <span class="delete-span">
+              Usuń
+            </span>
+          </i>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

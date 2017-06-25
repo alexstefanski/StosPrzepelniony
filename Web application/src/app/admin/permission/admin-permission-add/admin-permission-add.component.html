@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Dodaj kategorie</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="addForm">
+    <div class="inputs">
+      <span class="cat-input">
+        <input type="text" class="input_form" placeholder="Nazwa" name="name" formControlName="name"/>
+      </span>
+      <div class="error" [hidden]="addForm.controls['name'].valid ||addForm.controls['name'].pristine">
+        Nazwa jest wymagana
+      </div>
+
+      <span *ngIf="message"></span>
+      <span class="cat-input">
+        <input type="submit" value="Dodaj" [disabled]="!addForm.valid" [ngClass]="{'not-allowed': !addForm.valid }"/>
+      </span>
+    </div>
+  </form>
+</div>
