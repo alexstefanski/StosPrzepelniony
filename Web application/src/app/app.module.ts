@@ -64,7 +64,7 @@ const routes = [
     {path: 'permission', component: AdminPermissionIndexComponent, children: [
       {path: 'add', component: AdminPermissionAddComponent},
       {path: ':id/delete', component: AdminPermissionDeleteComponent},
-      {path: 'edit', component: AdminPermissionEditComponent},
+      {path: ':id/edit', component: AdminPermissionEditComponent},
       {path: ':id', component: AdminPermissionShowComponent}
     ]},
     {path: 'category', component: AdminCategoryComponent, canActivate: [AdminGuard], children: [

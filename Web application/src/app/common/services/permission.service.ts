@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { adminPermissionsList, adminPermissionShow } from '../../api';
+import {adminPermissionsList, adminPermissionShow, adminPermissionAdd} from '../../api';
 import { UserService } from './user.service';
 import { Permission } from '../models/permission';
 
@@ -32,5 +32,15 @@ export class PermissionService {
             });
     }
 
-    addPermission() {}
+  addPermission(permission, callback) {
+    const headers = this.userService.getAuthenticatedHeader();
+    this.http.post(adminPermissionAdd, permission, {headers: headers})
+      .toPromise()
+      .then((response) => {
+        callback(null, response);
+      })
+      .catch((errors) => {
+        callback(errors, null);
+      });
+  }
 }
