@@ -84,13 +84,13 @@ Autor: _Rafał_
 
 Autor: _Rafał_
 
-|     | Lokalizacja komponentu  | Ścieżka w aplikacji                    |
-| --- | ----------------------- | -------------------------------------- |
-|     | admin/permission/index  | /admin/permissions                     |
-|     | admin/permission/show   | /admin/permission/:permissionId        |
-|     | admin/permission/add    | /admin/permission/add                  |
-|     | admin/permission/edit   | /admin/permssion/:permissionId/edit    |
-|     | admin/permission/delete | /admin/permission/:permissionId/delete |
+|      | Lokalizacja komponentu  | Ścieżka w aplikacji                    |
+| -----| ----------------------- | -------------------------------------- |
+| :ok: | admin/permission/index  | /admin/permissions                     |
+|      | admin/permission/show   | /admin/permission/:permissionId        |
+| :ok: | admin/permission/add    | /admin/permission/add                  |
+|      | admin/permission/edit   | /admin/permssion/:permissionId/edit    |
+| :ok: | admin/permission/delete | /admin/permission/:permissionId/delete |
 
 Root dla lokalizacji komponentu to:
 
