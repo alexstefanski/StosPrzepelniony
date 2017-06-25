@@ -5,10 +5,14 @@ import { UserService } from './user.service';
 import { Permission } from '../models/permission';
 
 import 'rxjs/add/operator/toPromise';
+import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class PermissionService {
-    constructor(private http: Http, private userService: UserService) { }
+  private permissionAvailableSource = new Subject();
+  permissionAvailable$ = this.permissionAvailableSource.asObservable();
+
+  constructor(private http: Http, private userService: UserService) { }
 
     getAllPermissions(callback) {
         const headers = this.userService.getAuthenticatedHeader();
@@ -37,6 +41,7 @@ export class PermissionService {
     this.http.post(adminPermissionAdd, permission, {headers: headers})
       .toPromise()
       .then((response) => {
+        this.permissionAvailableSource.next();
         callback(null, response);
       })
       .catch((errors) => {
