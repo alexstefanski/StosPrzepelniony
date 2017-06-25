@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Lista dostępnych akcji</h2>
+  <table id="ads-list">
+    <thead>
+    <tr>
+      <th scope="col">
+        id
+      </th>
+      <th scope="col">
+        nazwa
+      </th>
+      <th scope="col">
+        opis
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let action of actionsList">
+      <td class="action-id">
+        {{action.id}}
+      </td>
+      <td class="action-name">
+        {{action.name}}
+      </td>
+      <td class="action-desc">
+        {{action.description}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

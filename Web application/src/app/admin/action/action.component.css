@@ -1,0 +1,37 @@
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-left: 0px;
+    color: #4a4a4d;
+    font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: auto;
+    width: 100%;
+}
+th,td {
+    padding: 10px 15px;
+    vertical-align: middle;
+}
+thead {
+    margin: auto;
+    width: 100%;
+    background-color: #fafafa;
+    color: black;
+    border-bottom: 1px solid #333333;
+    text-align: left;
+}
+th {
+    font-weight: bold;
+    border-bottom: 1px solid #787878;
+}
+th:first-child {
+    text-align: left;
+}
+tbody tr:nth-child(even) {
+    background: #f0f0f2;
+}
+td {
+    border-bottom: 1px solid #cecfd5;
+}
+td:first-child {
+
+}

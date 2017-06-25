@@ -25,7 +25,7 @@ export class AdminCategoryComponent implements OnInit {
   prepareCategoriesList() {
     this.categoryService.getAllCategories((errors, categories) => {
       if (!errors) {
-        this.categories = categories;
+        this.categories = categories.sort((a,b) => this.sortCategoriesById(a,b));
       }
     })
   }
@@ -60,5 +60,16 @@ export class AdminCategoryComponent implements OnInit {
   cancel(category) {
     category.edited = false;
     this.handlingEditing = false;
+  }
+
+  sortCategoriesById(a, b) {
+    if (a.categoryId < b.categoryId) {
+      return -1;
+    }
+    if (a.categoryId > b.categoryId) {
+      return 1;
+    }
+
+    return 0;
   }
 }
