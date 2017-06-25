@@ -7,7 +7,7 @@ import { Action } from '../../common/models/action';
   templateUrl: './action.component.html',
   styleUrls: ['./action.component.css']
 })
-export class ActionComponent implements OnInit {
+export class AdminActionComponent implements OnInit {
   actionsList: Array<Action> = new Array<Action>();
   constructor(private actionService: ActionService) { }
 

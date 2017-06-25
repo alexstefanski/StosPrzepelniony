@@ -47,6 +47,8 @@ import { AdminPermissionShowComponent } from './admin/permission/admin-permissio
 import { AdminPermissionAddComponent } from './admin/permission/admin-permission-add/admin-permission-add.component';
 import { AdminPermissionEditComponent } from './admin/permission/admin-permission-edit/admin-permission-edit.component';
 import { AdminPermissionDeleteComponent } from './admin/permission/admin-permission-delete/admin-permission-delete.component';
+import { AdminActionComponent } from './admin/action/action.component';
+import { ActionService } from './common/services/action.service';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -69,7 +71,8 @@ const routes = [
     ]},
     {path: 'category', component: AdminCategoryComponent, canActivate: [AdminGuard], children: [
         {path: 'create', component: AdminCategoryAddComponent},
-    ]}
+    ]},
+    {path: 'actions', component: AdminActionComponent}
   ]},
   {path: 'ad', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: AdComponent, pathMath: 'full'},
@@ -111,7 +114,8 @@ const routes = [
     AdminPermissionAddComponent,
     AdminPermissionEditComponent,
     AdminPermissionDeleteComponent,
-    AdminPermissionComponent
+    AdminPermissionComponent,
+    AdminActionComponent
   ],
   imports: [
     BrowserModule,
@@ -125,6 +129,7 @@ const routes = [
     CategoryService,
     AdminService,
     AdService,
+    ActionService,
     PermissionService,
     AuthenticatedGuard,
     AdminGuard,
