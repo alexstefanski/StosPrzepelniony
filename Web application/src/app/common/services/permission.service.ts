@@ -49,10 +49,10 @@ export class PermissionService {
       });
   }
 
-  deletePermission(categoryId, callback) {
+  deletePermission(permissionId, callback) {
     const headers = this.userService.getAuthenticatedHeader();
 
-    this.http.delete(adminPermissionDelete(categoryId), {headers: headers})
+    this.http.delete(adminPermissionDelete(permissionId), {headers: headers})
       .toPromise()
       .then((response) => {
         this.permissionAvailableSource.next();
