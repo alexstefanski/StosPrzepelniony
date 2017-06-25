@@ -1,3 +1,51 @@
-<p>
-  admin-permission-edit works!
-</p>
+<div class="container">
+  <h2>Edytuj dostęp</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="editForm">
+    <div class="inputs">
+      <span class="cat-input">
+        <input type="text" class="input_form" placeholder="Nazwa" name="name" formControlName="name"/>
+      </span>
+      <div class="error" [hidden]="editForm.controls['name'].valid ||editForm.controls['name'].pristine">
+        Nazwa jest wymagana
+      </div>
+    </div>
+    <table id="ads-list">
+      <thead>
+      <tr>
+        <th scope="col">
+          id
+        </th>
+        <th scope="col">
+          nazwa
+        </th>
+        <th scope="col">
+          opis
+        </th>
+        <th scope="col">
+          czy posiada
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let action of actionList">
+        <td class="action-id">
+          {{ action.id }}
+        </td>
+        <td class="action-name">
+          {{ action.name }}
+        </td>
+        <td class="action-desc">
+          {{ action.description }}
+        </td>
+        <td class="action-name">
+          <input type="checkbox" />
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <span *ngIf="message"></span>
+    <span class="cat-input">
+        <input type="submit" value="Dodaj" [disabled]="!editForm.valid" [ngClass]="{'not-allowed': !editForm.valid }"/>
+      </span>
+  </form>
+</div>

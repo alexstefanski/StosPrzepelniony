@@ -62,4 +62,20 @@ export class PermissionService {
         callback(errors, null);
       });
   }
+
+  getPermissionById(permissionId, callback) {
+    const headers = this.userService.getAuthenticatedHeader();
+
+    this.http.get(adminPermissionShow(permissionId), callback).toPromise()
+      .then(response => {
+        let ad = {
+          permissionId: response.json().permissionId,
+          name: response.json().name,
+          actions: response.json().actions
+        };
+        callback(null, ad);
+      }).catch(errors => {
+        callback(errors, null);
+    });
+  }
 }

@@ -41,12 +41,11 @@ import { CategoryService } from './common/services/category.service';
 import { AdminService } from './common/services/admin.service';
 import { PermissionService } from './common/services/permission.service';
 import { AdService } from './common/services/ad.service';
-import {AdminPermissionComponent} from "./admin/permission/admin-permission.component";
+import { AdminPermissionComponent } from "./admin/permission/admin-permission.component";
 import { AdminPermissionIndexComponent } from './admin/permission/admin-permission-index/admin-permission-index.component';
 import { AdminPermissionShowComponent } from './admin/permission/admin-permission-show/admin-permission-show.component';
 import { AdminPermissionAddComponent } from './admin/permission/admin-permission-add/admin-permission-add.component';
 import { AdminPermissionEditComponent } from './admin/permission/admin-permission-edit/admin-permission-edit.component';
-import { AdminPermissionDeleteComponent } from './admin/permission/admin-permission-delete/admin-permission-delete.component';
 import { AdminActionComponent } from './admin/action/action.component';
 import { ActionService } from './common/services/action.service';
 
@@ -65,7 +64,6 @@ const routes = [
     {path: '', component: AdminComponent},
     {path: 'permission', component: AdminPermissionIndexComponent, children: [
       {path: 'add', component: AdminPermissionAddComponent},
-      {path: ':id/delete', component: AdminPermissionDeleteComponent},
       {path: ':id/edit', component: AdminPermissionEditComponent},
       {path: ':id', component: AdminPermissionShowComponent}
     ]},
@@ -113,7 +111,6 @@ const routes = [
     AdminPermissionShowComponent,
     AdminPermissionAddComponent,
     AdminPermissionEditComponent,
-    AdminPermissionDeleteComponent,
     AdminPermissionComponent,
     AdminActionComponent
   ],

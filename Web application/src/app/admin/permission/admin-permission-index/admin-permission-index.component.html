@@ -35,7 +35,7 @@
         </a>
       </td>
       <td class="edit">
-        <div class="btn" [routerLink]="[permission.id]">
+        <div class="btn" [routerLink]="[permission.id, 'edit']">
           <i class="fa fa-pencil" aria-hidden="true"></i>
           <span class="edit-span">
             Edytuj
@@ -43,6 +43,7 @@
         </div>
       </td>
       <td class="delete btn-col">
+
         <div class="btn" (click)="onDelete(permission.id)">
           <i class="fa fa-times" aria-hidden="true">
             <span class="delete-span">
