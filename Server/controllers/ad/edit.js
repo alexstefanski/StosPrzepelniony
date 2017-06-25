@@ -22,12 +22,14 @@ module.exports.validate = function(request, response, next) {
     },
     costTotal:{
       numericality:{
-        message:"Wartości pola costTotal muszą być typu float"
+        greaterThan:0,
+        message:"Wynagrodzenie miesięczne musi być liczbą dodatnią."
       }
     },
     costHour:{
       numericality:{
-        message:"Wartości pola costHour muszą być typu float"
+        greaterThan:0,
+        message:"Wynagrodzenie godzinowe musi być liczbą dodatnią."
       }
     }
   }

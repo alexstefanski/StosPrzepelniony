@@ -21,12 +21,14 @@ module.exports.validate = function(request, response, next) {
     },
     costTotal:{
       numericality:{
-        message:"Wynagrodzenie miesięczne musi być liczbą"
+        greaterThan:0,
+        message:"Wynagrodzenie miesięczne musi być liczbą dodatnią."
       }
     },
     costHour:{
       numericality:{
-        message:"Wynagrodzenie godzinowe musi być liczbą"
+        greaterThan:0,
+        message:"Wynagrodzenie godzinowe musi być liczbą dodatnią."
       }
     }
   }
