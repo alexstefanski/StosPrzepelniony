@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { adminPermissionsList } from '../../api';
+import { adminPermissionsList, adminPermissionShow } from '../../api';
 import { UserService } from './user.service';
 import { Permission } from '../models/permission';
 
@@ -32,4 +32,5 @@ export class PermissionService {
             });
     }
 
+    addPermission() {}
 }

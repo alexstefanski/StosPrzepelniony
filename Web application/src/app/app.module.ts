@@ -41,6 +41,12 @@ import { CategoryService } from './common/services/category.service';
 import { AdminService } from './common/services/admin.service';
 import { PermissionService } from './common/services/permission.service';
 import { AdService } from './common/services/ad.service';
+import {AdminPermissionComponent} from "./admin/permission/admin-permission.component";
+import { AdminPermissionIndexComponent } from './admin/permission/admin-permission-index/admin-permission-index.component';
+import { AdminPermissionShowComponent } from './admin/permission/admin-permission-show/admin-permission-show.component';
+import { AdminPermissionAddComponent } from './admin/permission/admin-permission-add/admin-permission-add.component';
+import { AdminPermissionEditComponent } from './admin/permission/admin-permission-edit/admin-permission-edit.component';
+import { AdminPermissionDeleteComponent } from './admin/permission/admin-permission-delete/admin-permission-delete.component';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -55,9 +61,15 @@ const routes = [
   ]},
   {path: 'admin', component: AppAdminComponent, canActivate: [AdminGuard], children: [
     {path: '', component: AdminComponent},
+    {path: 'permission', component: AdminPermissionIndexComponent, children: [
+      {path: 'add', component: AdminPermissionAddComponent},
+      {path: ':id/delete', component: AdminPermissionDeleteComponent},
+      {path: 'edit', component: AdminPermissionEditComponent},
+      {path: ':id', component: AdminPermissionShowComponent}
+    ]},
     {path: 'category', component: AdminCategoryComponent, canActivate: [AdminGuard], children: [
         {path: 'create', component: AdminCategoryAddComponent},
-      ]}
+    ]}
   ]},
   {path: 'ad', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: AdComponent, pathMath: 'full'},
@@ -93,7 +105,13 @@ const routes = [
     AdEditComponent,
     AdIndexComponent,
     AdShowComponent,
-    AdChangeStatusComponent
+    AdChangeStatusComponent,
+    AdminPermissionIndexComponent,
+    AdminPermissionShowComponent,
+    AdminPermissionAddComponent,
+    AdminPermissionEditComponent,
+    AdminPermissionDeleteComponent,
+    AdminPermissionComponent
   ],
   imports: [
     BrowserModule,

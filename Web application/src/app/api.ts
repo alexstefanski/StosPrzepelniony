@@ -29,6 +29,9 @@ export const adminCategoryDelete = function(categoryId) {return server + '/admin
 export const adminCategoryEdit = function(categoryId) {return server + '/admin/categories/ ' + categoryId + '/edit'; };
 export const adminActionsList = server + '/admin/actions/list';
 export const adminPermissionsList = server + '/admin/permissions/list';
+export const adminPermissionShow = function(permId) {return server + '/permissions/' + permId + '/info'};
+export const adminPermissionAdd = server + '/permissions/add';
+export const adminPermissionDelete = function(permId) {return server + '/permission/' + permId + '/delete'};
 export const adminPermissionEdit = function(adminId) {return server + '/admin/admins/ ' + adminId + '/edit'; };
 
 
