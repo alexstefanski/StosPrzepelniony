@@ -1,3 +1,67 @@
-<p>
-  user works!
-</p>
+<div class="container">
+  <h2>Lista użytkowników</h2>
+  <table id="ads-list">
+    <thead>
+    <tr>
+      <th scope="col">
+        Id
+      </th>
+      <th scope="col">
+        Imię
+      </th>
+      <th scope="col">
+        Nazwisko
+      </th>
+      <th scope="col">
+        Email
+      </th>
+      <th scope="col">
+        Status
+      </th>
+      <th scope="col">
+        Edytuj
+      </th>
+      <th scope="col">
+        Usuń
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td class="user-id">
+        {{user.userId}}
+      </td>
+      <td class="user-firstname">
+        {{user.firstName}}
+      </td>
+      <td class="user-lastname">
+        {{user.lastName}}
+      </td>
+      <td class="user-email">
+        {{user.email}}
+      </td>
+      <td class="user-status">
+        {{user.status}}
+      </td>
+      <td class="edit">
+        <div class="btn">
+          <i class="fa fa-pencil" aria-hidden="true">
+									  <span class="delete-span">
+									  Edytuj
+									  </span>
+          </i>
+        </div>
+      </td>
+      <td class="delete">
+        <div class="btn" (click)="deleteUser(user)">
+            <i class="fa fa-times" aria-hidden="true">
+                      <span class="delete-span" >
+                        Usuń
+                      </span>
+            </i>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

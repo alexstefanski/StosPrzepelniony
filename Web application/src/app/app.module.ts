@@ -16,7 +16,6 @@ import { UserChangePasswordComponent } from './user/change-password/user-change-
 import { UserResendEmailComponent } from './user/resend-email/user-resend-email.component';
 
 import { AdminUserComponent } from './admin/user/admin-user.component';
-import { AdminUserDeleteComponent } from './admin/user/delete/admin-user-delete.component';
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminCategoryComponent } from './admin/category/admin-category.component';
@@ -50,6 +49,7 @@ import { AdminActionComponent } from './admin/action/action.component';
 import { ActionService } from './common/services/action.service';
 import { AdminAdComponent } from './admin/ad/admin-ad.component';
 import { AdminAdService } from './common/services/admin.ad.service';
+import {AdminUserService} from "app/common/services/admin.user.service";
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -69,6 +69,7 @@ const routes = [
       {path: ':id/edit', component: AdminPermissionEditComponent},
       {path: ':id', component: AdminPermissionShowComponent}
     ]},
+    {path: 'user', component: AdminUserComponent, canActivate: [AdminGuard]},
     {path: 'category', component: AdminCategoryComponent, canActivate: [AdminGuard], children: [
         {path: 'create', component: AdminCategoryAddComponent},
     ]},
@@ -100,7 +101,6 @@ const routes = [
     UserChangePasswordComponent,
     UserResendEmailComponent,
     AdminUserComponent,
-    AdminUserDeleteComponent,
     AppUserComponent,
     AppAdminComponent,
     AdComponent,
@@ -129,6 +129,7 @@ const routes = [
     UserService,
     CategoryService,
     AdminService,
+    AdminUserService,
     AdService,
     ActionService,
     AdminAdService,
