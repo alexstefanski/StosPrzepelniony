@@ -44,11 +44,11 @@ Autor: _Piotr_
 
 Autor: _Maciej M._
 
-|     | Nazwa API            | Adres API                          |
-| --- | -------------------- | ---------------------------------- |
-|     | Lista wiadomości     | /messages/list                     |
-|     | Pokaż wiadomość      | /messages/:adId/:userIdSender      |
-|     | Wysyłanie wiadomości | /messages/:adId/:userIdSender/send |
+|      | Nazwa API            | Adres API                          |
+| ---- | -------------------- | ---------------------------------- |
+| :ok: | Lista wiadomości     | /messages/list                     |
+| :ok: | Pokaż wiadomość      | /messages/:adId/:userIdSender      |
+| :ok: | Wysyłanie wiadomości | /messages/:adId/:userIdSender/send |
 
 **Admin/Admin**
 
@@ -67,12 +67,12 @@ Autor: _Bartosz_
 
 Autor: _Maciej M._
 
-|     | Nazwa API        | Adres API                      |
-| --- | ---------------- | ------------------------------ |
-|     | Lista kategorii  | /categories/list               |
-|     | Dodaj kategorię  | /categories/add                |
-|     | Edytuj kategorię | /categories/:categoryId/edit   |
-|     | Usuń kategorię   | /categories/:categoryId/delete |
+|      | Nazwa API        | Adres API                      |
+| ---- | ---------------- | ------------------------------ |
+| :ok: | Lista kategorii  | /categories/list               |
+| :ok: | Dodaj kategorię  | /categories/add                |
+| :ok: | Edytuj kategorię | /categories/:categoryId/edit   |
+| :ok: | Usuń kategorię   | /categories/:categoryId/delete |
 
 **Admin/User**
 
@@ -99,7 +99,7 @@ Autor: _Bartosz_
 Autor: _Paweł W._
 
 |      | Nazwa API           | Adres API                         |
-| ---  | ------------------- | --------------------------------- |
+| ---- | ------------------- | --------------------------------- |
 | :ok: | Lista typów dostępu | /permissions/list                 |
 | :ok: | Pokaż typ dostępu   | /permissions/:permissionId/info   |
 | :ok: | Dodaj typ dostępu   | /permissions/add                  |
@@ -111,7 +111,7 @@ Autor: _Paweł W._
 Autor: _Paweł W._
 
 |      | Nazwa API   | Adres API               |
-| ---  | ----------- | ----------------------- |
+| ---- | ----------- | ----------------------- |
 | :ok: | Lista akcji | /actions/list           |
 | :ok: | Pokaż akcję | /actions/:actionId/info |
 
