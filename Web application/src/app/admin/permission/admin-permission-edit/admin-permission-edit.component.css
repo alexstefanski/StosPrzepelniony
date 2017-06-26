@@ -35,3 +35,32 @@ td {
 td:first-child {
 
 }
+
+.error {
+  padding-bottom: 1%;
+  color: red;
+  font-size: 15px;
+}
+
+.btn {
+  text-decoration: none;
+  border: none;
+  padding: 4px 6px 4px 6px;
+  margin: 2% 0;
+  background-color: #384C6B;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  font-size: 20px;
+  float: right;
+}
+
+input[type="submit"]:hover {
+  background-color: #2C3C55;
+}
+.not-allowed {
+  cursor: not-allowed !important;
+}

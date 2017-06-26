@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Permission } from "../../../common/models/permission";
 import { PermissionService } from "../../../common/services/permission.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { Action } from "../../../common/models/action";
-import {ActionService} from "app/common/services/action.service";
+import { ActionService } from "app/common/services/action.service";
 
 @Component({
   selector: 'app-admin-permission-edit',
@@ -12,55 +11,73 @@ import {ActionService} from "app/common/services/action.service";
   styleUrls: ['./admin-permission-edit.component.css']
 })
 export class AdminPermissionEditComponent implements OnInit {
-  permission: Permission;
-  permissionId: number;
-  editForm: FormGroup;
-  actionList: Array<Action>;
+  permission: Permission = new Permission();
+  actionList: Array<Action> = new Array<Action>();
 
   constructor(private permissionService: PermissionService,
               private ar: ActivatedRoute,
-              private formBuilder: FormBuilder,
               private actionService: ActionService,
               private router: Router) {
-    this.editForm = this.formBuilder.group({
-      name: ['', Validators.required]
+    ar.params.subscribe(params => {
+      if (!isNaN(+params['id'])) {
+        this.permission.id = +params['id'];
+      } else {
+        this.router.navigate(['admin/permission']);
+      }
     });
+    this.permission.name = '';
   }
 
   ngOnInit() {
-    this.ar.params.subscribe(params => {
-      if (!isNaN(+params['id'])) {
-        this.permissionId = +params['id'];
-        this.actionService.getAllActions((errors, actionsArray) => {
-          if (errors === null){
-            this.actionList = actionsArray;
-            this.actionList.forEach(items => {
-              this.editForm.addControl('action' + items.id, new FormControl(false));
-            });
-          } else {
-            console.log(errors);
-          }
-        });
-        this.permissionService.getPermissionById(this.permissionId, (errors, permission) => {
-          if (!errors) {
-            this.permission = permission;
-            this.editForm.controls['name'].setValue(permission.name);
-          } else {
-            console.log(errors.join(' '));
-          }
-        });
+    this.actionService.getAllActions((errors, actionsArray) => {
+      if (errors === null){
+        this.actionList = actionsArray;
 
+        this.permissionService.getPermissionById(this.permission.id, (errors, permission) => {
+          if (errors === null) {
+            this.permission = permission;
+
+            this.actionList.forEach(act => {
+              if (this.permission.actions.find(i => i.id === act.id)) {
+                act.checked = true;
+              } else {
+                act.checked = false;
+              }
+            })
+          } else {
+            console.log(errors.json());
+          }
+        });
       } else {
-        console.log('Wrong param!');
+        console.log(errors);
+      }
+    });
+
+  }
+
+  onSubmit() {
+    let actions: any[] = [];
+
+    this.actionList.forEach(act => {
+      if (act.checked) {
+        actions.push({ actionId: act.id });
+      }
+    });
+
+    let payload = {
+      name: this.permission.name,
+      actions: actions
+    };
+
+    this.permissionService.postEditPermission(this.permission.id, payload, (errors, result) => {
+      if (errors === null) {
+        if (result.status === 204) {
+          this.router.navigate(['admin/permission']);
+        }
+      } else {
+        console.log(errors);
       }
     });
   }
 
-  onClick() {
-    console.log(this.editForm.value);
-  }
-
-  onSubmit() {
-    this.router.navigate(['/admin/permission'])
-  }
 }

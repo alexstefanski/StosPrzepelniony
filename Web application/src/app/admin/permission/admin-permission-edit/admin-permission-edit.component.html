@@ -1,13 +1,14 @@
 <div class="container">
-  <h2>Edytuj dostęp</h2>
-  <form (ngSubmit)="onSubmit()" [formGroup]="editForm">
-    <div class="inputs">
-      <span class="cat-input">
-        <input type="text" class="input_form" placeholder="Nazwa" name="name" formControlName="name"/>
-      </span>
-      <div class="error" [hidden]="editForm.controls['name'].valid ||editForm.controls['name'].pristine">
-        Nazwa jest wymagana
-      </div>
+  <h2>Edytuj uprawnienia</h2>
+  <form (ngSubmit)="onSubmit()" #editForm="ngForm">
+    Nazwa uprawnienia: <br/>
+    <input type="text"
+           required
+           [(ngModel)]="permission.name"
+           name="permissionName"
+           #name="ngModel"/>
+    <div class="error" [hidden]="name.valid || name.pristine">
+      Nazwa jest wymagana
     </div>
     <table id="ads-list">
       <thead>
@@ -27,7 +28,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let action of actionList; let i = index">
+      <tr *ngFor="let action of actionList">
         <td class="action-id">
           {{ action.id }}
         </td>
@@ -38,14 +39,16 @@
           {{ action.description }}
         </td>
         <td class="action-name">
-          <input type="checkbox" formControlName="action{{i + 1}}" (click)="onClick()" />
+          <input type="checkbox" [checked]="action.checked" (change)="action.checked = !action.checked"/>
         </td>
       </tr>
       </tbody>
     </table>
     <span *ngIf="message"></span>
     <span class="cat-input">
-        <input type="submit" value="Dodaj" [disabled]="!editForm.valid" [ngClass]="{'not-allowed': !editForm.valid }"/>
+        <input type="submit" class="btn add-btn" value="Zapisz zmiany"
+               [ngClass]="{'not-allowed': !editForm.form.valid}"
+               [disabled]="!editForm.form.valid" />
       </span>
   </form>
 </div>
