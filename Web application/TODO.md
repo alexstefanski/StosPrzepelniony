@@ -20,14 +20,14 @@ Autor: _Jakub_
 
 Autor: _Maciej G._
 
-|     | Lokalizacja komponentu | Ścieżka w aplikacji     |
-| --- | ---------------------- | ----------------------- |
-|     | ad/index               | /ads                    |
-|     | ad/show                | /ad/:adId               |
-|     | ad/add                 | /ad/add                 |
-|     | ad/edit                | /ad/:adId/edit          |
-|     | ad/change-status       | /ad/:adId/change-status |
-|     | ad/delete              | /ad/:adId/delete        |
+|      | Lokalizacja komponentu | Ścieżka w aplikacji     |
+| ---  | ---------------------- | ----------------------- |
+|      | ad/index               | /ads                    |
+| :ok: | ad/show                | /ad/:adId               |
+| :ok: | ad/add                 | /ad/add                 |
+| :ok: | ad/edit                | /ad/:adId/edit          |
+| :ok: | ad/change-status       | /ad/:adId/change-status |
+| :ok: | ad/delete              | /ad/:adId/delete        |
 
 **Message**
 
@@ -84,13 +84,13 @@ Autor: _Rafał_
 
 Autor: _Rafał_
 
-|     | Lokalizacja komponentu  | Ścieżka w aplikacji                    |
-| --- | ----------------------- | -------------------------------------- |
-|     | admin/permission/index  | /admin/permissions                     |
-|     | admin/permission/show   | /admin/permission/:permissionId        |
-|     | admin/permission/add    | /admin/permission/add                  |
-|     | admin/permission/edit   | /admin/permssion/:permissionId/edit    |
-|     | admin/permission/delete | /admin/permission/:permissionId/delete |
+|      | Lokalizacja komponentu  | Ścieżka w aplikacji                    |
+| -----| ----------------------- | -------------------------------------- |
+| :ok: | admin/permission/index  | /admin/permissions                     |
+|      | admin/permission/show   | /admin/permission/:permissionId        |
+| :ok: | admin/permission/add    | /admin/permission/add                  |
+|      | admin/permission/edit   | /admin/permssion/:permissionId/edit    |
+| :ok: | admin/permission/delete | /admin/permission/:permissionId/delete |
 
 Root dla lokalizacji komponentu to:
 

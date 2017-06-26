@@ -46,9 +46,9 @@ Autor: _Maciej M._
 
 |     | Nazwa API            | Adres API                          |
 | --- | -------------------- | ---------------------------------- |
-|     | Lista wiadomości     | /messages/list                     |
-|     | Pokaż wiadomość      | /messages/:adId/:userIdSender      |
-|     | Wysyłanie wiadomości | /messages/:adId/:userIdSender/send |
+| :ok: | Lista wiadomości     | /messages/list                     |
+| :ok: | Pokaż wiadomość      | /messages/:adId/:userIdSender      |
+| :ok: | Wysyłanie wiadomości | /messages/:adId/:userIdSender/send |
 
 **Admin/Admin**
 
@@ -69,10 +69,10 @@ Autor: _Maciej M._
 
 |     | Nazwa API        | Adres API                      |
 | --- | ---------------- | ------------------------------ |
-|     | Lista kategorii  | /categories/list               |
-|     | Dodaj kategorię  | /categories/add                |
-|     | Edytuj kategorię | /categories/:categoryId/edit   |
-|     | Usuń kategorię   | /categories/:categoryId/delete |
+| :ok: | Lista kategorii  | /categories/list               |
+| :ok: | Dodaj kategorię  | /categories/add                |
+| :ok: | Edytuj kategorię | /categories/:categoryId/edit   |
+| :ok: | Usuń kategorię   | /categories/:categoryId/delete |
 
 **Admin/User**
 
