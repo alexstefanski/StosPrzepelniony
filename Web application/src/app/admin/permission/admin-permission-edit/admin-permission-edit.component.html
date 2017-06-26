@@ -27,7 +27,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let action of actionList">
+      <tr *ngFor="let action of actionList; let i = index">
         <td class="action-id">
           {{ action.id }}
         </td>
@@ -38,7 +38,7 @@
           {{ action.description }}
         </td>
         <td class="action-name">
-          <input type="checkbox" [checked]="userHasAction(action)" />
+          <input type="checkbox" formControlName="action{{i + 1}}" (click)="onClick()"/>
         </td>
       </tr>
       </tbody>

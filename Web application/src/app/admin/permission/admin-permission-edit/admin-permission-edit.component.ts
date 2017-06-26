@@ -34,32 +34,30 @@ export class AdminPermissionEditComponent implements OnInit {
         this.actionService.getAllActions((errors, actionsArray) => {
           if (errors === null){
             this.actionList = actionsArray;
+            this.actionList.forEach(items => {
+              this.editForm.addControl('action' + items.id, new FormControl(false));
+            });
           } else {
             console.log(errors);
           }
         });
         this.permissionService.getPermissionById(this.permissionId, (errors, permission) => {
           if (!errors) {
-            console.log(permission);
             this.permission = permission;
             this.editForm.controls['name'].setValue(permission.name);
           } else {
-            console.log(errors);
+            console.log(errors.join(' '));
           }
         });
 
-        //this.actionList.forEach(items => {
-          //this.editForm.addControl('action' + items.id, new FormControl(this.permission.actions.indexOf(items.id) > 0))
-        //});
       } else {
         console.log('Wrong param!');
       }
     });
   }
 
-  userHasAction(action: Action) {
-    return false;
-    //return (this.permission.actions.indexOf(action) > 0);
+  onClick() {
+    console.log(this.editForm.value);
   }
 
   onSubmit() {
