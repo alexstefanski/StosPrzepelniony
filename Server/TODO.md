@@ -46,9 +46,9 @@ Autor: _Maciej M._
 
 |     | Nazwa API            | Adres API                          |
 | --- | -------------------- | ---------------------------------- |
-| :ok: | Lista wiadomości     | /messages/list                     |
-| :ok: | Pokaż wiadomość      | /messages/:adId/:userIdSender      |
-| :ok: | Wysyłanie wiadomości | /messages/:adId/:userIdSender/send |
+|     | Lista wiadomości     | /messages/list                     |
+|     | Pokaż wiadomość      | /messages/:adId/:userIdSender      |
+|     | Wysyłanie wiadomości | /messages/:adId/:userIdSender/send |
 
 **Admin/Admin**
 
@@ -69,10 +69,10 @@ Autor: _Maciej M._
 
 |     | Nazwa API        | Adres API                      |
 | --- | ---------------- | ------------------------------ |
-| :ok: | Lista kategorii  | /categories/list               |
-| :ok: | Dodaj kategorię  | /categories/add                |
-| :ok: | Edytuj kategorię | /categories/:categoryId/edit   |
-| :ok: | Usuń kategorię   | /categories/:categoryId/delete |
+|     | Lista kategorii  | /categories/list               |
+|     | Dodaj kategorię  | /categories/add                |
+|     | Edytuj kategorię | /categories/:categoryId/edit   |
+|     | Usuń kategorię   | /categories/:categoryId/delete |
 
 **Admin/User**
 
@@ -98,22 +98,22 @@ Autor: _Bartosz_
 
 Autor: _Paweł W._
 
-|     | Nazwa API           | Adres API                         |
-| --- | ------------------- | --------------------------------- |
-|     | Lista typów dostępu | /permissions/list                 |
-|     | Pokaż typ dostępu   | /permissions/:permissionId/info   |
-|     | Dodaj typ dostępu   | /permissions/add                  |
-|     | Edytuj typ dostępu  | /permissions/:permissionId/edit   |
-|     | Usuń typ dostępu    | /permissions/:permissionId/delete |
+|      | Nazwa API           | Adres API                         |
+| ---  | ------------------- | --------------------------------- |
+| :ok: | Lista typów dostępu | /permissions/list                 |
+| :ok: | Pokaż typ dostępu   | /permissions/:permissionId/info   |
+| :ok: | Dodaj typ dostępu   | /permissions/add                  |
+| :ok: | Edytuj typ dostępu  | /permissions/:permissionId/edit   |
+| :ok: | Usuń typ dostępu    | /permissions/:permissionId/delete |
 
 **Admin/Action**
 
 Autor: _Paweł W._
 
-|     | Nazwa API   | Adres API               |
-| --- | ----------- | ----------------------- |
-|     | Lista akcji | /actions/list           |
-|     | Pokaż akcję | /actions/:actionId/info |
+|      | Nazwa API   | Adres API               |
+| ---  | ----------- | ----------------------- |
+| :ok: | Lista akcji | /actions/list           |
+| :ok: | Pokaż akcję | /actions/:actionId/info |
 
 Gotowe API oznacza, że:
 
