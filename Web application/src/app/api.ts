@@ -24,6 +24,8 @@ export const isUserAdmin = function (userId) {return server + '/admin/admins/' +
 
 export const adminsList = server + '/admin/admins/list';
 export const adminDelete = function(adminId) {return server + '/admin/admins/' + adminId + '/delete'; };
+export const adminUser = server + '/admin/users/list';
+export const adminUserDelete = function(userId) {return server + '/admin/users/' + userId + '/delete'; };
 export const adminCategoryAdd = server + '/admin/categories/create';
 export const adminCategoryDelete = function(categoryId) {return server + '/admin/categories/' + categoryId + '/delete'; };
 export const adminCategoryEdit = function(categoryId) {return server + '/admin/categories/ ' + categoryId + '/edit'; };
