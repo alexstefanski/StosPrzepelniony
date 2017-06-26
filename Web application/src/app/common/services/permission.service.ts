@@ -71,12 +71,12 @@ export class PermissionService {
 
     this.http.get(adminPermissionShow(permissionId), {headers: headers}).toPromise()
       .then(response => {
-        let ad = {
-          permissionId: response.json().id,
-          name: response.json().name,
-          actions: response.json().actions
-        };
-        callback(null, ad);
+        let permission = new Permission();
+        permission.id = response.json().id;
+        permission.name = response.json().name;
+        permission.actions = response.json().actions;
+
+        callback(null, permission);
       }).catch(errors => {
         callback(errors, null);
     });
