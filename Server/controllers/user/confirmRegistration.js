@@ -4,6 +4,9 @@ var UserToken = require('./../../models/index.js').UserToken
 var validate = require('validate.js')
 var moment = require('moment')
 
+var registerTokenDuration = require('./../../config/userTokens.js').registerTokenDuration
+var registerTokenLength = require('./../../config/userTokens.js').registerTokenLength
+
 // Własny walidator sprawdzający czy użytkownik istnieje.
 validate.validators.userExistsValidator = function(value) {
   return new validate.Promise(function(resolve, reject) {
@@ -85,10 +88,9 @@ validate.validators.tokenLiveValidator = function(value) {
     })
     .then(result => {
 
-      var tokenExpiresIn = 7
       var createdMoment = moment(result.createdAt, "YYYY-MM-DD HH:mm:ss:SSS ZZ")
 
-      if(createdMoment.add(tokenExpiresIn, 'days') > moment()) {
+      if(createdMoment.add(registerTokenDuration, 'days') > moment()) {
         resolve()
       } else {
         resolve('Token jest już nie ważny.')
@@ -130,6 +132,11 @@ module.exports.basicValidation = function(request, response, next) {
     token: {
       presence: {
         message: 'Token jest wymagany.'
+      },
+
+      length: {
+        is: registerTokenLength,
+        messages: 'Token musi zawierać ' + registerTokenLength + ' znaków.'
       }
     }
   }
@@ -254,7 +261,6 @@ module.exports.main = function(request, response) {
             })
               .then(result => {
 
-                // Odpowiedź
                 var responseObject = {
                   message: ['Użytkownik aktywowany.', 'Możesz sie teraz zalogować.']
                 }

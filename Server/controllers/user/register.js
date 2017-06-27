@@ -3,6 +3,10 @@ var UserToken = require('./../../models/index.js').UserToken
 
 var validate = require('validate.js')
 
+var registerTokenLength = require('./../../config/userTokens.js').registerTokenLength
+
+var confirmRegisterWebAppUrl = require('./../../config/webAppUrls.js').confirmRegisterWebAppUrl
+
 // Własny walidator sprawdzający czy adres e-mail jest unikalny.
 validate.validators.uniqueEmail = function(value) {
   return new validate.Promise(function(resolve, reject) {
@@ -118,10 +122,10 @@ module.exports.main = function(request, response) {
   .then(user => {
 
     // Generating random token
-    var token = "";
-    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var token = '';
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-    for( var i = 0; i < 16; i++ ) {
+    for( var i = 0; i < registerTokenLength; i++ ) {
       token += chars.charAt(Math.floor(Math.random() * chars.length));
     }
 
@@ -132,12 +136,15 @@ module.exports.main = function(request, response) {
     })
     .then(userToken => {
 
-      var confirmEmailLink = "/users/" + userToken.userId + "/register/confirm/" + userToken.id + "/" + userToken.token
+      var confirmRegisterLink = confirmRegisterWebAppUrl(userToken.userId, userToken.id, userToken.token)
 
-      // TODO: Sending email with confirm link.
-      console.log('Confirm link for user ' + user.email + ': ', 'http:\/\/localhost:3000' + confirmEmailLink)
+      // TODO: Wysyłanie wiadomosci e-mail z linkiem aktywującym konto.
 
-      response.status(201).json({ messages: ['Użytkownik zarejestrowany pomyślnie. Potwierdź konto linkiem aktywacyjnym przesłanym na podany adres e-mail', 'http:\/\/localhost:3000' + confirmEmailLink]  })
+      var responseObject = {
+        messages: ['Użytkownik zarejestrowany pomyślnie.', 'Potwierdź konto linkiem aktywacyjnym przesłanym na podany adres e-mail.', confirmRegisterLink]
+      }
+
+      response.status(201).json(responseObject)
 
     })
     .catch(errors => {
