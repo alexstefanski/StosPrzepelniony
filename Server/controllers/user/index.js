@@ -7,6 +7,8 @@ var confirmRegistration = require('./confirmRegistration.js')
 var info = require('./info.js')
 var logout = require('./logout.js')
 var resendConfirmRegistrationEmail = require('./resendConfirmRegistrationEmail.js')
+var resetPassword = require('./resetPassword.js')
+var confirmResetPassword = require('./confirmResetPassword.js')
 
 module.exports.register = register
 module.exports.login = login
@@ -17,3 +19,5 @@ module.exports.confirmRegistration = confirmRegistration
 module.exports.info = info
 module.exports.logout = logout
 module.exports.resendConfirmRegistrationEmail = resendConfirmRegistrationEmail
+module.exports.resetPassword = resetPassword
+module.exports.confirmResetPassword = confirmResetPassword

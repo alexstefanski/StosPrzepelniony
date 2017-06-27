@@ -78,6 +78,16 @@ module.exports = function(app) {
   app.use('/users/changepassword', usersPublic.changePassword.validOldPassword)
   app.post('/users/changepassword', usersPublic.changePassword.main)
 
+  app.use('/users/resetpassword', usersPublic.resetPassword.basicValidation)
+  app.use('/users/resetpassword', usersPublic.resetPassword.userAvalibleValidator)
+  app.post('/users/resetpassword', usersPublic.resetPassword.main)
+
+  app.use('/users/:userId/resetpassword/:tokenId/:token', usersPublic.confirmResetPassword.basicValidation)
+  app.use('/users/:userId/resetPassword/:tokenId/:token', usersPublic.confirmResetPassword.userAvalibleValidator)
+  app.use('/users/:userId/resetPassword/:tokenId/:token', usersPublic.confirmResetPassword.correctTokenValidator)
+  app.use('/users/:userId/resetPassword/:tokenId/:token', usersPublic.confirmResetPassword.aliveTokenValidator)
+  app.post('/users/:userId/resetpassword/:tokenId/:token', usersPublic.confirmResetPassword.main)
+
   app.use('/categories/list', authenticatedUser.main)
   app.get('/categories/list', categoryRead.main)
 
@@ -161,10 +171,10 @@ module.exports = function(app) {
   app.use('/admin/permissions/:permissionId/delete', permissions.delete.hasNoAdministratorsValidation)
   app.delete('/admin/permissions/:permissionId/delete', permissions.delete.main)
 
-  app.use('/admin/permissions/:permissionId/edit', authenticatedUser.main)
-  app.use('/admin/permissions/:permissionId/edit', isAdministrator.main)
-  app.use('/admin/permissions/:permissionId/edit', permissions.edit.basicValidation)
-  app.use('/admin/permissions/:permissionId/edit', permissions.edit.permissionExistsValidation)
+  // app.use('/admin/permissions/:permissionId/edit', authenticatedUser.main)
+  // app.use('/admin/permissions/:permissionId/edit', isAdministrator.main)
+  // app.use('/admin/permissions/:permissionId/edit', permissions.edit.basicValidation)
+  // app.use('/admin/permissions/:permissionId/edit', permissions.edit.permissionExistsValidation)
   app.post('/admin/permissions/:permissionId/edit', permissions.edit.main)
 
   // Routes for admin/actions
