@@ -1,0 +1,29 @@
+<div class="container" *ngIf="!handlingConfirmRegister">
+  <div class="logo_container">
+    <img src="../../assets/logo.png" class="logo-img" alt="logo">
+  </div>
+  <div class="main_container">
+    <div class="forms_container">
+      <div class="tabs_container">
+        <ul class='ul'>
+          <li><a routerLink="/login">ZALOGUJ SIĘ</a></li>
+          <li><a routerLink="/register" >ZAREJESTRUJ SIĘ</a></li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="general-info" *ngIf="success.messages">
+          <p>{{ success.messages.join(' ') }}</p>
+        </div>
+
+        <div class="general-info" *ngIf="error.messages">
+          <p>{{ error.messages.join(' ') }}</p>
+
+          <p *ngIf="error.userId">{{ error.userId.join(' ') }}</p>
+          <p *ngIf="error.tokenId">{{ error.tokenId.join(' ') }}</p>
+          <p *ngIf="error.token">{{ error.token.join(' ') }}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

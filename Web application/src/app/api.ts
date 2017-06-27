@@ -10,6 +10,13 @@ export const logOutUser = server + '/users/logout';
 export const userInfo = function(userId) {return server + '/users/' + userId + '/info'; };
 export const changePassword = server + '/users/changepassword';
 export const resendEmail = server + '/users/resendverificationemail';
+export const confirmRegister = function(userId, tokenId, token) {
+  return server + '/users/' + userId + '/register/confirm/' + tokenId + '/' + token
+}
+export const resetPassword = server + '/users/resetpassword'
+export const setNewPassword = function(userId, tokenId, token) {
+  return server + '/users/' + userId + '/resetpassword/' + tokenId + '/' + token
+}
 
 export const addAds = server + '/ads/add';
 export const listAds = server + '/ads/list';
@@ -36,4 +43,3 @@ export const adminPermissionAdd = server + '/admin/permissions/add';
 export const adminPermissionDelete = function(permId) {return server + '/admin/permissions/' + permId + '/delete'};
 export const adminPermissionEdit = function(permId) {return server + '/admin/permissions/' + permId + '/edit'; };
 export const adminAdsList = server + '/admin/ads/list';
-

@@ -50,13 +50,19 @@ import { ActionService } from './common/services/action.service';
 import { AdminAdComponent } from './admin/ad/admin-ad.component';
 import { AdminAdService } from './common/services/admin.ad.service';
 import {AdminUserService} from "app/common/services/admin.user.service";
+import { UserConfirmRegisterComponent } from './user/confirm-register/user-confirm-register.component';
+import { UserResetPasswordComponent } from './user/reset-password/user-reset-password.component';
+import { UserSetNewPasswordComponent } from './user/set-new-password/user-set-new-password.component';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'login', component: UserLoginComponent, canActivate: [PreventLoggedInAccess]},
   {path: 'logout', component: UserLogoutComponent, canActivate: [AuthenticatedGuard]},
   {path: 'register', component: UserRegisterComponent},
-  {path: 'resend-email', component: UserResendEmailComponent },
+  {path: 'resend-email', component: UserResendEmailComponent},
+  {path: 'forgot-password', component: UserResetPasswordComponent },
+  {path: 'confirm-register/:userId/:tokenId/:token', component: UserConfirmRegisterComponent},
+  {path: 'set-new-password/:userId/:tokenId/:token', component: UserSetNewPasswordComponent },
   {path: 'user', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: HomeComponent},
     {path: 'me', component: UserInfoComponent},
@@ -117,7 +123,10 @@ const routes = [
     AdminPermissionEditComponent,
     AdminPermissionComponent,
     AdminActionComponent,
-    AdminAdComponent
+    AdminAdComponent,
+    UserConfirmRegisterComponent,
+    UserResetPasswordComponent,
+    UserSetNewPasswordComponent
   ],
   imports: [
     BrowserModule,
