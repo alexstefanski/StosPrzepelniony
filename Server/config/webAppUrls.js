@@ -1,4 +1,4 @@
-var webApplicationUrl = 'http://localhost:3000'
+var webApplicationUrl = 'http://localhost:4200'
 
 var confirmRegisterWebAppUrl = function(userId, tokenId, token) {
   return webApplicationUrl + '/confirm-register/' + userId + '/' + tokenId + '/' + token

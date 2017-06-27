@@ -136,7 +136,7 @@ module.exports.basicValidation = function(request, response, next) {
 
       length: {
         is: registerTokenLength,
-        messages: 'Token musi zawierać ' + registerTokenLength + ' znaków.'
+        message: 'Token musi zawierać ' + registerTokenLength + ' znaków.'
       }
     }
   }
@@ -262,7 +262,7 @@ module.exports.main = function(request, response) {
               .then(result => {
 
                 var responseObject = {
-                  message: ['Użytkownik aktywowany.', 'Możesz sie teraz zalogować.']
+                  messages: ['Użytkownik aktywowany.', 'Możesz sie teraz zalogować.']
                 }
 
                 response.status(201).json(responseObject)
