@@ -171,10 +171,10 @@ module.exports = function(app) {
   app.use('/admin/permissions/:permissionId/delete', permissions.delete.hasNoAdministratorsValidation)
   app.delete('/admin/permissions/:permissionId/delete', permissions.delete.main)
 
-  // app.use('/admin/permissions/:permissionId/edit', authenticatedUser.main)
-  // app.use('/admin/permissions/:permissionId/edit', isAdministrator.main)
-  // app.use('/admin/permissions/:permissionId/edit', permissions.edit.basicValidation)
-  // app.use('/admin/permissions/:permissionId/edit', permissions.edit.permissionExistsValidation)
+  app.use('/admin/permissions/:permissionId/edit', authenticatedUser.main)
+  app.use('/admin/permissions/:permissionId/edit', isAdministrator.main)
+  app.use('/admin/permissions/:permissionId/edit', permissions.edit.basicValidation)
+  app.use('/admin/permissions/:permissionId/edit', permissions.edit.permissionExistsValidation)
   app.post('/admin/permissions/:permissionId/edit', permissions.edit.main)
 
   // Routes for admin/actions
