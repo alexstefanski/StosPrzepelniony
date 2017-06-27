@@ -15,7 +15,7 @@ Autor: _Jakub_
 | :ok: | Logowanie                              | /users/login/                                   |
 | :ok: | Czy zalogowany                         | /users/isloggedin/                              |
 | :ok: | Wyloguj                                | /users/logout/                                  |
-|      | Odzyskiwanie Hasła                     | /users/resetpassword/                           |
+| :ok: | Odzyskiwanie Hasła                     | /users/resetpassword/                           |
 | :ok: | Informacje o koncie                    | /users/:userId/info                             |
 | :ok: | Zmiana hasła                           | /users/:userId/changepassword                   |
 

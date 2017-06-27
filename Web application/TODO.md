@@ -11,9 +11,9 @@ Autor: _Jakub_
 | :ok: | user/login              | /login              |
 | :ok: | user/register           | /register           |
 | :ok: | user/resend-email       | /resend-email       |
-|      | user/logout             | /logout             |
-|      | user/forgotten-password | /forgotten-password |
-|      | user/me                 | /me                 |
+| :ok: | user/logout             | /logout             |
+| :ok: | user/forgotten-password | /forgotten-password |
+| :ok: | user/me                 | /me                 |
 | :ok: | user/change-password    | /change-password    |
 
 **Ad**
