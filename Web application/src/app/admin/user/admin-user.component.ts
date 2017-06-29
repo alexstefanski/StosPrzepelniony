@@ -32,16 +32,18 @@ export class AdminUserComponent implements OnInit {
   deleteUser(user) {
     this.adminUserService.postDeleteUser(user.userId, (errors, response) => {
       if (errors) {
-        this.message = errors.message.join(' ');
+        if (errors.status === 403) {
+          alert(errors.json().message + '\n' + errors.json().userId);
+        }
       }
     });
   }
 
   sortUsersById(a, b) {
-    if (a.categoryId < b.categoryId) {
+    if (a.userId < b.userId) {
       return -1;
     }
-    if (a.categoryId > b.categoryId) {
+    if (a.userId > b.userId) {
       return 1;
     }
 

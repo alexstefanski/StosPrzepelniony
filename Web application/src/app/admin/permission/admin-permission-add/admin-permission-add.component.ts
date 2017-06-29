@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Http } from "@angular/http";
 import { PermissionService } from "../../../common/services/permission.service";
 import { Router } from "@angular/router";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-admin-permission-add',
@@ -34,8 +35,15 @@ export class AdminPermissionAddComponent implements OnInit {
       if (!error) {
         if (response.status === 201) {
           this.router.navigate(['admin/permission']);
-        } else {
-          this.message = error.join(' ');
+        }
+      } else {
+        let errorMsg = '';
+
+        if (error.status === 406) {
+          errorMsg += isNullOrUndefined(error.json().message) === false ? error.json().message + '\n' : '';
+          errorMsg += isNullOrUndefined(error.json().name) === false ? error.json().name : '';
+
+          alert(errorMsg);
         }
       }
     });

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PermissionService } from "../../../common/services/permission.service";
 import { Permission } from "../../../common/models/permission";
 import { Router } from "@angular/router";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-admin-permission-index',
@@ -37,7 +38,11 @@ export class AdminPermissionIndexComponent implements OnInit {
           this.router.navigate(['/admin/permission'])
         }
       } else {
-        console.log(errors);
+        if (!isNullOrUndefined(errors.json().messages)) {
+          let errorMsg = errors.json().messages + '\n';
+          errorMsg += isNullOrUndefined(errors.json().permissionId) === false ? errors.json().permissionId : '';
+          alert(errorMsg);
+        }
       }
     });
 

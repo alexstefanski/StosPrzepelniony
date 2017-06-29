@@ -4,6 +4,7 @@ import { PermissionService } from "../../../common/services/permission.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Action } from "../../../common/models/action";
 import { ActionService } from "app/common/services/action.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-admin-permission-edit',
@@ -56,11 +57,11 @@ export class AdminPermissionEditComponent implements OnInit {
   }
 
   onSubmit() {
-    let actions: any[] = [];
+    let actions: number[] = [];
 
     this.actionList.forEach(act => {
       if (act.checked) {
-        actions.push({ actionId: act.id });
+        actions.push(act.id);
       }
     });
 
@@ -71,7 +72,10 @@ export class AdminPermissionEditComponent implements OnInit {
 
     this.permissionService.postEditPermission(this.permission.id, payload, (errors, result) => {
       if (errors === null) {
-        if (result.status === 204) {
+        if (result.status === 201) {
+          if (!isNullOrUndefined(result.json().messages)) {
+            alert(result.json().messages);
+          }
           this.router.navigate(['admin/permission']);
         }
       } else {

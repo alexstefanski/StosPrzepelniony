@@ -30,9 +30,7 @@
         {{ permission.id }}
       </td>
       <td class="user-id">
-        <a href="userslist.html">
-          {{ permission.name }}
-        </a>
+        {{ permission.name }}
       </td>
       <td class="edit">
         <div class="btn" [routerLink]="[permission.id, 'edit']">
