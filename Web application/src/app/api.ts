@@ -30,6 +30,7 @@ export const categoriesList = server + '/categories/list';
 export const isUserAdmin = function (userId) {return server + '/admin/admins/' + userId + '/isadmin'; };
 
 export const adminsList = server + '/admin/admins/list';
+export const adminEdit = function (adminId) {return server + '/admin/admins/' + adminId + '/edit'};
 export const adminDelete = function(adminId) {return server + '/admin/admins/' + adminId + '/delete'; };
 export const adminUser = server + '/admin/users/list';
 export const adminUserDelete = function(userId) {return server + '/admin/users/' + userId + '/delete'; };

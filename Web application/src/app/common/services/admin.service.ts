@@ -1,6 +1,6 @@
 import { Injectable , } from '@angular/core';
 import { Http } from '@angular/http';
-import {adminDelete, adminPermissionEdit, adminsList} from '../../api';
+import { adminDelete , adminsList, adminEdit } from '../../api';
 import { UserService } from './user.service';
 import { Admin } from '../models/admin';
 import { Permission } from '../models/permission';
@@ -52,7 +52,7 @@ export class AdminService {
             permissionId: admin.permission.id
         };
 
-        this.http.post(adminPermissionEdit(admin.id), payload, {headers: headers})
+        this.http.post(adminEdit(admin.id), payload, {headers: headers})
             .toPromise()
             .then((response) => {
                 this.adminAvailableSource.next();

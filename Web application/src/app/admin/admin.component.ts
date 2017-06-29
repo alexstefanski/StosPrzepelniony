@@ -56,11 +56,15 @@ export class AdminComponent implements OnInit {
 
     admin.permission.id = this.newAdminPermissionId;
     this.adminService.postEditAdminPermission(admin, (errors, response) => {
-      if (response.status === 201) {
-        // pomyslnie edytowano
-        this.handlingEditing = false;
+      if (errors === null) {
+        if (response.status === 201) {
+          // pomyslnie edytowano
+          this.handlingEditing = false;
+        }
+        this.newAdminPermissionId = null;
+      } else {
+        console.log(errors.json());
       }
-      this.newAdminPermissionId = null;
     });
 
   }
