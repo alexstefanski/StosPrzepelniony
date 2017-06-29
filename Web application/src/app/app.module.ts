@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
@@ -135,6 +137,8 @@ const routes = [
     HttpModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
   providers: [

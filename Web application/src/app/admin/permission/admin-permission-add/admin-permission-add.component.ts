@@ -4,6 +4,7 @@ import { Http } from "@angular/http";
 import { PermissionService } from "../../../common/services/permission.service";
 import { Router } from "@angular/router";
 import {isNullOrUndefined} from "util";
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'app-admin-permission-add',
@@ -14,7 +15,7 @@ export class AdminPermissionAddComponent implements OnInit {
   private addForm: FormGroup;
   private message: string = null;
   constructor(private formBuilder: FormBuilder,
-              private http: Http,
+              private notificationsService: NotificationsService,
               private permissionService: PermissionService,
               private router: Router) {
 
@@ -34,16 +35,18 @@ export class AdminPermissionAddComponent implements OnInit {
     this.permissionService.addPermission(permission, (error, response) => {
       if (!error) {
         if (response.status === 201) {
+          this.notificationsService.success('Pomyślnie dodano nowy dostęp');
           this.router.navigate(['admin/permission']);
         }
       } else {
+        let errorTitle = '';
         let errorMsg = '';
 
         if (error.status === 406) {
-          errorMsg += isNullOrUndefined(error.json().message) === false ? error.json().message + '\n' : '';
+          errorTitle += isNullOrUndefined(error.json().message) === false ? error.json().message + '\n' : 'Niepowodzenie';
           errorMsg += isNullOrUndefined(error.json().name) === false ? error.json().name : '';
 
-          alert(errorMsg);
+          this.notificationsService.alert(errorTitle, errorMsg);
         }
       }
     });

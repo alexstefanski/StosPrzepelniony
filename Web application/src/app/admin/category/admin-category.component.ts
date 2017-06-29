@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../../common/models/category';
 import { CategoryService } from '../../common/services/category.service';
 import { Router } from '@angular/router';
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'app-admin-category',
@@ -13,7 +14,9 @@ export class AdminCategoryComponent implements OnInit {
   handlingEditing: boolean = false;
   message: string;
 
-  constructor(private categoryService: CategoryService, private router: Router) { }
+  constructor(private categoryService: CategoryService,
+              private router: Router,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() {
     this.prepareCategoriesList();
@@ -32,8 +35,10 @@ export class AdminCategoryComponent implements OnInit {
 
   deleteCategory(category) {
     this.categoryService.postDeleteCategory(category.categoryId, (errors, response) => {
-      if (errors) {
-        this.message = errors.message.join(' ');
+      if (errors === null) {
+        this.notificationsService.success('Pomyślnie usunięto');
+      } else {
+        this.notificationsService.error('Nie można usunąć', errors.json().messages);
       }
     });
   }
@@ -47,11 +52,12 @@ export class AdminCategoryComponent implements OnInit {
     this.categoryService.postEditCategory(category, (errors, response) => {
       if (!errors) {
         if (response.status === 204) {
+          this.notificationsService.success('Pomyślnie zaktualizowano');
           category.edited = false;
           this.handlingEditing = false;
         }
       } else {
-        this.message = errors.message;
+        this.notificationsService.error('Nie udało się zaktualizować');
       }
     });
 

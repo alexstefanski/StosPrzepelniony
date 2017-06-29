@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Headers, Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Category } from '../../../common/models/category';
 import { CategoryService } from '../../../common/services/category.service';
 
 import 'rxjs/add/operator/toPromise';
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'app-admin-category-add',
@@ -14,7 +14,9 @@ import 'rxjs/add/operator/toPromise';
 export class AdminCategoryAddComponent implements OnInit {
   category: Category = new Category();
   message: string = null;
-  constructor(private categoryService: CategoryService, private router: Router) {
+  constructor(private categoryService: CategoryService,
+              private router: Router,
+              private notificationsService: NotificationsService) {
     this.category.categoryIdParent = 0; // ustalone, że każda kategoria jest główna
   }
 
@@ -26,10 +28,11 @@ export class AdminCategoryAddComponent implements OnInit {
     this.categoryService.postAddCategory(this.category, (errors, response) => {
       if (!errors) {
         if (response.status === 204) {
-         this.router.navigate(['admin/category']);
+          this.notificationsService.success('Pomyślnie dodano kategorię');
+          this.router.navigate(['admin/category']);
         }
       } else {
-        this.message = errors.messages.join(' ');
+        this.notificationsService.error('Niepowodzenie');
       }
     })
   }

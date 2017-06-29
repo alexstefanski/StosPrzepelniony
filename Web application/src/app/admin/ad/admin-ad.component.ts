@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ad } from '../../common/models/ad';
 import { AdminAdService } from '../../common/services/admin.ad.service';
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'app-ad',
@@ -11,7 +12,7 @@ export class AdminAdComponent implements OnInit {
   adsList: Array<Ad> = new Array<Ad>();
   handlingEditing: boolean = false;
   newAdStatusNum: number;
-  constructor(private adminAdService: AdminAdService) { }
+  constructor(private adminAdService: AdminAdService, private notificationsService: NotificationsService) { }
 
   ngOnInit() {
     this.prepareAdsList();
@@ -37,6 +38,9 @@ export class AdminAdComponent implements OnInit {
   }
 
   editAdStatus(ad: Ad) {
+    if (this.newAdStatusNum === ad.statusNum) {
+      this.notificationsService.alert('Zmień status na inny bądź kliknij anuluj');
+    }
     const payload = {
       status: this.newAdStatusNum
     };
@@ -47,6 +51,7 @@ export class AdminAdComponent implements OnInit {
           ad.status = '';
           this.handlingEditing = false;
           ad.edited = false;
+          this.notificationsService.success('Pomyślnie zaktualizowano');
         }
       }
     });
@@ -59,9 +64,10 @@ export class AdminAdComponent implements OnInit {
 
   deleteAd(ad: Ad) {
     this.adminAdService.deleteAdById(ad.id, (errors, result) => {
-      debugger
-      if (errors != null) {
-
+      if (errors === null) {
+        this.notificationsService.success('Pomyślnie usunięto');
+      } else {
+        this.notificationsService.error('Nie można usunąć');
       }
     });
   }

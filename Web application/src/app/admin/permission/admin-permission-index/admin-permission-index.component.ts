@@ -3,6 +3,7 @@ import { PermissionService } from "../../../common/services/permission.service";
 import { Permission } from "../../../common/models/permission";
 import { Router } from "@angular/router";
 import {isNullOrUndefined} from "util";
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'app-admin-permission-index',
@@ -12,7 +13,9 @@ import {isNullOrUndefined} from "util";
 export class AdminPermissionIndexComponent implements OnInit {
   permissionArray = new Array<Permission>();
 
-  constructor(private permissionService: PermissionService, private router: Router) { }
+  constructor(private permissionService: PermissionService,
+              private router: Router,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() {
     this.preparePermissionList();
@@ -35,13 +38,14 @@ export class AdminPermissionIndexComponent implements OnInit {
     this.permissionService.deletePermission(permissionId, (errors, response) => {
       if (!errors) {
         if (response.status === 201) {
+          this.notificationsService.success('Pomyślnie usunięto');
           this.router.navigate(['/admin/permission'])
         }
       } else {
         if (!isNullOrUndefined(errors.json().messages)) {
-          let errorMsg = errors.json().messages + '\n';
-          errorMsg += isNullOrUndefined(errors.json().permissionId) === false ? errors.json().permissionId : '';
-          alert(errorMsg);
+          let errorTitle = errors.json().messages ;
+          let errorMsg = isNullOrUndefined(errors.json().permissionId) === false ? errors.json().permissionId : '';
+          this.notificationsService.error(errorTitle, errorMsg);
         }
       }
     });

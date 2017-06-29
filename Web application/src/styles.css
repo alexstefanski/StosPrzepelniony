@@ -5,3 +5,11 @@ html, body{
     height: 100%;
     background-color: #fff;
 }
+
+.simple-notification.alert {
+    background: #FFB128 !important;
+}
+
+.simple-notification.alert .sn-progress-loader span {
+    background: #FF9128 !important;
+}

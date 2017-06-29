@@ -3,6 +3,7 @@ import { Admin } from '../common/models/admin';
 import { AdminService } from '../common/services/admin.service';
 import { PermissionService } from '../common/services/permission.service';
 import { Permission } from '../common/models/permission';
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'app-admin',
@@ -15,7 +16,9 @@ export class AdminComponent implements OnInit {
   messages: string = null;
   newAdminPermissionId: number;
   handlingEditing: boolean = false;
-  constructor(private adminService: AdminService, private permissionService: PermissionService) { }
+  constructor(private adminService: AdminService,
+              private permissionService: PermissionService,
+              private notificationsService: NotificationsService) { }
 
   ngOnInit() {
     this.prepareAdminsList();
@@ -58,7 +61,7 @@ export class AdminComponent implements OnInit {
     this.adminService.postEditAdminPermission(admin, (errors, response) => {
       if (errors === null) {
         if (response.status === 201) {
-          // pomyslnie edytowano
+          this.notificationsService.success('Pomyślnie edytowano', ' ');
           this.handlingEditing = false;
         }
         this.newAdminPermissionId = null;
@@ -78,7 +81,7 @@ export class AdminComponent implements OnInit {
     this.adminService.deleteAdmin(admin, (errors, response) => {
       if (errors) {
         if (errors.status === 403) {
-          alert(errors.json().message + '\n' + errors.json().adminId);
+          this.notificationsService.alert(errors.json().message, errors.json().adminId);
         }
       }
     })

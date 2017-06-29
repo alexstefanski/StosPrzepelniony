@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,15 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  constructor( private router: Router) { }
+  options = {
+    position: ['bottom', 'right'],
+    timeOut: 3500,
+    lastOnBottom: true,
+    clickToClose: true,
+    animate: 'fromRight',
+    maxStack: 4
+  };
+  constructor() { }
 
   ngOnInit() {
 

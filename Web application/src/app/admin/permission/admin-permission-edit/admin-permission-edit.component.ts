@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Action } from "../../../common/models/action";
 import { ActionService } from "app/common/services/action.service";
 import {isNullOrUndefined} from "util";
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'app-admin-permission-edit',
@@ -18,7 +19,8 @@ export class AdminPermissionEditComponent implements OnInit {
   constructor(private permissionService: PermissionService,
               private ar: ActivatedRoute,
               private actionService: ActionService,
-              private router: Router) {
+              private router: Router,
+              private notificationsService: NotificationsService) {
     ar.params.subscribe(params => {
       if (!isNaN(+params['id'])) {
         this.permission.id = +params['id'];
@@ -74,7 +76,7 @@ export class AdminPermissionEditComponent implements OnInit {
       if (errors === null) {
         if (result.status === 201) {
           if (!isNullOrUndefined(result.json().messages)) {
-            alert(result.json().messages);
+            this.notificationsService.success(result.json().messages);
           }
           this.router.navigate(['admin/permission']);
         }

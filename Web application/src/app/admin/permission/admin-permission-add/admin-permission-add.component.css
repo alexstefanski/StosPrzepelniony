@@ -175,7 +175,7 @@ tfoot {
 tfoot tr:last-child {
   background: #f0f0f2;
 }
-div.btn {
+input[type="submit"] {
   text-decoration: none;
   padding: 4px 6px 4px 6px;
   background-color: #384C6B;
@@ -185,11 +185,13 @@ div.btn {
   color: #ffffff;
   text-align: center;
   cursor: pointer;
+  border: none;
+  font-size: 16px;
 }
 a.btn .fa {
   padding-right: 2px;
 }
-div.btn:hover {
+input[type="submit"]:hover {
   background-color: #2C3C55;
 }
 input {
@@ -226,4 +228,11 @@ input {
 }
 .add-btn {
   width: 200px;
+}
+.error-text {
+  color: red;
+  font-size: 14px;
+}
+.not-allowed {
+  cursor: not-allowed !important;
 }
