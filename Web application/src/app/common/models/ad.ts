@@ -11,4 +11,6 @@ export class Ad {
     costHour?: number;
     date: Date;
     status: string;
+    statusNum: number;
+    edited: boolean = false;
 }

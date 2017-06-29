@@ -67,23 +67,44 @@
 				<td class="date" *ngIf="!ad.date">
 					--
 				</td>
-				<td class="status">
+				<td class="status" *ngIf="!ad.edited">
 					{{ad.status}}
 				</td>
+				<td class="status" *ngIf="ad.edited">
+					<select [(ngModel)]="newAdStatusNum" name="ad-edit">
+						<option [value]="0">Aktywne</option>
+						<option [value]="1">Nieaktywne</option>
+						<option [value]="2">Zablokowane</option>
+					</select>
+				</td>
 				<td class="edit">
-					<div class="btn">
+					<div class="btn" *ngIf="!ad.edited" [ngClass]="{'not-allowed': handlingEditing}" (click)="handleEdit(ad)">
 						<i class="fa fa-pencil" aria-hidden="true">
 							<span class="edit-span">
 							  Edytuj
 							</span>
 						</i>
 					</div>
+					<div class="btn" *ngIf="ad.edited" (click)="editAdStatus(ad)">
+						<i class="fa fa-pencil" aria-hidden="true">
+							<span class="edit-span">
+							  Zatwierdź
+							</span>
+						</i>
+					</div>
 				</td>
 				<td class="delete btn-col">
-					<div class="btn">
+					<div class="btn" *ngIf="!ad.edited" [ngClass]="{'not-allowed': handlingEditing}" (click)="deleteAd(ad)">
 						<i class="fa fa-times" aria-hidden="true">
 							<span class="delete-span">
 							  Usuń
+							</span>
+						</i>
+					</div>
+					<div class="btn" *ngIf="ad.edited" (click)="handleCancel(ad)">
+						<i class="fa fa-times" aria-hidden="true">
+							<span class="delete-span">
+							  Anuluj
 							</span>
 						</i>
 					</div>

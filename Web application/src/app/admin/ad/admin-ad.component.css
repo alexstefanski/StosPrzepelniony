@@ -224,3 +224,6 @@ input {
 .edit, .delete {
 	width: 100px;
 }
+.not-allowed {
+	pointer-events: none;
+}

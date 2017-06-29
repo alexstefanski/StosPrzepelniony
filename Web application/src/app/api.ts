@@ -43,3 +43,5 @@ export const adminPermissionAdd = server + '/admin/permissions/add';
 export const adminPermissionDelete = function(permId) {return server + '/admin/permissions/' + permId + '/delete'};
 export const adminPermissionEdit = function(permId) {return server + '/admin/permissions/' + permId + '/edit'; };
 export const adminAdsList = server + '/admin/ads/list';
+export const adminAdsStatusEdit = function(adId) {return server + '/admin/ads/' + adId + '/status'; };
+export const adminAdsDeleteById = function(adId) {return server + '/admin/ads/' + adId + '/delete'; };

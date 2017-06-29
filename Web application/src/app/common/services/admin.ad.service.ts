@@ -1,6 +1,6 @@
 import { Injectable , } from '@angular/core';
 import { Http } from '@angular/http';
-import { adminAdsList } from '../../api';
+import {adminAdsDeleteById, adminAdsList, adminAdsStatusEdit} from '../../api';
 import { UserService } from './user.service';
 
 import { Subject } from 'rxjs/Subject';
@@ -35,6 +35,34 @@ export class AdminAdService {
             });
     }
 
+    postEditAdStatus(adId: number, payload, callback) {
+        const headers = this.userService.getAuthenticatedHeader();
+
+        this.http.post(adminAdsStatusEdit(adId), payload, {headers: headers})
+            .toPromise()
+            .then((response) => {
+                this.adAvailableSource.next();
+                callback(null, response);
+            })
+            .catch((errors) => {
+                callback(errors, null);
+            });
+    }
+
+    deleteAdById(adId, callback) {
+        const headers = this.userService.getAuthenticatedHeader();
+
+        this.http.delete(adminAdsDeleteById(adId), {headers: headers})
+            .toPromise()
+            .then((response) => {
+                this.adAvailableSource.next();
+                callback(null, response);
+            })
+            .catch((errors) => {
+                callback(errors, null);
+            });
+    }
+
     private assignAdValues(item): Ad {
         let ad = new Ad();
 
@@ -49,10 +77,13 @@ export class AdminAdService {
         ad.date = new Date(item.date);
 
         if (!isNullOrUndefined(item.status)) {
+            ad.statusNum = +item.status;
             if (+item.status === 0)
                 ad.status = 'aktywne';
             else if (+item.status === 1)
                 ad.status = 'nieaktywne';
+            else if (+item.status === 2)
+                ad.status = 'zablokowane';
         }
 
         return ad;
