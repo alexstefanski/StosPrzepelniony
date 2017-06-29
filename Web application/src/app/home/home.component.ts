@@ -11,6 +11,7 @@ import {CategoryService} from "../common/services/category.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  p: number = 1;
   adsList: Array<Ad>;
   categoriesList: Array<Category>;
   salaryViewSelected: boolean = false;

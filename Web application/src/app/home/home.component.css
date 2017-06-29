@@ -377,3 +377,11 @@ input[type=range]::-moz-range-thumb {
     }
 
 }
+
+.my-pagination /deep/ .ngx-pagination .current {
+    background: #00D2FF;
+}
+
+.my-pagination /deep/ .ngx-pagination {
+    text-align: center;
+}

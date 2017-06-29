@@ -66,7 +66,7 @@
   </div>
   <div class="list_container">
 
-    <div class="list-short" *ngFor="let ad of adsList">
+    <div class="list-short" *ngFor="let ad of adsList | paginate: { itemsPerPage: 10, currentPage: p }">
       <div class="header">
         <a routerLink="../ad/{{ad.id}}/show">
           {{ad.subject}}
@@ -85,5 +85,12 @@
       </div>
     </div>
 
+    <pagination-controls
+            class="my-pagination"
+            (pageChange)="p = $event"
+            autoHide="true"
+            previousLabel="Poprzednia"
+            nextLabel="Następna"
+    ></pagination-controls>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
@@ -133,6 +134,7 @@ const routes = [
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
