@@ -197,6 +197,10 @@ module.exports = function(app) {
   app.use('/admin/ads/list', isAdministrator.main)
   app.get('/admin/ads/list', ad.list.main)
 
+  app.use('/admin/ads/:adId/delete', authenticatedUser.main)
+  app.use('/admin/ads/:adId/delete', isAdministrator.main)
+  app.delete('/admin/ads/:adId/delete', ad.delete.main)
+  
   //Routes for user/ads
   app.use('/ads/add',authenticatedUser.main)
   app.use('/ads/add',adCreate.validate)
