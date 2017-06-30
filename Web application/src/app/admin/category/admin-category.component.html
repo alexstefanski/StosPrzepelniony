@@ -1,11 +1,20 @@
 <div class="container">
       <h2>Lista kategorii</h2>
-      <div class="add_btn" routerLink="create">
+      <div class="add_btn" routerLink="create" *ngIf="!handlingEditing" (click)="handlingEditing = true">
         <a>
           <i class="fa fa-plus" aria-hidden="true">
             <span class="delete-span">
               Dodaj kategorie
             </span>
+          </i>
+        </a>
+      </div>
+      <div class="add_btn" routerLink="../category" *ngIf="handlingEditing" (click)="handlingEditing = false">
+        <a>
+          <i class="fa fa-plus" aria-hidden="true">
+                <span class="delete-span">
+                  Dodaj kategorie
+                </span>
           </i>
         </a>
       </div>

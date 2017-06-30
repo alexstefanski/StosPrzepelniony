@@ -14,6 +14,7 @@ export class AdminCategoryComponent implements OnInit {
   p: number = 1;
   categories: Array<Category>;
   handlingEditing: boolean = false;
+  handlingAdding: boolean = false;
   message: string;
   private editedCategory: Category;
   constructor(private categoryService: CategoryService,
@@ -62,10 +63,10 @@ export class AdminCategoryComponent implements OnInit {
   editCategory(category) {
     category.name = category.name.trim();
     category.description = category.description.trim();
-    debugger
+
     this.categoryService.postEditCategory(category, (errors, response) => {
       if (!errors) {
-        if (response.status === 204) {
+        if (response.status === 200) {
           this.notificationsService.success('Pomyślnie zaktualizowano');
           category.edited = false;
           this.handlingEditing = false;
