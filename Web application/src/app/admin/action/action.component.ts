@@ -8,6 +8,7 @@ import { Action } from '../../common/models/action';
   styleUrls: ['./action.component.css']
 })
 export class AdminActionComponent implements OnInit {
+  p: number = 1;
   actionsList: Array<Action> = new Array<Action>();
   constructor(private actionService: ActionService) { }
 

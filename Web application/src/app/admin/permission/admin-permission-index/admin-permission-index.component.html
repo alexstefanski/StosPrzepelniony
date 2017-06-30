@@ -11,21 +11,21 @@
     <thead>
     <tr>
       <th scope="col">
-        id
+        Id
       </th>
       <th scope="col">
-        nazwa
+        Nazwa dostępu
       </th>
       <th scope="col">
-        edytuj
+        Edytuj
       </th>
       <th scope="col">
-        usuń
+        Usuń
       </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let permission of permissionArray">
+    <tr *ngFor="let permission of permissionArray | paginate: { itemsPerPage: 10, currentPage: p }">
       <td class="ad-id">
         {{ permission.id }}
       </td>
@@ -53,4 +53,11 @@
     </tr>
     </tbody>
   </table>
+  <pagination-controls
+          class="my-pagination"
+          (pageChange)="p = $event"
+          autoHide="true"
+          previousLabel="Poprzednia"
+          nextLabel="Następna">
+  </pagination-controls>
 </div>

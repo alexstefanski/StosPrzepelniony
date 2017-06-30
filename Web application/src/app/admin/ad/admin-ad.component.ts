@@ -9,6 +9,7 @@ import {NotificationsService} from "angular2-notifications/dist";
   styleUrls: ['./admin-ad.component.css']
 })
 export class AdminAdComponent implements OnInit {
+  p: number = 1;
   adsList: Array<Ad> = new Array<Ad>();
   handlingEditing: boolean = false;
   newAdStatusNum: number;

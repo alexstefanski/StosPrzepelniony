@@ -4,18 +4,18 @@
     <thead>
     <tr>
       <th scope="col">
-        id
+        Id
       </th>
       <th scope="col">
-        nazwa
+        Nazwa
       </th>
       <th scope="col">
-        opis
+        Opis
       </th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let action of actionsList">
+    <tr *ngFor="let action of actionsList | paginate: { itemsPerPage: 10, currentPage: p }">
       <td class="action-id">
         {{action.id}}
       </td>
@@ -28,4 +28,11 @@
     </tr>
     </tbody>
   </table>
+  <pagination-controls
+          class="my-pagination"
+          (pageChange)="p = $event"
+          autoHide="true"
+          previousLabel="Poprzednia"
+          nextLabel="Następna">
+  </pagination-controls>
 </div>

@@ -227,3 +227,6 @@ input {
 .not-allowed {
 	pointer-events: none;
 }
+.edit-span {
+	font-family: Arial;
+}

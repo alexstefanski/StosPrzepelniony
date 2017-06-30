@@ -4,39 +4,39 @@
 		<thead>
 			<tr>
 				<th scope="col">
-					id
+					Id
 				</th>
 				<th scope="col">
-					user id
+					Id użyt.
 				</th>
 				<th scope="col">
-					user name
+					Imię i nazwisko
 				</th>
 				<th scope="col">
-					subject
+					Tytuł
 				</th>
 				<th scope="col">
-					cost total
+					Koszt całkowity
 				</th>
 				<th scope="col">
-					cost hour
+					Koszt za h
 				</th>
 				<th scope="col">
-					date
+					Data wstawienia
 				</th>
 				<th scope="col">
-					status
+					Status
 				</th>
 				<th scope="col">
-					edytuj
+					Edytuj
 				</th>
 				<th scope="col">
-					delete
+					Usuń
 				</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let ad of adsList">
+			<tr *ngFor="let ad of adsList | paginate: { itemsPerPage: 10, currentPage: p }">
 				<td class="ad-id">
 					{{ad.id}}
 				</td>
@@ -117,4 +117,11 @@
 			</tr>
 		</tbody>
 	</table>
+	<pagination-controls
+			class="my-pagination"
+			(pageChange)="p = $event"
+			autoHide="true"
+			previousLabel="Poprzednia"
+			nextLabel="Następna">
+	</pagination-controls>
 </div>

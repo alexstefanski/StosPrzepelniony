@@ -12,25 +12,25 @@
     <thead>
     <tr>
       <th scope="col">
-        admin id
+        Id
       </th>
       <th scope="col">
-        user id
+        Id użyt.
       </th>
       <th scope="col">
-        first name
+        Imię
       </th>
       <th scope="col">
-        last name
+        Nazwisko
       </th>
       <th scope="col">
-        permission
+        Uprawnienie
       </th>
       <th scope="col">
-        edit
+        Edytuj
       </th>
       <th scope="col">
-        delete
+        Usuń
       </th>
     </tr>
     </thead>
@@ -44,14 +44,10 @@
         {{admin.userId}}
       </td>
       <td class="admin-firstname">
-        <a href="adminList.html">
-          {{admin.firstName}}
-        </a>
+        {{admin.firstName}}
       </td>
       <td class="admin-lastname">
-        <a href="adminList.html">
-          {{admin.lastName}}
-        </a>
+        {{admin.lastName}}
       </td>
       <td class="admin-permissionname" *ngIf="!admin.edited">
         {{admin.permission.name}}

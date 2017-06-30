@@ -11,6 +11,7 @@ import {NotificationsService} from "angular2-notifications/dist";
   styleUrls: ['./admin-permission-index.component.css']
 })
 export class AdminPermissionIndexComponent implements OnInit {
+  p: number = 1;
   permissionArray = new Array<Permission>();
 
   constructor(private permissionService: PermissionService,
