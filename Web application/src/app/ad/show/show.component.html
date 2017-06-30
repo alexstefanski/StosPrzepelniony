@@ -4,16 +4,12 @@
   </div>
   <div class="info">
     <div class="userName">
-      {{ad.userFirstName}}
+      {{ad.userFirstName}} {{ad.userLastName}}
     </div>
     <div class="ad-data">
       Dodane:
       <span class="ad-date" *ngIf="ad.date">
           {{ad.date.toLocaleDateString()}}
-      </span>
-      | ID ogłoszenia:
-      <span class="ad-id">
-          {{ad.id}}
       </span>
       | Status:
       <span class="ad-status">
@@ -26,10 +22,10 @@
     </div>
     <div class="ad-salary">
       <span class="ad-costTotal" *ngIf="ad.costTotal">
-        | Wynagrodzenie: {{ad.costTotal}} zł
+        Wynagrodzenie: {{ad.costTotal}} zł
       </span>
       <span class="ad-costHour" *ngIf="ad.costHour">
-        | Wynagrodzenie/h: {{ad.costHour}}
+        Stawka za godzinę: {{ad.costHour}} zł
       </span>
     </div>
     <div style="font-size: 15px">

@@ -26,7 +26,7 @@ var Message = sequelize.define('message',
             allowNull: false
         },
         content: {
-            type: Sequelize.TEXT,
+            type: Sequelize.TEXT('LONG'),
             allowNull: false
         },
         date: {

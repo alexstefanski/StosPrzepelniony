@@ -13,7 +13,7 @@ var Ad = sequelize.define('ad',{
   },
 
   content:{
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT('LONG'),
     allowNull:false
   },
 
