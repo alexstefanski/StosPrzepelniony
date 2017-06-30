@@ -4,7 +4,8 @@
     <input type="text" class="poster_input_text"
            [ngClass]="{'error-input': error.subject}"
            placeholder="Tytuł ogłoszenia"
-           formControlName="title"/><br/>
+           formControlName="title"
+           maxlength="250"/><br/>
     <div class="error-messages" *ngIf="error.subject"> &nbsp; {{ error.subject }}</div>
     <select class="poster_select" [ngClass]="{'error-input': error.categoryId}"
             formControlName="category"
