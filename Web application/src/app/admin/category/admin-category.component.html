@@ -31,7 +31,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let category of categories">
+        <tr *ngFor="let category of categories | paginate: { itemsPerPage: 10, currentPage: p }">
           <td class="cat-id">
             {{category.categoryId}}
           </td>
@@ -90,4 +90,11 @@
         </tr>
         </tbody>
       </table>
+      <pagination-controls
+              class="my-pagination"
+              (pageChange)="p = $event"
+              autoHide="true"
+              previousLabel="Poprzednia"
+              nextLabel="Następna">
+      </pagination-controls>
     </div>

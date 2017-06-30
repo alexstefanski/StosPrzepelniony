@@ -5,6 +5,7 @@ import { CategoryService } from '../../../common/services/category.service';
 
 import 'rxjs/add/operator/toPromise';
 import {NotificationsService} from "angular2-notifications/dist";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-admin-category-add',
@@ -25,14 +26,16 @@ export class AdminCategoryAddComponent implements OnInit {
   }
 
   onSubmit() {
+    this.category.name = this.category.name.trim();
     this.categoryService.postAddCategory(this.category, (errors, response) => {
       if (!errors) {
-        if (response.status === 204) {
+        if (response.status === 200) {
           this.notificationsService.success('Pomyślnie dodano kategorię');
           this.router.navigate(['admin/category']);
         }
       } else {
-        this.notificationsService.error('Niepowodzenie');
+        let contentMsg = isNullOrUndefined(errors.json().name) === false ? errors.json().name : '';
+        this.notificationsService.error('Niepowodzenie', contentMsg);
       }
     })
   }

@@ -5,8 +5,9 @@ var Category = require('./../../models/category.js');
 var Ad = require('./../../models/ad.js');
 
 module.exports.main = function (request, response) {
+  console.log(request.params.categoryId + 'id')
     Category.findOne({
-        where:  {categoryIdParent: request.params.categoryId},
+        where:  {categoryId: request.params.categoryId},
         attributes: {exclude: ['id','createdAt', 'updatedAt'], include:['categoryId']}
     }).then(function (category) {
         if(category===null)
