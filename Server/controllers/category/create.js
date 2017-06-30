@@ -24,13 +24,25 @@ module.exports.main = function (request, response) {
 
                 else
                 {
-                    Category.create({
-                        categoryIdParent: request.body.categoryIdParent,
-                        name: request.body.name,
-                        description: request.body.description
-                    }).then(function (category) {
-                        response.status(204).json({messages:'Kategoria pomyślnie dodana do bazy!'})
+                    Category.findOne({
+                        where:  {name: request.body.name},
+                        attributes: {exclude: ['id','createdAt', 'updatedAt'], include:['categoryId']}
+                    }).then(function (cat) {
+                        if(cat === null)
+                        {
+                            Category.create({
+                                categoryIdParent: request.body.categoryIdParent,
+                                name: request.body.name,
+                                description: request.body.description
+                            }).then(function (category) {
+                                response.status(200).json({messages:'Kategoria pomyślnie dodana do bazy!'})
+                            })
+                        }
+                        else {
+                            response.status(406).json({messages:'Nie udało się dodać kategorii!',name:'Nazwa musi być unikatowa!'})
+                        }
                     })
+
                 }
             }
 
