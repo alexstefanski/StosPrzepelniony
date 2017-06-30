@@ -1,7 +1,7 @@
 <div class="search-main">
   <div class="wrapper">
     <div class="search-input">
-      <input type="text" name="phrase" id="search-phrase" placeholder="Czego szukasz?">
+      <input type="text" name="phrase" id="search-phrase" placeholder="Czego szukasz?" [(ngModel)]="searchQuery">
     </div>
     <div class="search-btn">
       <button class="btn"><i class="fa fa-search" aria-hidden="true"></i>Szukaj</button>
@@ -34,27 +34,32 @@
       <div class="checkbox-salary">
         <label class="control control--checkbox checkbox-container">
           Za godzinę
-          <input type="checkbox"/>
+          <input type="checkbox" (click)="costType = 0" *ngIf="costType != 0"/>
+          <input type="checkbox" (click)="costType = 0" checked *ngIf="costType == 0"/>
           <div class="control__indicator"></div>
         </label>
         <label class="control control--checkbox checkbox-container">
           Za projekt
-          <input type="checkbox"/>
+          <input type="checkbox" (click)="costType = 1" *ngIf="costType != 1"/>
+          <input type="checkbox" (click)="costType = 1" checked *ngIf="costType == 1"/>
           <div class="control__indicator"></div>
         </label>
       </div>
+
       <div class="salary_range">
         <div>
-          Minimalne
+          <span *ngIf="!minimumCost">Minimalne</span>
+          <span *ngIf="minimumCost">Minimalne: {{ minimumCost }}</span>
         </div>
-        <input type="range" name="range-min" min="{{salaryRangeMin}}" max="{{salaryRangeMax}}" [(ngModel)]="salaryValue"/>
+        <input type="range" name="range-min" min="{{salaryRangeMin}}" max="{{salaryRangeMax}}" [(ngModel)]="minimumCost"/>
         <span id="range-min"></span>
       </div>
       <div class="salary_range">
         <div>
-          Maksymalne
+          <span *ngIf="!maximumCost">Maksymalne</span>
+          <span *ngIf="maximumCost">Maksymalne: {{ maximumCost }}</span>
         </div>
-        <input type="range" name="range-max" min="0" max="100000" onchange="showMax(this.value)"  />
+        <input type="range" name="range-max" min="0" max="100000" [(ngModel)]="maximumCost"/>
         <span id="range-max"></span>
       </div>
     </div>
@@ -66,7 +71,7 @@
   </div>
   <div class="list_container">
 
-    <div class="list-short" *ngFor="let ad of adsList | paginate: { itemsPerPage: 10, currentPage: p }">
+    <div class="list-short" *ngFor="let ad of (adsList | filterByCategory: selectedCategories | search: searchQuery | costFilter:costType:minimumCost:maximumCost ) | paginate: { itemsPerPage: 10, currentPage: p }">
       <div class="header">
         <a routerLink="../ad/{{ad.id}}/show">
           {{ad.subject}}

@@ -18,6 +18,13 @@ export class HomeComponent implements OnInit {
   salaryRangeMin: number = 0;
   salaryRangeMax: number = 10000;
   salaryValue: number = 6000;
+
+  searchQuery: string = null;
+  selectedCategories: Array<Category> = [];
+  costType: number = null;
+  minimumCost: number = null;
+  maximumCost: number = null;
+
   constructor(private adService: AdService, private categoryService: CategoryService) { }
 
   ngOnInit() {
@@ -73,6 +80,20 @@ export class HomeComponent implements OnInit {
   };
 
   checkedCategory(category: Category) {
+    if (!this.selectedCategories.includes(category)) {
+      this.selectedCategories.push(category);
+    } else {
+      let index = this.selectedCategories.indexOf(category);
+      if (index > -1) {
+          this.selectedCategories.splice(index, 1);
+      }
+    }
+
+    // Tworzenie nowego obiektu z istniejącej tablicy po usunieciu
+    // lub dodaniu kategorii. W ten sposób Angular odnotowuje że zaszły zmiany
+    // i odświeża filtrowanie.
+    this.selectedCategories = this.selectedCategories.slice(0);
+
     category.checked = !category.checked;
   }
 }

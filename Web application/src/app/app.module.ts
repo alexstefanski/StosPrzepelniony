@@ -57,6 +57,10 @@ import { UserConfirmRegisterComponent } from './user/confirm-register/user-confi
 import { UserResetPasswordComponent } from './user/reset-password/user-reset-password.component';
 import { UserSetNewPasswordComponent } from './user/set-new-password/user-set-new-password.component';
 
+import { AdCategoryFilterPipe } from './common/pipes/ad-category-filter.pipe';
+import { AdSearchPipe } from './common/pipes/ad-search.pipe';
+import { AdCostFilterPipe } from './common/pipes/ad-cost-filter.pipe';
+
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'login', component: UserLoginComponent, canActivate: [PreventLoggedInAccess]},
@@ -129,7 +133,10 @@ const routes = [
     AdminAdComponent,
     UserConfirmRegisterComponent,
     UserResetPasswordComponent,
-    UserSetNewPasswordComponent
+    UserSetNewPasswordComponent,
+    AdCategoryFilterPipe,
+    AdSearchPipe,
+    AdCostFilterPipe
   ],
   imports: [
     BrowserModule,
