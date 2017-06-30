@@ -3,5 +3,7 @@ export class AdminUser {
   firstName: string;
   lastName: string;
   email: string;
-  status: string;
+  status: number;
+  statusName: string;
+  edited: boolean = false;
 }

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  p: number = 1;
   adminsList: Array<Admin>;
   permissionsList: Array<Permission>;
   messages: string = null;
@@ -55,6 +56,7 @@ export class AdminComponent implements OnInit {
 
   editPermission(admin: Admin) {
     if (admin.permission.id == this.newAdminPermissionId) {
+      this.notificationsService.alert('Zmień rodzaj uprawnienia na inny bądź kliknij anuluj');
       return;
     }
 
@@ -67,7 +69,11 @@ export class AdminComponent implements OnInit {
         }
         this.newAdminPermissionId = null;
       } else {
-        console.log(errors.json());
+        if (errors.status === 403) {
+          this.notificationsService.alert(errors.json().message, errors.json().adminId);
+        } else {
+          this.notificationsService.error('Niepowodzenie');
+        }
       }
     });
 
@@ -84,6 +90,8 @@ export class AdminComponent implements OnInit {
         if (errors.status === 403) {
           this.notificationsService.alert(errors.json().message, errors.json().adminId);
         }
+      } else {
+        this.notificationsService.success('Pomyślnie usunięto: ' + admin.permission.name);
       }
     })
   }

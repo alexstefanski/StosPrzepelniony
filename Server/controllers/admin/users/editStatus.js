@@ -1,5 +1,6 @@
 var User = require('./../../../models/index.js').User
 
+var auth = require('basic-auth')
 var validate = require('validate.js')
 
 // Walidacja przychodzących danych
@@ -46,6 +47,17 @@ module.exports.validate = function(request, response, next) {
 module.exports.main = function(request, response) {
   let _userId = request.params.userId
   let _status = request.body.status
+
+  var _authData = auth(request)
+  var _currentUserId = _authData.name
+
+  if (+_userId === +_currentUserId) {
+      response.status(403).json({
+        message: 'Nie można edytować statusu użytkownika',
+        userId: 'Nie można edytować własnego status'
+      })
+      return
+  }
 
   User
     .findOne({

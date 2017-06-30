@@ -2,9 +2,22 @@ var Admin = require('./../../../models/index.js').Admin
 var Permission = require('./../../../models/index.js').Permission
 var isPermissionExist = require('./helpers/isPermissionExist').main
 
+var auth = require('basic-auth')
+
 module.exports.main = function(request, response) {
   let _adminId = request.params.adminId
   let _permissionId = request.body.permissionId
+
+  var _authData = auth(request)
+  var _currentAdminId = _authData.name
+
+  if (+_adminId === +_currentAdminId) {
+      response.status(403).json({
+        message: 'Nie można edytować uprawnienia',
+        adminId: 'Nie można edytować własnego uprawnienia'
+      })
+      return
+  }
 
   Admin
     .findOne({

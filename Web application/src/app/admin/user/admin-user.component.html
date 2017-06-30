@@ -27,7 +27,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p }">
       <td class="user-id">
         {{user.userId}}
       </td>
@@ -40,28 +40,56 @@
       <td class="user-email">
         {{user.email}}
       </td>
-      <td class="user-status">
-        {{user.status}}
+      <td class="user-status" *ngIf="!user.edited">
+        {{user.statusName}}
+      </td>
+      <td class="user-status" *ngIf="user.edited">
+        <select [(ngModel)]="newUserStatus" name="userStatus">
+          <option [value]="0">Niezweryfikowany</option>
+          <option [value]="1">Zweryfikowany</option>
+          <option [value]="2">Zablokowany</option>
+        </select>
       </td>
       <td class="edit">
-        <div class="btn">
+        <div class="btn" *ngIf="!user.edited" [ngClass]="{'not-allowed': handlingEditing}" (click)="handleEdit(user)">
           <i class="fa fa-pencil" aria-hidden="true">
-									  <span class="delete-span">
-									  Edytuj
-									  </span>
+            <span class="delete-span">
+            Edytuj
+            </span>
+        </i>
+        </div>
+        <div class="btn" *ngIf="user.edited" (click)="editUserStatus(user)">
+          <i class="fa fa-pencil" aria-hidden="true">
+            <span class="delete-span">
+            Zatwierdź
+            </span>
           </i>
         </div>
       </td>
       <td class="delete">
-        <div class="btn" (click)="deleteUser(user)">
-            <i class="fa fa-times" aria-hidden="true">
-                      <span class="delete-span" >
-                        Usuń
-                      </span>
-            </i>
+        <div class="btn" *ngIf="!user.edited" [ngClass]="{'not-allowed': handlingEditing}" (click)="deleteUser(user)">
+          <i class="fa fa-times" aria-hidden="true">
+            <span class="delete-span" >
+              Usuń
+            </span>
+          </i>
+        </div>
+        <div class="btn" *ngIf="user.edited" (click)="cancel(user)">
+          <i class="fa fa-times" aria-hidden="true">
+            <span class="delete-span" >
+              Anuluj
+            </span>
+          </i>
         </div>
       </td>
     </tr>
     </tbody>
   </table>
+  <pagination-controls
+          class="my-pagination"
+          (pageChange)="p = $event"
+          autoHide="true"
+          previousLabel="Poprzednia"
+          nextLabel="Następna">
+  </pagination-controls>
 </div>

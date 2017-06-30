@@ -36,7 +36,7 @@
     </thead>
     <tbody>
 
-    <tr *ngFor="let admin of adminsList">
+    <tr *ngFor="let admin of adminsList | paginate: { itemsPerPage: 10, currentPage: p }">
       <td class="admin-id">
         {{admin.id}}
       </td>
@@ -96,4 +96,11 @@
     </tr>
     </tbody>
   </table>
+  <pagination-controls
+          class="my-pagination"
+          (pageChange)="p = $event"
+          autoHide="true"
+          previousLabel="Poprzednia"
+          nextLabel="Następna">
+  </pagination-controls>
 </div>
