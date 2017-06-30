@@ -4,6 +4,7 @@ import { AdminService } from '../common/services/admin.service';
 import { PermissionService } from '../common/services/permission.service';
 import { Permission } from '../common/models/permission';
 import {NotificationsService} from "angular2-notifications/dist";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',

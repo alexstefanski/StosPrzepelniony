@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Dodaj administratora</h2>
+
+    <form (ngSubmit)="onSubmit()" #addForm="ngForm">
+        <div class="inputs">
+
+            <span class="cat-input">
+                <input type="text" class="input_form" placeholder="Podaj UserID" name="userId"
+                        required
+                        [(ngModel)]="admin.userId"
+                        #userId="ngModel"/>
+            </span>
+            <div class="error" [hidden]="userId.valid || userId.pristine">
+                UserId jest wymagane.
+            </div>
+            <span class="cat-input">
+                <input type="text" class="input_form" placeholder="Podaj Permission ID" name="permissionId"
+                        required
+                        [(ngModel)]="admin.permissionId"
+                        #permissionId="ngModel"/>
+            </span>
+            <div class="error" [hidden]="permissionId.valid || permissionId.pristine">
+                PermissionId jest wymagane.
+            </div>
+            <span *ngIf="message"> {{message}}</span>
+            <span class="cat-input">
+                <input type="submit" [disabled]="!addForm.form.valid" [ngClass]="{'not-allowed': !addForm.form.valid }" value="Dodaj"/>
+            </span>
+
+        </div>
+    </form>
+</div>

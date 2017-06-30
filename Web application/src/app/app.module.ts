@@ -21,6 +21,7 @@ import { UserResendEmailComponent } from './user/resend-email/user-resend-email.
 import { AdminUserComponent } from './admin/user/admin-user.component';
 
 import { AdminComponent } from './admin/admin.component';
+import {AdminAddComponent} from './admin/admin-add/admin-add.component';
 import { AdminCategoryComponent } from './admin/category/admin-category.component';
 import { AdminCategoryAddComponent } from './admin/category/add/admin-category-add.component';
 
@@ -52,7 +53,7 @@ import { AdminActionComponent } from './admin/action/action.component';
 import { ActionService } from './common/services/action.service';
 import { AdminAdComponent } from './admin/ad/admin-ad.component';
 import { AdminAdService } from './common/services/admin.ad.service';
-import {AdminUserService} from "app/common/services/admin.user.service";
+import {AdminUserService} from "./common/services/admin.user.service";
 import { UserConfirmRegisterComponent } from './user/confirm-register/user-confirm-register.component';
 import { UserResetPasswordComponent } from './user/reset-password/user-reset-password.component';
 import { UserSetNewPasswordComponent } from './user/set-new-password/user-set-new-password.component';
@@ -60,6 +61,8 @@ import { UserSetNewPasswordComponent } from './user/set-new-password/user-set-ne
 import { AdCategoryFilterPipe } from './common/pipes/ad-category-filter.pipe';
 import { AdSearchPipe } from './common/pipes/ad-search.pipe';
 import { AdCostFilterPipe } from './common/pipes/ad-cost-filter.pipe';
+import { MessageComponent } from './message/message.component';
+import { MessageService } from './common/services/message.service';
 
 const routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -73,10 +76,14 @@ const routes = [
   {path: 'user', component: AppUserComponent, canActivate: [AuthenticatedGuard], children: [
     {path: '', component: HomeComponent},
     {path: 'me', component: UserInfoComponent},
-    {path: 'change-password', component: UserChangePasswordComponent}
+    {path: 'change-password', component: UserChangePasswordComponent},
+    {path: 'messages', component: MessageComponent}
+
   ]},
   {path: 'admin', component: AppAdminComponent, canActivate: [AdminGuard], children: [
-    {path: '', component: AdminComponent},
+    {path: '', component: AdminComponent, children:[
+      {path: 'add', component: AdminAddComponent}
+    ]},
     {path: 'permission', children: [
       {path: '', component: AdminPermissionIndexComponent},
       {path: 'add', component: AdminPermissionAddComponent},
@@ -110,6 +117,7 @@ const routes = [
     UserLogoutComponent,
     UserInfoComponent,
     AdminComponent,
+    AdminAddComponent,
     AdminCategoryComponent,
     AdminCategoryAddComponent,
     UserChangePasswordComponent,
@@ -136,7 +144,8 @@ const routes = [
     UserSetNewPasswordComponent,
     AdCategoryFilterPipe,
     AdSearchPipe,
-    AdCostFilterPipe
+    AdCostFilterPipe,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -160,6 +169,7 @@ const routes = [
     AuthenticatedGuard,
     AdminGuard,
     PreventLoggedInAccess,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
 import { Injectable , } from '@angular/core';
 import { Http } from '@angular/http';
-import { adminDelete , adminsList, adminEdit } from '../../api';
+import { adminDelete , adminsList, adminEdit, adminsAdd } from '../../api';
 import { UserService } from './user.service';
 import { Admin } from '../models/admin';
 import { Permission } from '../models/permission';
@@ -38,6 +38,18 @@ export class AdminService {
                 });
 
                 callback(null, adminsArray);
+            })
+            .catch((errors) => {
+                callback(errors, null);
+            });
+    }
+    postAddAdmin(admin: Admin, callback) {
+        const headers = this.userService.getAuthenticatedHeader();
+        this.http.post(adminsAdd, admin, {headers: headers})
+            .toPromise()
+            .then((response) => {
+                this.adminAvailableSource.next();
+                callback(null, response);
             })
             .catch((errors) => {
                 callback(errors, null);

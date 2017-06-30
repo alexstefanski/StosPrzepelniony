@@ -1,12 +1,13 @@
 <div class="container">
   <h2>Lista administratorów</h2>
-  <div class="btn add-btn">
+  <div class="btn add-btn" routerLink="add">
     <i class="fa fa-plus" aria-hidden="true">
       <span class="add-span">
-          <a href="addAdmin.html">Dodaj administratora</a>
+          <a >Dodaj administratora</a>
       </span>
     </i>
   </div>
+  <router-outlet></router-outlet>
   <table id="ads-list">
     <thead>
     <tr>

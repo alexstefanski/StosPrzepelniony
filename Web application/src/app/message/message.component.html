@@ -1,0 +1,63 @@
+<div class="content">
+	<div class = "MessagesBody">
+		<div class = "MessagesText">
+					<p>Wiadomości</p>
+  		</div>
+				
+				<div class = "MessagesList">
+					<ul>
+						<div *ngFor="let messageList of messageListArray" class="MessagesContactBox">
+							<li><a href="#">{{messageList.user.firstName}} {{messageList.user.lastName}}</a></li>
+						</div>				
+					</ul>
+				</div>
+				
+				<div class ="MessagesMarkedChat">
+					<div class="MessagesContactName">
+						Krzysztof Sobiech
+					</div>
+				
+					<div class ="MessagesHistory">			
+						
+						<div class="talk-bubble-left tri-right round left-in">
+							<div class="talktext">
+								<p>Hej, co tam?</p>
+							</div>
+						</div>
+
+						<div class="talk-bubble-right tri-right round right-in">
+							<div class="talktext">
+								<p>Wszystko dobrze</p>
+							</div>
+						</div>
+
+						<div class="talk-bubble-left tri-right round left-in">
+							<div class="talktext">
+								<p>To spoko</p>
+							</div>
+						</div>
+
+						<div class="talk-bubble-right tri-right round right-in">
+							<div class="talktext">
+								<p>No dzieki ELO</p>
+							</div>
+						</div>
+							
+					</div>
+				
+					<div class ="MessagesSentBox">
+				
+						<form id= "FormMessagesID" action = "#" method ="get">
+								<div class="MessagesFormComponents">
+								
+									<textarea>
+									</textarea>
+									<div class ="Button">
+										<input type="submit" name="SendButton" value="Wyślij"/>	
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+</div>    
+</div>
