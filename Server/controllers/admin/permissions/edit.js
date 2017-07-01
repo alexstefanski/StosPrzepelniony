@@ -115,6 +115,15 @@ module.exports.permissionExistsValidation = function(request, response, next) {
 
 module.exports.main = function(request, response) {
 
+	// blokada edycji głównego uprawnienia -> Administrator
+	if (+request.params.permissionId === 1) {
+		response.status(403).json({
+			messages: 'Nie można edytować',
+			permissionId: 'Nie można edytować głównego uprawnienia!'
+		})
+		return
+	}
+
 	Permission.findOne({
 		where: {
 			id: request.params.permissionId

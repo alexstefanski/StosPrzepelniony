@@ -88,6 +88,8 @@ export class AdminPermissionEditComponent implements OnInit {
       } else {
         if (errors.status === 422) {
           this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        } else if (errors.status === 403) {
+          this.notificationsService.error(errors.json().messages, errors.json().permissionId);
         }
       }
     });
