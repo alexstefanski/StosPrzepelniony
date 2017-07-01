@@ -61,6 +61,7 @@ export class AdService {
         ad.userId = item.user.userId;
         ad.userFirstName = item.user.firstName;
         ad.categoryId = item.categoryId;
+        ad.categoryName = item.category.categoryName;
         ad.subject = item.subject;
         ad.costTotal = item.costTotal;
         ad.costHour = item.costHour;

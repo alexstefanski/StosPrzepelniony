@@ -26,7 +26,7 @@
     <div class="category" *ngIf="!salaryViewSelected">
       <label *ngFor="let cat of categoriesList" class="control control--checkbox checkbox-container">
         {{cat.name}}
-        <input type="checkbox" (click)="checkedCategory(cat)"/>
+        <input type="checkbox" (click)="checkedCategory(cat)" [checked]="selectedCategories.includes(cat)"/>
         <div class="control__indicator"></div>
       </label>
     </div>
@@ -35,13 +35,13 @@
         <label class="control control--checkbox checkbox-container">
           Za godzinę
           <input type="checkbox" (click)="costType = 0" *ngIf="costType != 0"/>
-          <input type="checkbox" (click)="costType = 0" checked *ngIf="costType == 0"/>
+          <input type="checkbox" (click)="costType = null" *ngIf="costType == 0" checked>
           <div class="control__indicator"></div>
         </label>
         <label class="control control--checkbox checkbox-container">
           Za projekt
           <input type="checkbox" (click)="costType = 1" *ngIf="costType != 1"/>
-          <input type="checkbox" (click)="costType = 1" checked *ngIf="costType == 1"/>
+          <input type="checkbox" (click)="costType = null" *ngIf="costType == 1" checked>
           <div class="control__indicator"></div>
         </label>
       </div>
@@ -49,17 +49,28 @@
       <div class="salary_range">
         <div>
           <span *ngIf="!minimumCost">Minimalne</span>
-          <span *ngIf="minimumCost">Minimalne: {{ minimumCost }}</span>
+          <span *ngIf="minimumCost">
+            Minimalne: {{ minimumCost }}
+            <a (click)="$event.stopPropagation(); minimumCost = null">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+
+          </span>
         </div>
-        <input type="range" name="range-min" min="{{salaryRangeMin}}" max="{{salaryRangeMax}}" [(ngModel)]="minimumCost"/>
+        <input type="range" name="range-min" min="10" max="5000" step="20" [(ngModel)]="minimumCost"/>
         <span id="range-min"></span>
       </div>
       <div class="salary_range">
         <div>
           <span *ngIf="!maximumCost">Maksymalne</span>
-          <span *ngIf="maximumCost">Maksymalne: {{ maximumCost }}</span>
+          <span *ngIf="maximumCost">
+            Maksymalne: {{ maximumCost }}
+            <a (click)="$event.stopPropagation(); maximumCost = null">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+          </span>
         </div>
-        <input type="range" name="range-max" min="0" max="100000" [(ngModel)]="maximumCost"/>
+        <input type="range" name="range-max" min="5000" max="10000" step="200" [(ngModel)]="maximumCost"/>
         <span id="range-max"></span>
       </div>
     </div>
@@ -73,13 +84,13 @@
 
     <div class="list-short" *ngFor="let ad of (adsList | filterByCategory: selectedCategories | search: searchQuery | costFilter:costType:minimumCost:maximumCost ) | paginate: { itemsPerPage: 10, currentPage: p }">
       <div class="header">
-        <a routerLink="../ad/{{ad.id}}/show">
+        <a routerLink="../ad/{{ad.id}}">
           {{ad.subject}}
         </a>
       </div>
       <div class="info">
         <div class="author-name">
-          {{ad.userFirstName}}
+          {{ ad.categoryName }} &bull; {{ad.userFirstName}}
         </div>
         <div class="date">
           Dodane
