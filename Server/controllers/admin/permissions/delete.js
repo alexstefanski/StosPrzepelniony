@@ -108,6 +108,7 @@ module.exports.main = function(request, response) {
     })
     .catch(error => {
       console.log('Database error: connection is not established or table permissions does not exist.')
-    })
+			response.status(400).json(error);
+		})
 
 }
