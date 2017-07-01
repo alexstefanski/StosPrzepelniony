@@ -50,7 +50,7 @@ export class AdminUserComponent implements OnInit {
           this.notificationsService.error('Niepowodzenie');
         }
       } else {
-        this.notificationsService.success('Pomyślnie usunięto użytkownia');
+        this.notificationsService.success('Pomyślnie usunięto użytkownika');
       }
     });
   }
