@@ -15,7 +15,7 @@ import {NotificationsService} from "angular2-notifications/dist";
 export class AdminPermissionEditComponent implements OnInit {
   permission: Permission = new Permission();
   actionList: Array<Action> = new Array<Action>();
-
+  messages: string = '';
   constructor(private permissionService: PermissionService,
               private ar: ActivatedRoute,
               private actionService: ActionService,
@@ -48,11 +48,21 @@ export class AdminPermissionEditComponent implements OnInit {
               }
             })
           } else {
-            console.log(errors.json());
+            if (errors.status === 422) {
+              this.notificationsService.error('Niepowodzenie', errors.json().messages);
+              this.messages = errors.json().messages;
+            } else {
+              this.notificationsService.error('Niepowodzenie');
+            }
           }
         });
       } else {
-        console.log(errors);
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+          this.messages = errors.json().messages;
+        } else {
+          this.notificationsService.error('Niepowodzenie');
+        }
       }
     });
 

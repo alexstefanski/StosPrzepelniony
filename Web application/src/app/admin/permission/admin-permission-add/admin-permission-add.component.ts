@@ -45,8 +45,12 @@ export class AdminPermissionAddComponent implements OnInit {
         if (error.status === 406) {
           errorTitle += isNullOrUndefined(error.json().message) === false ? error.json().message + '\n' : 'Niepowodzenie';
           errorMsg += isNullOrUndefined(error.json().name) === false ? error.json().name : '';
-
           this.notificationsService.alert(errorTitle, errorMsg);
+
+        } else if (error.status === 422) {
+          this.notificationsService.error('Niepowodzenie', error.json().messages);
+        } else {
+          this.notificationsService.error('Niepowodzenie');
         }
       }
     });

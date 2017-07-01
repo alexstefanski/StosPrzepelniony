@@ -83,9 +83,13 @@
         </div>
       </td>
     </tr>
+    <tr *ngIf="!users">
+      <td colspan="7">{{messages}}</td>
+    </tr>
     </tbody>
   </table>
   <pagination-controls
+          *ngIf="users"
           class="my-pagination"
           (pageChange)="p = $event"
           autoHide="true"

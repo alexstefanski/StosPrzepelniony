@@ -110,14 +110,15 @@
 					</div>
 				</td>
 			</tr>
-			<tr *ngIf="adsList.length === 0">
+			<tr *ngIf="!adsList">
 				<td colspan="10">
-					Brak ogłoszeń do wyświetlenia
+					{{messages}}
 				</td>
 			</tr>
 		</tbody>
 	</table>
 	<pagination-controls
+			*ngIf="adsList"
 			class="my-pagination"
 			(pageChange)="p = $event"
 			autoHide="true"

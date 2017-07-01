@@ -15,7 +15,7 @@ export class AdminCategoryComponent implements OnInit {
   categories: Array<Category>;
   handlingEditing: boolean = false;
   handlingAdding: boolean = false;
-  message: string;
+  messages: string = '';
   private editedCategory: Category;
   constructor(private categoryService: CategoryService,
               private notificationsService: NotificationsService) { }
@@ -31,13 +31,18 @@ export class AdminCategoryComponent implements OnInit {
     this.categoryService.getAllCategories((errors, categories) => {
       if (!errors) {
         this.categories = categories.sort((a,b) => this.sortCategoriesById(a,b));
+      } else {
+        this.categories = null;
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+          this.messages = errors.json().messages;
+        }
       }
     })
   }
 
   deleteCategory(category) {
     this.categoryService.postDeleteCategory(category.categoryId, (errors, response) => {
-
       if (errors === null) {
         this.notificationsService.success('Pomyślnie usunięto');
       } else {
@@ -45,6 +50,8 @@ export class AdminCategoryComponent implements OnInit {
           let titleMsg = isNullOrUndefined(errors.json().messages) === false ? errors.json().messages : 'Niepowodzenie';
           let contentMsg = isNullOrUndefined(errors.json().categoryId) === false ? errors.json().categoryId : '';
           this.notificationsService.alert(titleMsg, contentMsg);
+        } else if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
         } else {
           this.notificationsService.error('Nie można usunąć', errors.json().messages);
         }
@@ -72,9 +79,13 @@ export class AdminCategoryComponent implements OnInit {
           this.handlingEditing = false;
         }
       } else {
-        let contentMsg = isNullOrUndefined(errors.json().name) === false ? errors.json().name + ' ' : '';
-        contentMsg += isNullOrUndefined(errors.json().description) === false ? errors.json().description : '';
-        this.notificationsService.error('Nie udało się zaktualizować', contentMsg);
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        } else {
+          let contentMsg = isNullOrUndefined(errors.json().name) === false ? errors.json().name + ' ' : '';
+          contentMsg += isNullOrUndefined(errors.json().description) === false ? errors.json().description : '';
+          this.notificationsService.error('Nie udało się zaktualizować', contentMsg);
+        }
       }
     });
 

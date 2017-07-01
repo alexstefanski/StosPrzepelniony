@@ -14,16 +14,16 @@
       <thead>
       <tr>
         <th scope="col">
-          id
+          Id
         </th>
         <th scope="col">
-          nazwa
+          nNazwa
         </th>
         <th scope="col">
-          opis
+          Opis
         </th>
         <th scope="col">
-          czy posiada
+          Czy posiada
         </th>
       </tr>
       </thead>
@@ -42,9 +42,13 @@
           <input type="checkbox" [checked]="action.checked" (change)="action.checked = !action.checked"/>
         </td>
       </tr>
+      <tr *ngIf="!actionList">
+        <td colspan="4">
+          {{messages}}
+        </td>
+      </tr>
       </tbody>
     </table>
-    <span *ngIf="message"></span>
     <span class="cat-input">
         <input type="submit" class="btn add-btn" value="Zapisz zmiany"
                [ngClass]="{'not-allowed': !editForm.form.valid}"

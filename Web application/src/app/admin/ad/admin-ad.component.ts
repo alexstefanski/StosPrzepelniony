@@ -13,6 +13,7 @@ export class AdminAdComponent implements OnInit {
   adsList: Array<Ad> = new Array<Ad>();
   handlingEditing: boolean = false;
   newAdStatusNum: number;
+  messages: string = '';
   constructor(private adminAdService: AdminAdService, private notificationsService: NotificationsService) { }
 
   ngOnInit() {
@@ -27,7 +28,11 @@ export class AdminAdComponent implements OnInit {
       if (errors === null) {
         this.adsList = adsArray;
       } else {
-        console.log(errors);
+        this.adsList = null;
+       if (errors.status === 422) {
+         this.notificationsService.error('Niepowodzenie', errors.json().messages);
+         this.messages = errors.json().messages;
+       }
       }
     });
   }
@@ -41,6 +46,7 @@ export class AdminAdComponent implements OnInit {
   editAdStatus(ad: Ad) {
     if (this.newAdStatusNum === ad.statusNum) {
       this.notificationsService.alert('Zmień status na inny bądź kliknij anuluj');
+      return;
     }
     const payload = {
       status: this.newAdStatusNum
@@ -53,6 +59,12 @@ export class AdminAdComponent implements OnInit {
           this.handlingEditing = false;
           ad.edited = false;
           this.notificationsService.success('Pomyślnie zaktualizowano');
+        }
+      } else {
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        } else {
+          this.notificationsService.error('Niepowodzenie');
         }
       }
     });
@@ -68,7 +80,11 @@ export class AdminAdComponent implements OnInit {
       if (errors === null) {
         this.notificationsService.success('Pomyślnie usunięto');
       } else {
-        this.notificationsService.error('Nie można usunąć');
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        } else {
+          this.notificationsService.error('Nie można usunąć');
+        }
       }
     });
   }

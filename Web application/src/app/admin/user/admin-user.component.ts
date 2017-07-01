@@ -12,7 +12,7 @@ import {NotificationsService} from "angular2-notifications/dist";
 export class AdminUserComponent implements OnInit {
   p: number = 1;
   users: Array<AdminUser>;
-  message: string;
+  messages: string = '';
   newUserStatus: number;
   handlingEditing: boolean = false;
   constructor(private adminUserService: AdminUserService,
@@ -29,6 +29,12 @@ export class AdminUserComponent implements OnInit {
     this.adminUserService.getAllUsers((errors, users) => {
       if (!errors) {
         this.users = users.sort((a,b) => this.sortUsersById(a,b));
+      } else {
+        this.users = null;
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+          this.messages = errors.json().messages;
+        }
       }
     });
   }
@@ -38,6 +44,10 @@ export class AdminUserComponent implements OnInit {
       if (errors) {
         if (errors.status === 403) {
           this.notificationsService.error('Niepowodzenia', errors.json().userId);
+        } else if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        } else {
+          this.notificationsService.error('Niepowodzenie');
         }
       } else {
         this.notificationsService.success('Pomyślnie usunięto użytkownia');
@@ -54,6 +64,7 @@ export class AdminUserComponent implements OnInit {
   editUserStatus(adminUser: AdminUser) {
     if (adminUser.status === this.newUserStatus) {
       this.notificationsService.alert('Zmień status na inny bądź kliknij anuluj');
+      return;
     }
 
     const payload = {
@@ -72,7 +83,9 @@ export class AdminUserComponent implements OnInit {
       } else {
         if (errors.status === 403 || errors.status === 404) {
           this.notificationsService.alert(errors.json().message, errors.json().userId);
-        } else if (errors.status === 406) {
+        } else if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        } else {
           this.notificationsService.error('Niepowodzenie');
         }
       }

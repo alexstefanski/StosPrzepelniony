@@ -26,9 +26,15 @@
         {{action.description}}
       </td>
     </tr>
+    <tr *ngIf="!actionsList">
+      <td colspan="3">
+        {{messages}}
+      </td>
+    </tr>
     </tbody>
   </table>
   <pagination-controls
+          *ngIf="actionsList"
           class="my-pagination"
           (pageChange)="p = $event"
           autoHide="true"

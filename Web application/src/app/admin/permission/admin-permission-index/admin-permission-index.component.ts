@@ -13,7 +13,7 @@ import {NotificationsService} from "angular2-notifications/dist";
 export class AdminPermissionIndexComponent implements OnInit {
   p: number = 1;
   permissionArray = new Array<Permission>();
-
+  messages: string = '';
   constructor(private permissionService: PermissionService,
               private router: Router,
               private notificationsService: NotificationsService) { }
@@ -30,7 +30,11 @@ export class AdminPermissionIndexComponent implements OnInit {
       if (errors === null) {
         this.permissionArray = permissionsArray;
       } else {
-        console.log(errors);
+        this.permissionArray = null;
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+          this.messages = errors.json().messages;
+        }
       }
     });
   }
@@ -43,7 +47,9 @@ export class AdminPermissionIndexComponent implements OnInit {
           this.router.navigate(['/admin/permission'])
         }
       } else {
-        if (!isNullOrUndefined(errors.json().messages)) {
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        } else if (!isNullOrUndefined(errors.json().messages)) {
           let errorTitle = errors.json().messages ;
           let errorMsg = isNullOrUndefined(errors.json().permissionId) === false ? errors.json().permissionId : '';
           this.notificationsService.error(errorTitle, errorMsg);

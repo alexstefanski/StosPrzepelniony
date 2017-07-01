@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   p: number = 1;
   adminsList: Array<Admin>;
   permissionsList: Array<Permission>;
-  messages: string = null;
+  messages: string = '';
   newAdminPermissionId: number;
   handlingEditing: boolean = false;
   constructor(private adminService: AdminService,
@@ -34,7 +34,11 @@ export class AdminComponent implements OnInit {
       if (!errors) {
         this.adminsList = adminsArray;
       } else {
-        this.messages = 'Nie można pobrać listy administratorów';
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+          this.messages = errors.json().messages;
+          this.adminsList = null;
+        }
       }
     })
   }
@@ -45,6 +49,11 @@ export class AdminComponent implements OnInit {
         this.newAdminPermissionId = admin.permission.id;
         this.permissionsList = permissionsArray;
         admin.edited = true;
+      } else {
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        }
+        this.handlingEditing = false;
       }
     })
   }
@@ -65,14 +74,14 @@ export class AdminComponent implements OnInit {
       if (errors === null) {
         if (response.status === 201) {
           this.notificationsService.success('Pomyślnie edytowano', ' ');
-          this.handlingEditing = false;
         }
+        this.handlingEditing = false;
         this.newAdminPermissionId = null;
       } else {
         if (errors.status === 403) {
           this.notificationsService.alert(errors.json().message, errors.json().adminId);
-        } else {
-          this.notificationsService.error('Niepowodzenie');
+        } else if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
         }
       }
     });
@@ -89,6 +98,8 @@ export class AdminComponent implements OnInit {
       if (errors) {
         if (errors.status === 403) {
           this.notificationsService.alert(errors.json().message, errors.json().adminId);
+        } else if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
         }
       } else {
         this.notificationsService.success('Pomyślnie usunięto: ' + admin.permission.name);

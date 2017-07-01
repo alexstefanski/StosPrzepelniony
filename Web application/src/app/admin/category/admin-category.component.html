@@ -97,9 +97,13 @@
             </div>
           </td>
         </tr>
+        <tr *ngIf="!categories">
+          <td colspan="5">{{messages}}</td>
+        </tr>
         </tbody>
       </table>
       <pagination-controls
+              *ngIf="categories"
               class="my-pagination"
               (pageChange)="p = $event"
               autoHide="true"

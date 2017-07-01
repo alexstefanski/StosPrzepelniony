@@ -90,9 +90,13 @@
         </div>
       </td>
     </tr>
+    <tr *ngIf="!adminsList">
+      <td colspan="7"> {{messages}} </td>
+    </tr>
     </tbody>
   </table>
   <pagination-controls
+          *ngIf="adminsList"
           class="my-pagination"
           (pageChange)="p = $event"
           autoHide="true"

@@ -34,8 +34,12 @@ export class AdminCategoryAddComponent implements OnInit {
           this.router.navigate(['admin/category']);
         }
       } else {
-        let contentMsg = isNullOrUndefined(errors.json().name) === false ? errors.json().name : '';
-        this.notificationsService.error('Niepowodzenie', contentMsg);
+        if (errors.status === 422) {
+          this.notificationsService.error('Niepowodzenie', errors.json().messages);
+        } else {
+          let contentMsg = isNullOrUndefined(errors.json().name) === false ? errors.json().name : '';
+          this.notificationsService.error('Niepowodzenie', contentMsg);
+        }
       }
     })
   }

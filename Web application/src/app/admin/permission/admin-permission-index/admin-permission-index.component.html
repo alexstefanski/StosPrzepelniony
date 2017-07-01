@@ -51,9 +51,15 @@
         </div>
       </td>
     </tr>
+    <tr *ngIf="!permissionArray">
+      <td colspan="4">
+        {{messages}}
+      </td>
+    </tr>
     </tbody>
   </table>
   <pagination-controls
+          *ngIf="permissionArray"
           class="my-pagination"
           (pageChange)="p = $event"
           autoHide="true"
