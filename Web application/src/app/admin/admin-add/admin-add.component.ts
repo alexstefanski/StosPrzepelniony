@@ -37,7 +37,7 @@ message: string = null;
   onSubmit() {
     this.adminService.postAddAdmin(this.admin, (errors, response) => {
       if (errors.status === 406) {
-         this.notificationsService.error('Niepowodzenie', errors.json().messages );
+         this.notificationsService.alert(errors.json().message, errors.json().userId)
       } else {
         this.notificationsService.success('Pomyślnie dodano administratora');
         this.router.navigate(['admin/']);

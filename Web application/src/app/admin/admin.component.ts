@@ -92,6 +92,7 @@ export class AdminComponent implements OnInit {
     admin.edited = false;
     this.handlingEditing = false;
   }
+  
 
   deleteAdmin(admin: Admin) {
     this.adminService.deleteAdmin(admin, (errors, response) => {

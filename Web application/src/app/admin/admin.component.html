@@ -1,13 +1,20 @@
 <div class="container">
   <h2>Lista administratorów</h2>
-  <div class="btn add-btn" routerLink="add">
-    <i class="fa fa-plus" aria-hidden="true">
+    <div class="btn add-btn" routerLink="add" *ngIf="!handlingEditing" (click)="handlingEditing = true">
+        <i class="fa fa-plus" aria-hidden="true">
       <span class="add-span">
           <a >Dodaj administratora</a>
       </span>
     </i>
-  </div>
-  <router-outlet></router-outlet>
+    </div>
+    <div class="btn add-btn" routerLink="../admin" *ngIf="handlingEditing" (click)="handlingEditing = false">
+        <i class="fa fa-plus" aria-hidden="true">
+      <span class="add-span">
+          <a >Dodaj administratora</a>
+      </span>
+    </i>
+    </div>
+    <router-outlet></router-outlet>
   <table id="ads-list">
     <thead>
     <tr>
