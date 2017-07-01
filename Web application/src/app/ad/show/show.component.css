@@ -166,6 +166,9 @@ a {
   margin: auto;
   margin-bottom: 8px;
 }
+.pull-right {
+  text-align: right;
+}
 .ad-salary {
   font-size: 14px;
   width: 100%;

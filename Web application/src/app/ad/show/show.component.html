@@ -4,32 +4,39 @@
   </div>
   <div class="info">
     <div class="userName">
-      {{ad.userFirstName}} {{ad.userLastName}}
+      <p>{{ad.userFirstName}}</p>
     </div>
     <div class="ad-data">
-      Dodane:
-      <span class="ad-date" *ngIf="ad.date">
-          {{ad.date.toLocaleDateString()}}
-      </span>
-      | Status:
-      <span class="ad-status">
-          {{ad.status}}
-      </span>
-      | Kategoria:
-      <span class="ad-category">
-          {{ad.categoryName}}
-      </span>
+      <p>
+        Kategoria:
+        <span class="ad-category">
+            {{ad.categoryName}}
+        </span>
+      </p>
     </div>
+
     <div class="ad-salary">
-      <span class="ad-costTotal" *ngIf="ad.costTotal">
-        Wynagrodzenie: {{ad.costTotal}} zł
-      </span>
-      <span class="ad-costHour" *ngIf="ad.costHour">
-        Stawka za godzinę: {{ad.costHour}} zł
-      </span>
+      <p>
+        <span class="ad-costTotal" *ngIf="ad.costTotal">
+          Wynagrodzenie: {{ad.costTotal}} zł
+        </span>
+        <span class="ad-costHour" *ngIf="ad.costHour">
+          Stawka za godzinę: {{ad.costHour}} zł
+        </span>
+      </p>
     </div>
+
     <div style="font-size: 15px">
-      <pre>{{ad.content}}</pre>
+      <p>{{ad.content}}</p>
+    </div>
+
+    <div class="ad-data pull-right">
+      <p>
+        Dodane:
+        <span class="ad-date" *ngIf="ad.date">
+            {{ad.date.toLocaleDateString()}}
+        </span>
+      </p>
     </div>
   </div>
   <div class="btn_container">
