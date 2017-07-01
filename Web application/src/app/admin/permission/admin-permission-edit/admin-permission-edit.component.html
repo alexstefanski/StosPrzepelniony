@@ -17,7 +17,7 @@
           Id
         </th>
         <th scope="col">
-          nNazwa
+          Nazwa
         </th>
         <th scope="col">
           Opis
@@ -40,11 +40,6 @@
         </td>
         <td class="action-name">
           <input type="checkbox" [checked]="action.checked" (change)="action.checked = !action.checked"/>
-        </td>
-      </tr>
-      <tr *ngIf="!actionList">
-        <td colspan="4">
-          {{messages}}
         </td>
       </tr>
       </tbody>

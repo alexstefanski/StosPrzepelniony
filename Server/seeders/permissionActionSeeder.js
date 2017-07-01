@@ -25,7 +25,6 @@ PermissionAction.bulkCreate([
   { permissionId: 1, actionId: 22 },
   { permissionId: 2, actionId: 1 },
   { permissionId: 2, actionId: 3 },
-  { permissionId: 2, actionId: 4 },
   { permissionId: 2, actionId: 6 },
   { permissionId: 2, actionId: 8 },
   { permissionId: 2, actionId: 10 },
@@ -34,7 +33,6 @@ PermissionAction.bulkCreate([
   { permissionId: 2, actionId: 14 },
   { permissionId: 2, actionId: 16 },
   { permissionId: 2, actionId: 17 },
-  { permissionId: 2, actionId: 19 },
   { permissionId: 2, actionId: 21 },
   { permissionId: 2, actionId: 22 }
 ])

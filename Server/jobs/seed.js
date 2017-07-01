@@ -1,6 +1,5 @@
 require('./../seeders/userSeeder.js')
 require('./../seeders/userTokenSeeder.js')
-require('./../seeders/adminSeeder.js')
 require('./../seeders/permissionSeeder.js')
 require('./../seeders/actionSeeder.js')
 require('./../seeders/permissionActionSeeder.js')

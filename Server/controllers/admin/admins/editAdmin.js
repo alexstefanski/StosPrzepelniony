@@ -9,47 +9,61 @@ module.exports.main = function(request, response) {
   let _permissionId = request.body.permissionId
 
   var _authData = auth(request)
-  var _currentAdminId = _authData.name
-
-  if (+_adminId === +_currentAdminId) {
-      response.status(403).json({
-        message: 'Nie można edytować uprawnienia',
-        adminId: 'Nie można edytować własnego uprawnienia'
-      })
-      return
-  }
+  var _currentUserId = _authData.name
 
   Admin
     .findOne({
       where: {
-        id: _adminId
+        userId: _currentUserId
       }
     })
-    .then(function(admin) {
-      if (admin != null) {
-        isPermissionExist(_permissionId, (err, res) => {
-          if (res != null) {
-            admin.update({
-              permissionId: _permissionId
-            }).then(function() {
-              // uaktualniono pomyślnie uprawnienia
-              response.status(201).json()
-            })
-          } else {
-            // nie ma takiego permissionId
-            response.status(406).json({
-              message: 'Nie można uaktualnić uprawnień',
-              permissionId: 'Uprawnienie nie istnieje'
-            })
-          } // koniec if
-        }) // koniec isPermissionExist
-      } else {
-        // nie ma takiego administratora
-        response.status(406).json({
-          message: 'Nie można uaktualnić uprawnień',
-          adminId: 'Administrator nie istnieje'
+    .then((currentAdmin) => {
+      // sprawdzenie czy nie następuje próba edycji samego siebie
+      if (+currentAdmin.id === +_adminId) {
+        response.status(403).json({
+          message: 'Nie można edytować uprawnienia',
+          adminId: 'Nie można edytować własnego uprawnienia'
         })
-      } // koniec if
-    }) // koniec then
+      } else if (+_adminId === 1) {
+        response.status(403).json({
+          message: 'Nie można edytować uprawnienia',
+          adminId: 'Nie można edytować uprawnienia głównego admina'
+        })
+      } else {
+        // edycja uprawnień admina
+        Admin
+          .findOne({
+            where: {
+              id: _adminId
+            }
+          })
+          .then(function(admin) {
+            if (admin != null) {
+              isPermissionExist(_permissionId, (err, res) => {
+                if (res != null) {
+                  admin.update({
+                    permissionId: _permissionId
+                  }).then(function() {
+                    // uaktualniono pomyślnie uprawnienia
+                    response.status(201).json()
+                  })
+                } else {
+                  // nie ma takiego permissionId
+                  response.status(406).json({
+                    message: 'Nie można uaktualnić uprawnień',
+                    permissionId: 'Uprawnienie nie istnieje'
+                  })
+                } // koniec if
+              }) // koniec isPermissionExist
+            } else {
+              // nie ma takiego administratora
+              response.status(406).json({
+                message: 'Nie można uaktualnić uprawnień',
+                adminId: 'Administrator nie istnieje'
+              })
+            } // koniec if
+          }) // koniec then
+      }
+    })
 
 } // koniec main

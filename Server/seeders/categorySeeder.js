@@ -2,7 +2,6 @@ var Category = require('./../models/category.js')
 
 Category.bulkCreate([
   {name: 'Android', categoryIdParent: 0, description: 'Lorem ipsum ...'},
-  {name: 'Android', categoryIdParent: 0, description: 'Lorem ipsum ...'},
   {name: 'C', categoryIdParent: 0, description: 'Lorem ipsum ...'},
   {name: 'C#', categoryIdParent: 0, description: 'Lorem ipsum ...'},
   {name: 'C++', categoryIdParent: 0, description: 'Lorem ipsum ...'},
