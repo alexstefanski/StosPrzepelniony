@@ -31,7 +31,9 @@ module.exports.main = function(actionId) {
       if (admin != null) {
         next()
       } else {
-        response.status(422).json("Error")
+        response.status(422).json({
+          messages: 'Brak wystarczających uprawnień'
+        })
       }
     })
   }
