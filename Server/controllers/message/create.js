@@ -14,14 +14,14 @@ module.exports.main = function(request, response) {
         var userID = authData.name;
 
         User.findOne({
-            attributes: {include:['userId'], exclude :['id','createdAt','updatedAt','email','password','status', 'firstName', 'lastName']},
-            where:{userId:request.params.userIdSender}
+            attributes: {include:['id'], exclude :['id','createdAt','updatedAt','email','password','status', 'firstName', 'lastName']},
+            where:{id:request.params.userIdSender}
         }).then(function (user) {
             if(user !== null)
             {
                 Ad.findOne({
-                    attributes: { include:['adId'], exclude :['id','createdAt','updatedAt']},
-                    where:{adId:request.params.adId}
+                    attributes: { include:['id', 'userId'], exclude :['createdAt','updatedAt']},
+                    where:{id:request.params.adId}
                 }).then(function (ad) {
                     if(ad !== null)
                     {
@@ -30,10 +30,10 @@ module.exports.main = function(request, response) {
                         else {
                             console.log(userID);
                             console.log(ad.dataValues.userId);
-                            if(userID == request.params.userIdSender || userID == ad.dataValues.userId)
+                            if(userID != request.params.userIdSender)
                             {
                                 Message.create({
-                                    adId: ad.dataValues.adId,
+                                    adId: ad.dataValues.id,
                                     userId: userID,
                                     userIdSender:request.params.userIdSender,
                                     content: request.body.content

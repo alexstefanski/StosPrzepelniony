@@ -10,16 +10,16 @@ var sequelize = require('./../../config/sequelize.js');
 module.exports.main = function(request, response) {
 
     User.findOne({
-        attributes: {include:['userId'], exclude :['id','createdAt','updatedAt','email','password','status']},
-        where:{userId:request.params.userIdSender}
+        attributes: {include:['id'], exclude :['createdAt','updatedAt','email','password','status']},
+        where:{id: request.params.userIdSender}
     }).then(function (user) {
         if(user===null)
             response.status(404).json({messages:"Rozmowa nie istnieje", userIdSender:'Nie znaleziono takiego użytkownika!'});
         else{
 
             Ad.findOne({
-                attributes: { include:['adId'], exclude :['id','createdAt','updatedAt']},
-                where:{adId:request.params.adId}
+                attributes: { include:['id'], exclude :['createdAt','updatedAt']},
+                where:{id: request.params.adId}
             }).then(function(ad){
                 if(ad === null)
                     response.status(404).json({messages:"Rozmowa nie istnieje", adId:'Nie znaleziono takiego ogłoszenia!'});
@@ -27,7 +27,7 @@ module.exports.main = function(request, response) {
 
                     Message.findAll({
                         attributes: {exclude: ['id','createdAt','updatedAt']},
-                        where:{adId:ad.dataValues.adId, userIdSender:user.dataValues.userId }
+                        where:{adId: ad.dataValues.id, userIdSender: user.dataValues.id}
                     }).then(function (messages) {
                         obj = new Array();
                         messages.sort(function (a,b) {
@@ -36,7 +36,7 @@ module.exports.main = function(request, response) {
 
                             User.findOne({
                                 attributes: {exclude :['id','createdAt','updatedAt','email','password','status']},
-                                where:{userId:element.userId }
+                                where:{id :element.userId }
                             }).then(function (u1) {
                                 if(u1 !== null)
                                 {
